@@ -4,6 +4,7 @@ class PurchasesControllerTest < ActionController::TestCase
 
   should_route :get,  '/purchases', :action => :index
   should_route :post, '/purchases', :action => :create
+  should_route :delete, '/purchases/1', :action => :destroy, :id => '1'
 
   public_context do
     should_deny_access_on 'get :index'
@@ -39,7 +40,9 @@ class PurchasesControllerTest < ActionController::TestCase
         should_assign_to :purchases, :equals => '@purchases'
         should_assign_to :new_purchase
 
-        should_display :purchases
+        should_display :purchases do |purchase|
+          assert_remote_link_to :delete, purchase_path(purchase)
+        end
         
         should "have the purchases list" do
           assert_select "#purchases"
@@ -116,6 +119,43 @@ class PurchasesControllerTest < ActionController::TestCase
 
       should "display errors on purchase form" do
         assert_select "#errorExplanation"
+      end
+    end
+
+    context "with a purchase owned by the current user" do
+      setup do
+        @purchase = Factory(:purchase, :user => @user)
+      end
+
+      context "on DELETE to destroy" do
+        setup do
+          delete :destroy, :id => @purchase, :format => :js
+        end
+
+        should_change "Purchase.count", :by => -1
+
+        should "remove the purchase from the list" do
+          assert_match /new Effect.Fade\("#{dom_id(@purchase)}"/,
+                       @response.body
+        end
+      end
+    end
+
+    context "a purchase not owned by the current user" do
+      setup do
+        @purchase = Factory(:purchase, :user => Factory(:user))
+        assert_not_equal @user, @purchase.user
+      end
+
+      context "on DELETE to destroy" do
+        setup do
+          trap_exception do
+            delete :destroy, :id => @purchase, :format => :js
+          end
+        end
+
+        should_not_change "Purchase.count"
+        should_raise_exception ActiveRecord::RecordNotFound
       end
     end
   end

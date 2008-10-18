@@ -16,4 +16,9 @@ class PurchasesController < ApplicationController
     end
   end
 
+  def destroy
+    @purchase = current_user.purchases.find(params[:id])
+    @purchase.destroy
+  end
+
 end
