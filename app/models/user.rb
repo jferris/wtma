@@ -6,14 +6,16 @@ class User < ActiveRecord::Base
                     :auto_geocode => {:field => :location}})
                     
   validates_presence_of :openid_identity, :if => :email_blank?
+  validates_presence_of :location, :latitude, :longitude
 
-  attr_accessible :first_name, :zip, :openid_identity, :email
+  attr_accessible :first_name, :zip, :openid_identity, :email, :location
 
-  def self.find_or_create_by_openid(openid_identity, registration)
+  def self.find_or_create_by_openid(openid_identity, registration, user)
     User.find_by_openid_identity(openid_identity) ||
       User.new(:openid_identity => openid_identity,
-                      :first_name => registration[:nickname],
-                      :zip => registration[:postcode])
+               :first_name => registration['nickname'],
+               :zip => registration['postcode'],
+               :location => user[:location])
   end
 
   private

@@ -2,3 +2,13 @@
   <%= render :partial => '/users/form', :object => form %>
   <%= form.submit 'Sign up', :disable_with => 'Please wait...' %>
 <% end %>
+
+<% form_tag openid_path do %>
+  <h2>OpenID</h2>
+  <p><%= text_field_tag 'openid_identifier' %></p>
+  <div class="text_field">
+    <label for="openid_user_location">Location</label>
+    <%= text_field_tag 'user[location]', nil, :id => 'openid_user_location' %>
+  </div>
+  <%= submit_tag %></p>
+<% end %>

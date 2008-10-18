@@ -33,11 +33,7 @@ module Clearance
 
               context "on POST to /users" do
                 setup do
-                  post :create, :user => {
-                    :email => Factory.next(:email),
-                    :password => 'skerit',
-                    :password_confirmation => 'skerit'
-                  }
+                  post :create, :user => Factory.attributes_for(:user)
                 end
             
                 should_set_the_flash_to /confirm/i

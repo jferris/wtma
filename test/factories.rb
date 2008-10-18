@@ -14,6 +14,9 @@ Factory.define :user do |user|
   user.email { Factory.next :email }
   user.password "password"
   user.password_confirmation "password"
+  user.location "41 Winter St. Floor 3, Boston, MA 02108"
+  user.latitude 42.355835
+  user.longitude -71.061849
 end
 
 Factory.define :store do |store|

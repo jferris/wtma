@@ -3,9 +3,9 @@ class OpenidController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
   def create
-    authenticate_with_open_id do |result, openid_identity, registration|
+    authenticate_with_open_id(nil, :optional => [:nickname, :postcode]) do |result, openid_identity, registration|
       if result.successful?
-        user = User.find_or_create_by_openid(openid_identity, registration)
+        user = User.find_or_create_by_openid(openid_identity, registration, params[:user])
         if user.save
           session[:user_id] = user.id
           redirect_to new_purchase_path

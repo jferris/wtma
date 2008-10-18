@@ -11,15 +11,17 @@ class OpenidControllerTest < ActionController::TestCase
     setup do
       result = stub('successful_result',:successful? => true)
       @openid_identity = 'http://example.com/'
-      @registration = { :nickname => 'Francis', :postcode => '60647' }
-      @controller.stubs(:authenticate_with_open_id).
+      @registration = { 'nickname' => 'Francis', 'postcode' => '60647' }
+      @controller.stubs(:authenticate_with_open_id).with(nil, :optional => [:nickname, :postcode]).
         yields(result, @openid_identity, @registration)
     end
 
     context "a new user" do
       setup do
         User.delete_all(:openid_identity => @openid_identity)
-        post :create, :openid_identifier => @openid_identity
+        @location = "41 Winter St. Boston, MA 02108"
+        post :create, :openid_identifier => @openid_identity, 
+                      :user => { :location => @location }
         @user = User.find_by_openid_identity(@openid_identity)
       end
 
@@ -30,16 +32,20 @@ class OpenidControllerTest < ActionController::TestCase
       end
 
       should "set the first name" do
-        assert_equal @registration[:nickname], @user.first_name
+        assert_equal @registration['nickname'], @user.first_name
       end
 
       should "set the zip" do
-        assert_equal @registration[:postcode], @user.zip
+        assert_equal @registration['postcode'], @user.zip
+      end
+      
+      should "set the location" do
+        assert_equal @location, @user.location
       end
 
       should "log the user in" do
         assert_equal @user.id, session[:user_id]
-      end
+      end      
     end
 
     context "an existing user" do
