@@ -21,7 +21,7 @@
     <% @purchases.each do |purchase| %>
       map.add_overlay(<%= GMarker.new([purchase.store.latitude,purchase.store.longitude],
                                        :title => "Cheapest #{purchase.item.name}!",
-                                       :info_window => "#{purchase.item.name}<br />#{purchase.price}<br />#{purchase.store.name}<br />#{purchase.store.location}") %>) %>
+                                       :info_window => "#{purchase.item.name}<br />#{purchase.price}<br />#{purchase.store.name}<br />#{purchase.store.location}").to_js %>) %>
     <% end %>
   <% end -%>
 <% end -%>

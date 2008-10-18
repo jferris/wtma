@@ -21,12 +21,8 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     [:openid, :username].each do |map|
-      should_assign_to "#{map}_map".to_sym
-
-      should "initialize @#{map}_map" do
-        # Looking at init_begin modifies it.
-        assert_not_nil assigns("#{map}_map".to_sym).
-          send(:instance_variable_get,'@init_begin').first
+      should "initialize the #{map}_map" do
+        assert_select "script", :text => /new GMap2\(\$\('#{map}_map'\)\);/
       end
 
       should "have the div for #{map}_map" do
@@ -34,7 +30,7 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       should "observe the #{map}_map location field" do
-        assert_match /new Form.Element.DelayedObserver\('#{map}_user_location'/,
+        assert_match /new MapObserver\(\{.*observe: *'#{map}_user_location'.*\}\)/m,
                      @response.body
       end
     end

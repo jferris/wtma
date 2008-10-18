@@ -15,6 +15,33 @@ class UserTest < Test::Unit::TestCase
     should "have the default first name of Joe" do
       assert_equal "Joe", @user.first_name
     end
+
+    context "with some Purchases" do
+      setup do
+        [:month,:week,:day,:hour].each do |time_ago|
+          Factory(:purchase,
+                  :user => @user,
+                  :created_at => 1.send(time_ago).ago,
+                  :item_name => Factory.next(:item_name))
+        end
+      end
+
+      context "when sent #recent_items" do
+        setup do
+          @limit = 2
+          @result = @user.recent_items(@limit)
+        end
+
+        should "produce Items sorted by recency of Purchase" do
+          items = @user.purchases.sort{|a,b|b.created_at <=> a.created_at}.map(&:item).first(2)
+          assert_equal items, @result
+        end
+
+        should "only produce the passed number of Items" do
+          assert_equal @limit, @result.size
+        end
+      end
+    end
   end
 
   context "a user with several nearby and faraway stores" do

@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Where's the Milk at?</title>
+  <link rel="stylesheet" href="stylesheets/reset.css" type="text/css" />
+  <link rel="stylesheet" href="stylesheets/main.css" type="text/css" />
+	
+</head>
+
+<body id="receipts">
+  <div id="container">
+    
+    <div id="header">
+      <h1 id="logo"><a href="/"><span class="invisible">Where's the Milk at?</span></a></h1>
+      <div class="copy">
+        <p>Hey Joe! Isn't grocery shopping swell?</p>
+        <ul id="account-menu">
+          <li><a href="account.html">Your Account</a></li>
+          <li><a href="logout/">Log Out</a></li>
+        </ul>
+      </div>
+      <div id="menu">
+        <ul>
+          <li class="active"><a href="receipts.html">Receipts</a></li>
+          <li><a href="stores.html">Stores</a></li>
+        </ul>
+      </div>
+    </div>
+    
+
+    
+    <div id="new-item">
+      <div id="pick-location">
+         <div id="picked-store">          
+            <a href="#">
+              <img src="images/location.png" id="marker" alt="marker!"/>
+              <span class="location">Johnnie's Basic Food and Produce Supply Store</span>
+            </a>
+          </div>
+          
+        <form id="pick-location-form" action="#">
+          <p id="location-field">
+            <label>store location</label>
+            <input value="store location"/>
+          </p>
+        </form>
+        <img alt="your map!" src="images/map.png" class="map"/>
+        
+        <ul class="near-stores">
+          <li>
+            <span class="near-store-name">Ralph's</span>
+          </li>
+          <li>
+            <span class="near-store-name">Dave's</span>
+          </li>
+          <li>
+            <span class="near-store-name">Cannibal Carol's</span>
+          </li>
+          <li>
+            <span class="near-store-name">Ralph's</span>
+          </li>
+          <li>
+            <span class="near-store-name">Dave's</span>
+          </li>
+          <li>
+            <span class="near-store-name">Cannibal Carol's</span>
+          </li>
+          <li>
+            <span class="near-store-name">Ralph's</span>
+          </li>
+          <li>
+            <span class="near-store-name">Dave's</span>
+          </li>
+          <li>
+            <span class="near-store-name">Cannibal Carol's</span>
+          </li>
+        </ul>
+
+       
+    </div>
+      <form id="new-item-form" action="#">
+        
+        <p id="new-item-qty">
+          <label>Qty.</label>
+          <input value="qty"/>
+        </p>
+        
+        <p id="new-item-name">
+          <label>Name</label>
+          <input value="name"/>
+        </p>
+        
+        <p id="new-item-price">
+          <label>Price</label>
+          <input value="price"/>
+        </p>
+        
+        <p id="new-item-submit">
+          <input type="submit" value="add"/>
+        </p>
+      </form>
+    </div>
+    
+    <ul id="grocery-items">
+      <li class="grocery-item">
+        <div class="grocery-item-info">
+          <span class="qty">1 package</span>
+          <span class="name">whole raw almonds <span class="location">Ralph's</span></span>
+          <span class="your-price"><span class="dollar-sign">$</span>3.29</span>
+          <span class="cheapest-price open"><a href="#"><span class="dollar-sign">$</span>2.79</a></span>
+        </div>
+        <div class="more-info">
+          <img alt="your map!" src="images/map.png" class="map"/>
+          <ul class="other-stores">
+            <li>
+              <span class="other-store-name">Ralph's</span>
+              <span class="other-store-price"><span class="dollar-sign">$</span>2.79</span>
+            </li>
+            <li>
+              <span class="other-store-name">Dave's</span>
+              <span class="other-store-price"><span class="dollar-sign">$</span>2.89</span>
+            </li>
+            <li>
+              <span class="other-store-name">Cannibal Carol's</span>
+              <span class="other-store-price"><span class="dollar-sign">$</span>2.90</span>
+            </li>
+          </ul>
+        </div>
+      </li>
+    
+      <li class="grocery-item">
+        <div class="grocery-item-info">
+          <span class="qty">1 package</span>
+          <span class="name">Harmony Farms oversized whole raw walnuts <span class="location">Ralph's</span></span>
+          <span class="your-price"><span class="dollar-sign">$</span>1.19</span>
+          <span class="cheapest-price open"><a href="#"><span class="dollar-sign">$</span>1.18</a></span>
+        </div>
+      </li>
+
+      <li class="grocery-item">
+        <div class="grocery-item-info">
+          <span class="qty">1 quart</span>
+          <span class="name">apple cider <span class="location">Ralph's</span></span>
+          <span class="your-price"><span class="dollar-sign">$</span>4.19</span>
+          <span class="cheapest-price open"><a href="#"><span class="dollar-sign">$</span>2.12</a></span>
+        </div>
+      </li>
+      
+      <li class="grocery-item">
+        <div class="grocery-item-info">
+          <span class="qty">1 quart</span>
+          <span class="name">apple cider <span class="location">Ralph's</span></span>
+          <span class="your-price"><span class="dollar-sign">$</span>4.19</span>
+          <span class="cheapest-price open"><a href="#"><span class="dollar-sign">$</span>2.12</a></span>
+        </div>
+      </li>
+    </ul>
+        
+    <ul id="pagination">
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+    </ul>
+
+
+    <div id="footer">
+    <p>Copyright 2008 by Chad, Joe, Mike, and Micah.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>

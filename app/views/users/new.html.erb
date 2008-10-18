@@ -58,17 +58,11 @@
   <% javascript_tag do -%>
     var geocoder = new GClientGeocoder();
     <% [:openid, :username].each do |auth_type| %>
-      var <%=auth_type%>_overlay = null;
-      new Form.Element.DelayedObserver('<%=auth_type%>_user_location', 0.5,
-        function(element, value) {
-          geocoder.getLatLng(value, function(latlon) {
-            if (<%=auth_type%>_overlay != null)
-            <%=auth_type%>_map.removeOverlay(<%=auth_type%>_overlay);
-            <%=auth_type%>_overlay = new GMarker(latlon);
-            <%=auth_type%>_map.addOverlay(<%=auth_type%>_overlay);
-            <%=auth_type%>_map.setCenter(latlon);
-            <%=auth_type%>_map.setZoom(15);
-          })})
+      new MapObserver({
+        map:      <%= auth_type %>_map,
+        geocoder: geocoder,
+        observe:  '<%= auth_type %>_user_location'
+      });
     <% end %>
   <% end -%>
 <% end -%>
