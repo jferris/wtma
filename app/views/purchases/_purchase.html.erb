@@ -2,5 +2,6 @@
   <%=h purchase.item_name %>
   (<%=h purchase.quantity %>)
   <%= number_to_currency(purchase.price) %>
+  (<%= number_to_currency(purchase.cheapest_price) %>)
   <%= link_to_remote 'X', :url => purchase_path(purchase), :method => :delete %>
 <% end -%>

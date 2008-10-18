@@ -36,6 +36,12 @@ class Purchase < ActiveRecord::Base
     !@new_item_name.blank?
   end
 
+  def cheapest_price
+    item.
+      cheapest_purchase_in_stores(user.nearby_stores).
+      price
+  end
+
   protected
 
   def save_item

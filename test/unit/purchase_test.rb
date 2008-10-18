@@ -150,4 +150,28 @@ class PurchaseTest < Test::Unit::TestCase
       end
     end
   end
+
+  should "find the cheapest price for a purchase" do
+    purchase = Factory(:purchase)
+    stores   = mock('stores')
+    cheapest = mock('cheapest-purchase')
+    price    = 100.00
+
+    purchase.item.
+      expects(:cheapest_purchase_in_stores).
+      with(stores).
+      returns(cheapest)
+
+    purchase.user.
+      expects(:nearby_stores).
+      with().
+      returns(stores)
+
+    cheapest.
+      expects(:price).
+      with().
+      returns(price)
+
+    assert_equal price, purchase.cheapest_price
+  end
 end
