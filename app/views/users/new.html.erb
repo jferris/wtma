@@ -1,14 +1,57 @@
-<% form_for @user do |form| %>
-  <%= render :partial => '/users/form', :object => form %>
-  <%= form.submit 'Sign up', :disable_with => 'Please wait...' %>
+<% content_for :header do %>
+  <%= GMap.header %>
 <% end %>
 
+<h2>OpenID</h2>
 <% form_tag openid_path do %>
-  <h2>OpenID</h2>
   <p><%= text_field_tag 'openid_identifier' %></p>
   <div class="text_field">
     <label for="openid_user_location">Location</label>
     <%= text_field_tag 'user[location]', nil, :id => 'openid_user_location' %>
   </div>
+
+  <%= @openid_map.div(:width => 300, :height => 200) %>
   <%= submit_tag %>
 <% end %>
+
+<h2>Boring</h2>
+<% form_for @user do |form| %>
+  <%= form.error_messages %>
+  <div class="text_field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+  <div class="password_field">
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+  <div class="password_field">
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+  <div class="text_field">
+    <%= form.label :location %>
+    <%= form.text_field :location, :id => 'username_user_location' %>
+  </div>
+
+  <%= @username_map.div(:width => 300, :height => 200) %>
+  <%= form.submit 'Sign up' %>
+<% end %>
+
+<script type="text/javascript">
+  var geocoder = new GClientGeocoder();
+  <% [:openid, :username].each do |auth_type| %>
+    <%= instance_variable_get("@#{auth_type}_map").to_html :no_load => true, :no_script_tag => true %>
+    var <%=auth_type%>_overlay = null;
+    new Form.Element.DelayedObserver('<%=auth_type%>_user_location', 0.5,
+      function(element, value) {
+        geocoder.getLatLng(value, function(latlon) {
+          if (<%=auth_type%>_overlay != null)
+          <%=auth_type%>_map.removeOverlay(<%=auth_type%>_overlay);
+          <%=auth_type%>_overlay = new GMarker(latlon);
+          <%=auth_type%>_map.addOverlay(<%=auth_type%>_overlay);
+          <%=auth_type%>_map.setCenter(latlon);
+          <%=auth_type%>_map.setZoom(15);
+        })})
+  <% end %>
+</script>
