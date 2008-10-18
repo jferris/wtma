@@ -11,4 +11,8 @@ class Item < ActiveRecord::Base
   def cheapest_purchase_in_stores(stores)
     purchases.in_stores(stores).cheapest
   end
+
+  def cheapest_stores
+    purchases.cheap.map(&:store)
+  end
 end

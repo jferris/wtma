@@ -43,7 +43,17 @@ class ItemTest < Test::Unit::TestCase
           assert_equal @cheapest, @result
         end
       end
+
+      context "finding the cheapest stores for an item when sent #cheapest_stores" do
+        setup do
+          @result = @item.cheapest_stores
+        end
+
+        should "produce the Stores ordered by the Purchase's price for the Item" do
+          stores = @item.purchases.sort{|a,b| a.price <=> b.price}.map(&:store)
+          assert_equal stores, @result
+        end
+      end
     end
   end
-
 end
