@@ -41,6 +41,37 @@ class UserTest < Test::Unit::TestCase
           assert_equal @limit, @result.size
         end
       end
+
+      context "with some Purchases by other Users, some cheaper, some more expensive" do
+        setup do
+          item = @user.purchases.first.item
+          Factory(:purchase, :price => 0.25,  :item_name => item.name)
+          Factory(:purchase, :price => 1000.0, :item_name => item.name)
+        end
+
+        context "when sent #best_stores" do
+          setup do
+            @result = @user.best_stores
+          end
+
+          should "produce Stores ordered by which is the cheapest for recent_items" do
+            items = @user.recent_items(10)
+            item_stores = {}
+            items.each do |item|
+              item_stores[item] = item.purchases.sort {|a,b|a.price <=> b.price}.map(&:store)
+            end
+            store_rankings = {}
+            item_stores.each do |item,stores|
+              stores.each_with_index do |store,index|
+                store_rankings[store] ||= 0
+                store_rankings[store] += stores.size-index
+              end
+            end
+            ranked_stores = store_rankings.sort {|a,b| b[1] <=> a[1]}.map {|store,rank| store}
+            assert_equal ranked_stores, @result
+          end
+        end
+      end
     end
   end
 

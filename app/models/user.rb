@@ -29,6 +29,17 @@ class User < ActiveRecord::Base
     purchases.latest.all(:limit => limit).map(&:item)
   end
 
+  def best_stores
+    store_rankings = {}
+    recent_items(10).map(&:cheapest_stores).each do |stores|
+      stores.each_with_index do |store, index|
+        store_rankings[store] ||= 0
+        store_rankings[store] += stores.size-index
+      end
+    end
+    store_rankings.sort {|a,b| b[1] <=> a[1]}.map {|store,ranking| store}
+  end
+
   private
 
   def email_blank?
