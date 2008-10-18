@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :first_name, :zip, :openid_identity, :email, :location
 
+  has_many :purchases
+
   def self.find_or_create_by_openid(openid_identity, registration, user)
     User.find_by_openid_identity(openid_identity) ||
       User.new(:openid_identity => openid_identity,
