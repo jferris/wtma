@@ -1,6 +1,5 @@
 <% content_for :header do %>
   <%= GMap.header %>
-  <%= @map.to_html %>
 <% end %>
 
 <ul>
@@ -9,3 +8,12 @@
 </ul>
 
 <%= @map.div(:width => 600, :height => 400) %>
+
+<script type="text/javascript">
+  <%= @map.to_html :no_script_tag => true, :no_load => true %>
+  <% @purchases.each do |purchase| %>
+    <%= @map.add_overlay(GMarker.new([purchase.store.latitude,purchase.store.longitude],
+                                     :title => "Cheapest #{purchase.item.name}!",
+                                     :info_window => "#{purchase.item.name}<br />#{purchase.price}<br />#{purchase.store.name}<br />#{purchase.store.location}")) %>
+  <% end %>
+</script>
