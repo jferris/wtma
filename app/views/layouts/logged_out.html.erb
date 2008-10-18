@@ -9,7 +9,6 @@
 	
   <%= stylesheet_link_tag 'reset', 'main', :media => 'all' %>
   <%= javascript_include_tag :defaults, 'map' %>
-  <%= yield :header %>
 </head>
 
 <body class="<%= body_class %>">
@@ -35,5 +34,6 @@
       <p>Copyright 2008 by Chad, Joe, Mike, and Micah.</p>
     </div>
   </div>
+  <%= render :partial => 'layouts/javascripts' %>
 </body>
 </html>
