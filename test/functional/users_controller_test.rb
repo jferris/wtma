@@ -30,7 +30,7 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       should "have the div for #{map}_map" do
-        assert_select 'div[id=?]', assigns("#{map}_map".to_sym).container
+        assert_select 'div[id=?]', "#{map}_map"
       end
 
       should "observe the #{map}_map location field" do
