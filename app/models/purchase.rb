@@ -13,6 +13,12 @@ class Purchase < ActiveRecord::Base
                  WHERE s_purchases.item_id = purchases.item_id)'
   }
 
+  named_scope :latest, { :order => 'purchases.created_at DESC' }
+
+  def item_name
+    item.name
+  end
+
   def self.cheapest
     cheap.first
   end

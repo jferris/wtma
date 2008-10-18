@@ -10,6 +10,10 @@ class PurchaseTest < Test::Unit::TestCase
 
     should_require_attributes :user_id, :store_id, :item_id, :price, :quantity
 
+    should "return its item's name for item_name" do
+      assert_equal @purchase.item.name, @purchase.item_name
+    end
+
     context "another Purchase" do
       setup { @expensive = Factory(:purchase, :price => @purchase.price+1) }
 
@@ -37,6 +41,24 @@ class PurchaseTest < Test::Unit::TestCase
           end
         end
       end
+    end
+  end
+
+  context "looking for the latest purchases of several purchases" do
+    setup do
+      @purchases = [2, 1, 3].collect do |i|
+        Factory(:purchase, :created_at => i.days.ago)
+      end
+      @result = Purchase.latest
+    end
+
+    should "sort purchases by reverse creation time" do
+      assert_equal @result.sort {|b, a| a.created_at <=> b.created_at },
+                   @result
+    end
+    
+    should "find all purchases" do
+      assert_equal @purchases.size, @result.size
     end
   end
 end
