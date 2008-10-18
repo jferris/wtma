@@ -1,4 +1,6 @@
 class Store < ActiveRecord::Base
+
+  cattr_accessor :nearby_miles
   
   validates_presence_of :name, :location, :latitude, :longitude
   

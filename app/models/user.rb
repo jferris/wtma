@@ -20,6 +20,11 @@ class User < ActiveRecord::Base
                :location => user[:location])
   end
 
+  def nearby_stores
+    Store.find(:all, :origin => [latitude, longitude],
+                     :within => Store.nearby_miles)
+  end
+
   private
 
   def email_blank?

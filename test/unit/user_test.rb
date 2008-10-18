@@ -11,6 +11,28 @@ class UserTest < Test::Unit::TestCase
     end
 
     should_have_many :purchases
+
+  end
+
+  context "a user with several nearby and faraway stores" do
+    setup do
+      User.any_instance.stubs(:auto_geocode_address)
+      Store.any_instance.stubs(:auto_geocode_address)
+
+      @user    = Factory(:user,  :latitude  => 42.355835,
+                                 :longitude => -71.061849,
+                                 :location  => 'happy place')
+      @nearby  = Factory(:store, :latitude  => 42.374513,
+                                 :longitude => -71.101946,
+                                 :location  => 'happy place')
+      @faraway = Factory(:store, :latitude  => 42.223714,
+                                 :longitude => -72.509492,
+                                 :location  => 'happy place')
+    end
+
+    should "find a nearby store" do
+      assert_equal [@nearby], @user.nearby_stores
+    end
   end
   
   context "an email User" do
