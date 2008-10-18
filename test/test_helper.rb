@@ -14,4 +14,5 @@ class Test::Unit::TestCase
   self.backtrace_silencers << :rails_vendor
   self.backtrace_filters   << :rails_root
 
+  include Clearance::Test::TestHelper
 end
