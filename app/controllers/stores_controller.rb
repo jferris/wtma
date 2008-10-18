@@ -1,5 +1,4 @@
 class StoresController < ApplicationController
-  
   before_filter :authenticate, :except => :show
   
   def show
@@ -14,5 +13,4 @@ class StoresController < ApplicationController
       render :action => :new
     end
   end
-  
 end
