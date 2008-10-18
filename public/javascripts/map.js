@@ -32,10 +32,12 @@ MapObserver = Class.create({
   displayLocation:
     function(latlon) {
       this.removeOverlay();
-      this.overlay = new GMarker(latlon);
-      this.map.addOverlay(this.overlay);
-      this.map.setCenter(latlon);
-      this.map.setZoom(this.options.zoom);
+      if (latlon) {
+        this.overlay = new GMarker(latlon);
+        this.map.addOverlay(this.overlay);
+        this.map.setCenter(latlon);
+        this.map.setZoom(this.options.zoom);
+      }
     },
 
   removeOverlay:
