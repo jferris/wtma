@@ -16,6 +16,9 @@ class Purchase < ActiveRecord::Base
   }
 
   named_scope :latest, { :order => 'purchases.created_at DESC' }
+  named_scope :in_stores, lambda {|stores|
+    { :conditions => ['purchases.store_id IN(?)', stores] }
+  }
 
   def item_name
     item.name unless item.nil?

@@ -67,6 +67,35 @@ class PurchaseTest < Test::Unit::TestCase
     end
   end
 
+  context "looking for purchases in stores" do
+    setup do
+      @stores = [Factory(:store), Factory(:store)]
+
+      @in_store_purchases = []
+      @stores.each do |store|
+        2.times do
+          @in_store_purchases << Factory(:purchase, :store => store)
+        end
+      end
+
+      Factory(:purchase) # purchase at another store
+
+      @result = Purchase.in_stores(@stores)
+    end
+
+    should "not return any purchases for other stores" do
+      assert_all @result do |purchase|
+        @stores.include?(purchase.store)
+      end
+    end
+
+    should "return every purchase for the specified stores" do
+      assert_all @in_store_purchases do |purchase|
+        @result.include?(purchase)
+      end
+    end
+  end
+
   context "a new Purchase" do
     setup do
       @purchase = Factory.build(:purchase, 
