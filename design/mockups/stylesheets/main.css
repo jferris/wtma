@@ -601,13 +601,15 @@ body#stores h4 {
 	color: #57999d;
 }
 
+#account-changes {
+	padding-left: 60px;
+}
+
 #account-name {
 	
 }
 
-#account-changes {
-	display: block;
-	clear: both;
+#account-changes p {
 }
 
 #account-changes label {
@@ -615,10 +617,56 @@ body#stores h4 {
 	padding-top: 10px;
 }
 
-#account-changes .new-pwd {
-	float: left;
-	margin-right: 30px;
+#account-changes h2 {
+	font-size: 2em;
+	color: #57999d;
+	clear: both;
+	padding-top: 30px;
+	margin-top: 20px;
 }
+
+#account-location {
+	margin-bottom: 20px;
+}
+
+#account-location input {
+	width: 470px;
+}
+
+#account-old-pwd {
+	display: block;
+	width: 100%;
+}
+
+#account-new-pwd {
+	margin-right: 30px;
+	float: left;
+}
+
+#account-submit input {
+	width: 82px;
+	background: url(../images/add-btn.png) no-repeat -83px 0;
+	height: 50px;
+	border-style: none;
+	color: #57999d;
+	text-shadow: #63b3b7 -1px -1px 2px;
+	font-weight: bold;
+	font-size: 1.4em;
+	cursor: pointer;
+	margin-top: 30px;
+}
+
+#account-submit input:hover {
+	width: 83px;
+	height: 50px;
+	border-style: none;
+	color: #fff;
+	text-shadow: #63b3b7 -1px -1px 2px;
+	font-weight: bold;
+	font-size: 1.4em;
+	cursor: pointer;
+	background-position: 0 0;
+}#account-address
 
 
 
