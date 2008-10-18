@@ -1,4 +1,7 @@
 class OpenidController < ApplicationController
+  
+  skip_before_filter :verify_authenticity_token
+  
   def create
     authenticate_with_open_id do |result, openid_identity, registration|
       if result.successful?
