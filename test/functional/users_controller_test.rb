@@ -34,7 +34,7 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       should "observe the #{map}_map location field" do
-        assert_match /new Form.Element.DelayedObserver\('#{map}_user_location'/,
+        assert_match /new MapObserver\(\{.*observe: *'#{map}_user_location'.*\}\)/m,
                      @response.body
       end
     end
