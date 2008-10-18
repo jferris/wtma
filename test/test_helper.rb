@@ -14,6 +14,19 @@ class Test::Unit::TestCase
   self.backtrace_silencers << :rails_vendor
   self.backtrace_filters   << :rails_root
 
+  unless instance_methods.include?('run_with_timing')
+    # Times tests if you run with TIMER set
+    def run_with_timing(*args, &block)
+      @timer = Time.now
+      run_without_timing(*args, &block)
+      diff = Time.now - @timer
+      if diff >= 0.1
+        puts "#{diff} - #{self}" 
+      end
+    end
+    alias_method_chain :run, :timing if ENV['TIMER'] 
+  end
+
   include Clearance::Test::TestHelper
 end
 
