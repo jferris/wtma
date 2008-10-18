@@ -14,6 +14,11 @@ class PurchaseTest < Test::Unit::TestCase
       assert_equal @purchase.item.name, @purchase.item_name
     end
 
+    should "return nil for item_name on a purchase without an item" do
+      @purchase.item = nil
+      assert_nil @purchase.item_name
+    end
+
     context "another Purchase" do
       setup { @expensive = Factory(:purchase, :price => @purchase.price+1) }
 
@@ -59,6 +64,61 @@ class PurchaseTest < Test::Unit::TestCase
     
     should "find all purchases" do
       assert_equal @purchases.size, @result.size
+    end
+  end
+
+  context "a new Purchase" do
+    setup do
+      @purchase = Factory.build(:purchase, 
+                                :item_name => nil,
+                                :user      => Factory(:user),
+                                :store     => Factory(:store))
+    end
+
+    should "not have an item" do
+      assert_nil @purchase.item
+    end
+
+    context "being saved with an existing item name" do
+      setup do
+        @item = Factory(:item)
+        @purchase.item_name = @item.name
+        @purchase.save
+      end
+
+      should "assign the existing item to item" do
+        assert_equal @item, @purchase.item
+      end
+
+      should "no longer have a new item name" do
+        assert !@purchase.item_name_changed?
+      end
+    end
+
+    context "being saved with a new item name" do
+      setup do
+        @item_name = "new item"
+        assert !Item.exists?(:name => @item_name)
+        @purchase.item_name = @item_name
+        @purchase.save
+      end
+
+      should "successfully save the record" do
+        assert_valid @purchase
+      end
+
+      should "assign an item with the correct name" do
+        assert_not_nil @purchase.item
+        assert_equal @item_name, @purchase.item.name
+      end
+
+      should "create the matching item" do
+        assert Item.exists?(:name => @item_name)
+      end
+
+      should "no longer have a new item name" do
+        assert !@purchase.item_name_changed?
+      end
     end
   end
 end

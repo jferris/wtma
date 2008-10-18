@@ -33,7 +33,12 @@ end
 Factory.define :purchase do |purchase|
   purchase.association :user
   purchase.association :store
-  purchase.association :item
+  purchase.item_name   'strawberries'
   purchase.price       2.45
   purchase.quantity    'two bushels'
 end
+
+Factory.alias /(.*)_name/, '\1_id'
+Factory.alias /(.*)_id/, '\1_name'
+Factory.alias /(.*)_name/, '\1'
+Factory.alias /(.*)/, '\1_name'
