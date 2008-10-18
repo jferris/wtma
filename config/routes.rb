@@ -5,7 +5,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.new_purchase '/purchases/new', :controller => 'sessions', :action => 'new' ### Just for testing redirects
 
-  map.resources :items
+  map.resources :items do |items|
+    items.resources :stores
+  end
   map.resources :users
   map.resource :session
   map.resources :users, :has_one => :password
