@@ -1,0 +1,7 @@
+<ul class="stores">
+  <% @stores.each do |store| -%>
+    <% content_tag_for :li, store do %>
+      <%=h store.name %>
+    <% end -%>
+  <% end -%>
+</ul>
