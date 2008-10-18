@@ -589,12 +589,7 @@ body#stores h4 {
 
 /* @group account page */
 
-body#account h2 {
-	font-size: 2.4em;
-	color: #cdedef;
-}
-
-body#account input {
+#account-changes input {
 	font-size: 2.4em;
 	border-bottom-style: none;
 	border-right-style: none;
@@ -606,6 +601,10 @@ body#account input {
 	color: #57999d;
 }
 
+#account-name {
+	
+}
+
 #account-changes {
 	display: block;
 	clear: both;
@@ -613,7 +612,7 @@ body#account input {
 
 #account-changes label {
 	display: block;
-	padding-top: 20px;
+	padding-top: 10px;
 }
 
 #account-changes .new-pwd {
