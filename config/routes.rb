@@ -12,4 +12,5 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :has_one => :confirmation
   map.resources :passwords
   map.resources :stores
+  map.resources :purchases
 end
