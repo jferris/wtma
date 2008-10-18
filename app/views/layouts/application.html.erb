@@ -6,9 +6,11 @@
     <title><%= PROJECT_NAME.humanize %></title>
     <%= stylesheet_link_tag 'screen', :media => 'all' %>
     <%= javascript_include_tag :defaults %>
+    <%= yield :header %>
   </head>
   <body class="<%= body_class %>">
     <%= render :partial => 'layouts/flashes' -%>
+    <%= render :partial => "layouts/header" %>
     <%= yield %>
   </body>
 </html>

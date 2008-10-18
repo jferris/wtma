@@ -1,5 +1,6 @@
 set :stages, %w(staging production)
 set :default_stage, 'production'
+set :ssh_options, { :forward_agent => true } 
 require 'capistrano/ext/multistage'
 
 before "deploy:setup", "db:password"
