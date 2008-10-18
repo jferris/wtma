@@ -1,4 +1,11 @@
+<% content_for :header do %>
+  <%= GMap.header %>
+  <%= @map.to_html %>
+<% end %>
+
 <ul>
   <li><%= link_to 'Sign In', new_session_path %></li>
   <li><%= link_to 'Sign Up', new_user_path %></li>
 </ul>
+
+<%= @map.div(:width => 600, :height => 400) %>
