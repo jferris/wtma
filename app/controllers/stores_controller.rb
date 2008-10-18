@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
   before_filter :authenticate, :except => :show
-  
+
   def show
     @store = Store.find params[:id]
   end
