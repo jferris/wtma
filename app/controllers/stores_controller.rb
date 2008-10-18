@@ -1,11 +1,6 @@
 class StoresController < ApplicationController
   before_filter :authenticate, :except => :show
 
-  def index
-    @item   = Item.find(params[:item_id])
-    @stores = @item.cheapest_stores(current_user.nearby_stores)
-  end
-  
   def show
     @store = Store.find params[:id]
   end

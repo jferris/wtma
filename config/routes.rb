@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.new_purchase '/purchases/new', :controller => 'sessions', :action => 'new' ### Just for testing redirects
 
   map.resources :items do |items|
-    items.resources :stores
+    items.resources :stores, :controller => 'items/stores'
   end
   map.resources :users
   map.resource :session
