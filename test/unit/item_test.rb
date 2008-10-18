@@ -46,12 +46,25 @@ class ItemTest < Test::Unit::TestCase
 
       context "finding the cheapest stores for an item when sent #cheapest_stores" do
         setup do
-          @result = @item.cheapest_stores
+          @result = @item.cheapest_stores(@stores)
         end
 
-        should "produce the Stores ordered by the Purchase's price for the Item" do
-          stores = @item.purchases.sort{|a,b| a.price <=> b.price}.map(&:store)
-          assert_equal stores, @result
+        should "sort stores by cheapest purchase price" do
+          cheapest_purchases_per_store = @result.map do |store| 
+            store.purchases.sort {|a, b| a.price <=> b.price }.first
+          end
+          sorted_stores = cheapest_purchases_per_store.map(&:store)
+          assert_equal sorted_stores, @result
+        end
+
+        should "not return stores not in the given list" do
+          assert_all @result do |store|
+            @stores.include?(store)
+          end
+        end
+
+        should_eventually "only return any given store once" do
+          assert_equal @result.uniq, @result
         end
       end
     end
