@@ -15,15 +15,11 @@ Factory.define :user do |user|
   user.password "password"
   user.password_confirmation "password"
   user.location "41 Winter St. Floor 3, Boston, MA 02108"
-  user.latitude 42.355835
-  user.longitude -71.061849
 end
 
 Factory.define :store do |store|
   store.name { Factory.next :store_name }
   store.location "41 Winter St. Floor 3, Boston, MA 02108"
-  store.latitude 42.355835
-  store.longitude -71.061849
 end
 
 Factory.define :item do |item|
@@ -42,3 +38,7 @@ Factory.alias /(.*)_name/, '\1_id'
 Factory.alias /(.*)_id/, '\1_name'
 Factory.alias /(.*)_name/, '\1'
 Factory.alias /(.*)/, '\1_name'
+Factory.alias /latitude/, 'location'
+Factory.alias /longitude/, 'location'
+Factory.alias /location/, 'latitude'
+Factory.alias /location/, 'longitude'

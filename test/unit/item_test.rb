@@ -18,5 +18,32 @@ class ItemTest < Test::Unit::TestCase
         assert_equal @cheap, @item.cheapest_purchase
       end
     end
+
+    context "with several purchases with different prices in different stores" do
+      setup do
+        Factory(:purchase, :item => @item, :price => 1)
+        @stores = [Factory(:store), Factory(:store)]
+        @stores.each do |store|
+          Factory(:purchase, :item  => @item,
+                             :store => store,
+                             :price => 2 + store.id)
+        end
+
+        @cheapest = Factory(:purchase, :item  => @item,
+                                       :store => @stores.first,
+                                       :price => 2)
+      end
+
+      context "finding the cheapest purchase out of a list of stores" do
+        setup do
+          @result = @item.cheapest_purchase_in_stores(@stores)
+        end
+
+        should "return the cheapest purchase from the given stores" do
+          assert_equal @cheapest, @result
+        end
+      end
+    end
   end
+
 end

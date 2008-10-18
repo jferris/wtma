@@ -7,4 +7,8 @@ class Item < ActiveRecord::Base
   def cheapest_purchase
     purchases.cheapest
   end
+
+  def cheapest_purchase_in_stores(stores)
+    purchases.in_stores(stores).cheapest
+  end
 end
