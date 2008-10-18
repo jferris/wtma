@@ -1,7 +1,3 @@
-<% content_for :header do %>
-  <%= GMap.header %>
-<% end %>
-
 <h2>OpenID</h2>
 <% form_tag openid_path do %>
   <p><%= text_field_tag 'openid_identifier' %></p>
@@ -10,7 +6,17 @@
     <%= text_field_tag 'user[location]', nil, :id => 'openid_user_location' %>
   </div>
 
-  <%= @openid_map.div(:width => 300, :height => 200) %>
+  <div id="openid_map" style="width: 300px; height: 200px;"></div>
+  <% content_for :javascripts do -%>
+    <% javascript_tag do -%>
+      var openid_map;
+      if (GBrowserIsCompatible()) {
+        openid_map = new GMap2($('openid_map'));
+        openid_map.setCenter(new GLatLng(<%= USA[:lat] %>, <%= USA[:long] %>), <%= DEFAULT_ZOOM_LEVEL %>);
+      }
+    <% end %>
+  <% end -%>
+  
   <%= submit_tag %>
 <% end %>
 
@@ -34,18 +40,29 @@
     <%= form.text_field :location, :id => 'username_user_location' %>
   </div>
 
-  <%= @username_map.div(:width => 300, :height => 200) %>
+  <div id="username_map" style="width: 300px; height: 200px;"></div>
+  <% content_for :javascripts do -%>
+    <% javascript_tag do -%>
+      var username_map;
+      if (GBrowserIsCompatible()) {
+        username_map = new GMap2($('username_map'));
+        username_map.setCenter(new GLatLng(<%= USA[:lat] %>, <%= USA[:long] %>), <%= DEFAULT_ZOOM_LEVEL %>);
+      }
+    <% end %>
+  <% end -%>
+  
   <%= form.submit 'Sign up' %>
 <% end %>
 
-<script type="text/javascript">
-  var geocoder = new GClientGeocoder();
-  <% [:openid, :username].each do |auth_type| %>
-    <%= instance_variable_get("@#{auth_type}_map").to_html :no_load => true, :no_script_tag => true %>
-    new MapObserver({
-      map:      <%= auth_type %>_map,
-      geocoder: geocoder,
-      observe:  '<%= auth_type %>_user_location'
-    });
-  <% end %>
-</script>
+<% content_for :javascripts do -%>
+  <% javascript_tag do -%>
+    var geocoder = new GClientGeocoder();
+    <% [:openid, :username].each do |auth_type| %>
+      new MapObserver({
+        map:      <%= auth_type %>_map,
+        geocoder: geocoder,
+        observe:  '<%= auth_type %>_user_location'
+      });
+    <% end %>
+  <% end -%>
+<% end -%>
