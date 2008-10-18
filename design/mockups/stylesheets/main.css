@@ -1,6 +1,10 @@
 html {
 }
 
+.clear {
+	clear: both;
+}
+
 body {
 	width: 960px;
 	margin-right: auto;
@@ -108,7 +112,7 @@ h1 {
 	border-bottom: 4px solid #66b4b9;
 }
 
-#menu li.active {
+body.purchase-new li#purchases-new, body.stores-index li#stores-index, #menu li.active  {
 	padding-bottom: 14px;
 	border-style: none;
 	background: #91cfd3 url(../images/active-tab-top.png) no-repeat 0 0;
@@ -278,13 +282,14 @@ ul#grocery-items {
 }
 
 #pick-location .map {
-	float: left;
 	margin: 10px 20px 10px 0;
+	float: left;
 }
 
 #location-field input {
 	color: #81b5b8;
-	width: 50%;
+	float: left;
+	width: 96%;
 }
 
 #picked-store {
@@ -307,7 +312,6 @@ ul#grocery-items {
 /* @group near stores */
 
 .near-stores {
-	padding-left: 330px;
 	margin-top: 12px;
 }
 
@@ -418,40 +422,58 @@ li.grocery-item {
 	height: 160px;
 	background-color: #edf8f9;
 	border-bottom: 4px solid #e5eff1;
-	clear: both;
 	padding: 30px;
 	margin-top: 32px;
 }
 
-.more-info img {
+.more-info .map {
+	width: 400px;
+	height: 160px;
+	background-color: beige;
 	float: left;
-	margin-right: 30px;
 }
 
 /* @group other stores */
 
 .other-stores {
-	padding-left: 337px;
-	width: 250px;
-}
-
-.other-store-name {
-	font-size: 1.4em;
-	text-align: right;
-}
-
-.other-store-price {
-	font-size: 1.4em;
 	float: right;
-}
-
-.other-stores {
-	padding-left: 337px;
-	width: 250px;
+	width: 390px;
 }
 
 ul.other-stores li {
-	margin-top: 5px;
+	color: #88e197;
+clear: both;
+float: right;
+	margin-top: 10px;
+	padding: 10px;
+	display: block;
+	width: 100%;
+	font-size: 1em;
+		border-bottom: 1px dotted #aadde0;
+
+}
+
+ul.other-stores li:last-child {
+	border-bottom-style: none;
+}
+
+ul.other-stores li:hover {
+	color: #41c037;
+}
+
+.other-store-name {
+	text-align: right;
+	float: left;
+	clear: both;
+	font-style: italic;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	width: 310px;
+	line-height: 1.4;
+}
+
+.other-store-price {
+	float: right;
+	margin-left: 30px;
 }
 
 .other-store-name {
@@ -517,7 +539,7 @@ ol#best-stores li:first-child {
 	
 }
 
-body#stores h2 {
+ol#best-stores h2 {
 	font-size: 4.8em;
 	position: relative;
 	color: #90d3d2;
@@ -557,13 +579,13 @@ body#stores h2 {
 	top: -20px;
 }
 
-body#stores h3 {
+ol#best-stores h3 {
 	color: #90ced2;
 	font-size: 2.4em;
 	text-shadow: #afeaed -1px -1px 1px;
 }
 
-body#stores h4 {
+ol#best-stores h4 {
 	font-size: .5em;
 	color: #b5dee1;
 }
@@ -673,6 +695,21 @@ body#stores h4 {
 	cursor: pointer;
 	background-position: 0 0;
 }#account-address
+
+
+
+/* @end */
+
+/* @group home */
+
+#milkman {
+	display: block;
+	position: absolute;
+}
+
+#content {
+	
+}
 
 
 
