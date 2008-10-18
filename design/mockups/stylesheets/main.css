@@ -112,7 +112,7 @@ h1 {
 	border-bottom: 4px solid #66b4b9;
 }
 
-#menu li.active {
+body.purchase-new li#purchases-new, body.stores-index li#stores-index, #menu li.active  {
 	padding-bottom: 14px;
 	border-style: none;
 	background: #91cfd3 url(../images/active-tab-top.png) no-repeat 0 0;
@@ -539,7 +539,7 @@ ol#best-stores li:first-child {
 	
 }
 
-body#stores h2 {
+ol#best-stores h2 {
 	font-size: 4.8em;
 	position: relative;
 	color: #90d3d2;
@@ -579,13 +579,13 @@ body#stores h2 {
 	top: -20px;
 }
 
-body#stores h3 {
+ol#best-stores h3 {
 	color: #90ced2;
 	font-size: 2.4em;
 	text-shadow: #afeaed -1px -1px 1px;
 }
 
-body#stores h4 {
+ol#best-stores h4 {
 	font-size: .5em;
 	color: #b5dee1;
 }
@@ -695,6 +695,21 @@ body#stores h4 {
 	cursor: pointer;
 	background-position: 0 0;
 }#account-address
+
+
+
+/* @end */
+
+/* @group home */
+
+#milkman {
+	display: block;
+	position: absolute;
+}
+
+#content {
+	
+}
 
 
 
