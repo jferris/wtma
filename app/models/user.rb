@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
                      :within => Store.nearby_miles)
   end
 
+  def recent_items(limit)
+    purchases.latest.all(:limit => limit).map(&:item)
+  end
+
   private
 
   def email_blank?
