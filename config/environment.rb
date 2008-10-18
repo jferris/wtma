@@ -30,6 +30,10 @@ Rails::Initializer.run do |config|
              :source => 'http://gems.github.com', 
              :version => '~> 2.3.5'
 
+  config.gem "thoughtbot-clearance",
+             :lib => 'clearance',
+             :source => 'http://gems.github.com/'
+
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named

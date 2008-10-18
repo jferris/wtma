@@ -1,5 +1,4 @@
 require 'redcloth'
-require 'clearance'
 
 Dir[File.join(RAILS_ROOT, 'lib', 'extensions', '*.rb')].each do |f|
   require f
