@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include Clearance::App::Models::User
 
-  validates_presence_of :email, :if => :email_required?
+  validates_presence_of :openid_identity, :if => :email_blank?
 
   attr_accessible :first_name, :zip, :openid_identity, :email
 
@@ -13,6 +13,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def email_blank?
+    email.blank?
+  end
 
   def email_required?
     openid_identity.blank?

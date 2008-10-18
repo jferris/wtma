@@ -2,12 +2,22 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class UserTest < Test::Unit::TestCase
   include Clearance::Test::Unit::UserTest
+
+  context "an email User" do
+    setup do
+      @user = Factory(:user, :openid_identity => nil, :email => 'foo@example.com')
+    end
+
+    should_require_attributes :email
+  end
   
   context "an OpenID" do
     setup { @openid_identity = 'http://example.com/' }
 
     context "an OpenID user" do
-      setup { @user = Factory(:user, :openid_identity => @openid_identity) }
+      setup { @user = Factory(:user, :openid_identity => @openid_identity, :email => nil) }
+
+      should_require_attributes :openid_identity
 
       should "produce the User with the specified openid_identity when sent .find_or_create_by_openid" do
         assert_equal @user, User.find_or_create_by_openid(@openid_identity,
