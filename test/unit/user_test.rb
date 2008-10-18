@@ -3,6 +3,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 class UserTest < Test::Unit::TestCase
   include Clearance::Test::Unit::UserTest
 
+  should_be_mappable
+  
   context "an email User" do
     setup do
       @user = Factory(:user, :openid_identity => nil, :email => 'foo@example.com')
