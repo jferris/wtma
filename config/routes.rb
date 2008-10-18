@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.root :controller => 'sessions', :action => 'new'
+  map.root :controller => 'items', :action => 'index'
 
   map.openid '/openid', :controller => 'openid', :action => 'create'
 
