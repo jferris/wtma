@@ -16,6 +16,12 @@
   </div>
 <% end %>
 
+<% form_tag openid_path do %>
+  <h2>OpenID</h2>
+  <p><%= text_field_tag 'openid_identifier' %>
+  <%= submit_tag %></p>
+<% end %>
+
 <ul>
   <li>
     <%= link_to "Sign up", new_user_path %>
