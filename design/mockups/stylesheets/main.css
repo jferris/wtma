@@ -1,6 +1,10 @@
 html {
 }
 
+.clear {
+	clear: both;
+}
+
 body {
 	width: 960px;
 	margin-right: auto;
@@ -278,13 +282,14 @@ ul#grocery-items {
 }
 
 #pick-location .map {
-	float: left;
 	margin: 10px 20px 10px 0;
+	float: left;
 }
 
 #location-field input {
 	color: #81b5b8;
-	width: 50%;
+	float: left;
+	width: 96%;
 }
 
 #picked-store {
@@ -307,7 +312,6 @@ ul#grocery-items {
 /* @group near stores */
 
 .near-stores {
-	padding-left: 330px;
 	margin-top: 12px;
 }
 
@@ -418,40 +422,58 @@ li.grocery-item {
 	height: 160px;
 	background-color: #edf8f9;
 	border-bottom: 4px solid #e5eff1;
-	clear: both;
 	padding: 30px;
 	margin-top: 32px;
 }
 
-.more-info img {
+.more-info .map {
+	width: 400px;
+	height: 160px;
+	background-color: beige;
 	float: left;
-	margin-right: 30px;
 }
 
 /* @group other stores */
 
 .other-stores {
-	padding-left: 337px;
-	width: 250px;
-}
-
-.other-store-name {
-	font-size: 1.4em;
-	text-align: right;
-}
-
-.other-store-price {
-	font-size: 1.4em;
 	float: right;
-}
-
-.other-stores {
-	padding-left: 337px;
-	width: 250px;
+	width: 390px;
 }
 
 ul.other-stores li {
-	margin-top: 5px;
+	color: #88e197;
+clear: both;
+float: right;
+	margin-top: 10px;
+	padding: 10px;
+	display: block;
+	width: 100%;
+	font-size: 1em;
+		border-bottom: 1px dotted #aadde0;
+
+}
+
+ul.other-stores li:last-child {
+	border-bottom-style: none;
+}
+
+ul.other-stores li:hover {
+	color: #41c037;
+}
+
+.other-store-name {
+	text-align: right;
+	float: left;
+	clear: both;
+	font-style: italic;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	width: 310px;
+	line-height: 1.4;
+}
+
+.other-store-price {
+	float: right;
+	margin-left: 30px;
 }
 
 .other-store-name {
