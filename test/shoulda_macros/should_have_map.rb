@@ -1,11 +1,11 @@
 class Test::Unit::TestCase
   def self.should_have_map(map=nil)
     map_name = map.blank? ? "map" : "#{map}_map"
-    should "output the GMap headers" do
+    should "output the GMap headers for #{map_name}" do
       assert_match /ym4r-gm.js/, @response.body
     end
 
-    should "output the GMap JavaScript" do
+    should "output the GMap JavaScript for #{map_name}" do
       assert_select 'script', /if \(GBrowserIsCompatible\(\)\)/
     end
 
