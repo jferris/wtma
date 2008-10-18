@@ -16,3 +16,7 @@ class Test::Unit::TestCase
 
   include Clearance::Test::TestHelper
 end
+
+class ActionController::TestCase
+  include ActionView::Helpers::RecordIdentificationHelper
+end
