@@ -1,6 +1,12 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class OpenidControllerTest < ActionController::TestCase
+  
+  should "not verify authenticity on POST to create" do
+    @controller.expects(:verify_authenticity_token).never
+    post :create, {}
+  end
+  
   context "successful login" do
     setup do
       result = stub('successful_result',:successful? => true)

@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   include Clearance::App::Models::User
 
+  acts_as_mappable({:lat_column_name => :latitude,
+                    :lng_column_name => :longitude,
+                    :auto_geocode => {:field => :location}})
+                    
   validates_presence_of :openid_identity, :if => :email_blank?
 
   attr_accessible :first_name, :zip, :openid_identity, :email
