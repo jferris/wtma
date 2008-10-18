@@ -1,0 +1,8 @@
+<% remote_form_for @new_purchase do |f| -%>
+  <%= f.error_messages %>
+  <%= f.text_field :quantity %>
+  <%= f.text_field :item_name %>
+  <%= f.text_field :price %>
+  <%= f.text_field :store_id %>
+  <%= f.submit 'Save' %>
+<% end -%>
