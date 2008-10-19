@@ -10,13 +10,10 @@
       <form id="pick-location-form" action="#">
         <p id="location-field">
           <label>store location</label>
-          <input value="store location"/>
         </p>
+        <div id="store_location_map" class="map" style="width: 400px; height: 250px;"></div>
+        <div id="store_selector_results" class="near-stores"></div>      
       </form>
-
-      <div id="store_location_map" class="map" style="width: 400px; height: 250px; float: left"></div>
-      <div id="store_selector_results" class="near-stores"></div>      
-      <br class="clear"/>
     </div>
     
     <% remote_form_for @new_purchase do |f| -%>
