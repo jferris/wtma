@@ -433,6 +433,10 @@ li.purchase {
 	float: left;
 }
 
+.purchase_stores {
+  margin-top: 0px;
+}
+
 /* @group other stores */
 
 .other-stores {
