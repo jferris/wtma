@@ -12,15 +12,22 @@ module ApplicationHelper
   end
 
   def autocomplete_field(obj, field)
-    content_for :javascripts  do
-      javascript_tag do
-        %|var purchase_quantity_auto_completer = new Ajax.Autocompleter(
-          'purchase_quantity',
-          'purchase_quantity_autocomplete',
-          '/purchases/autocomplete_purchase_quantity',
-          {method: 'get'})|
+    r = ''
+    autocompleter = javascript_tag do
+     %|var purchase_quantity_auto_completer = new Ajax.Autocompleter(
+            'purchase_quantity',
+            'purchase_quantity_autocomplete',
+            '/purchases/autocomplete_purchase_quantity',
+            {method: 'get'})|
+        end
+    if params[:format] == :js
+      r << autocompleter
+    else
+      content_for :javascripts  do
+        autocompleter
       end
     end
-    %{<div class="auto_complete" id="#{obj}_#{field}_autocomplete"></div>}
+    r << %{<div class="auto_complete" id="#{obj}_#{field}_autocomplete"></div>}
+    r
   end
 end
