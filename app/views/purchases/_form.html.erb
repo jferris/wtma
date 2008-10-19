@@ -19,5 +19,6 @@
   <p id="new-item-submit">
     <%= f.submit 'add' %>
   </p>
-  <%= f.hidden_field :store_id %>
+
+  <%= f.hidden_field :store_id, :value => @store && @store.id %>
 <% end -%>
