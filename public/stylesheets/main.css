@@ -706,6 +706,10 @@ body.items-index #content {
 	position: relative;
 }
 
+body.items-index #footer {
+	margin-top: 10px;
+}
+
 body.items-index #container {
 	padding-top: 50px;
 	background-position: 0 0;
@@ -730,6 +734,24 @@ body.items-index #container {
 	position: absolute;
 	top: -150px;
 	left: 0;
+}
+
+#signup-link {
+	width: 310px;
+	display: block;
+	height: 90px;
+	background: url(../images/signup.png) 0 0;
+}
+
+#signup-link:hover {
+	background-position: -306px;
+}
+
+#signup-link a {
+	background-image: url(../images/signup.png);
+	width: 310px;
+	display: block;
+	height: 90px;
 }
 
 /* @group signin */
