@@ -65,7 +65,7 @@ h1 {
 	background: url(../images/repeating-top-receipt.png) repeat-x 0 40px;
 	height: 75px;
 	width: 100%;
-	margin-top: -24px;
+	margin-top: -4px;
 }
 
 #menu li {
@@ -598,6 +598,7 @@ ol#best-stores h4 {
 	background: #91cfd3 url(../images/repeating-bottom-receipt.png) repeat-x;
 	padding-bottom: 7em;
 	margin-top: 80px;
+	position: relative;
 }
 
 #footer p {
@@ -610,32 +611,32 @@ ol#best-stores h4 {
 
 /* @group account menu */
 
-#account-menu p {
-	margin-bottom: 10px;
-	visibility: hidden;
+
+#account-menu {
+	position: absolute;
+	top: 50px;
+	right: 10px;
 }
 
-#account-menu ul {
-	margin-top: 5px;
-}
-
-#account-menu ul li {
+#account-menu li {
 	display: inline;
-	padding-right: 6px;
-	border-right: 1px solid #91cfd3;
+	border-right: 1px solid #fff;
 }
 
-#account-menu ul li:last-child {
+#account-menu li:last-child {
 	border-right-style: none;
 }
 
-#account-menu ul li a {
-	padding: 3px;
+#account-menu li a {
 	border-right-style: solid;
-	color: #91cfd3;
+	color: #fff;
+	font-weight: bold;
+	padding-right: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
-#account-menu ul li a:hover {
+#account-menu li a:hover {
 	color: #57999d;
 }
 
@@ -947,7 +948,7 @@ body.error .copy p {
 
 /* @group flashes */
 
-#flash_notice {
+#flash {
 	background-color: #f9eeb3;
 	padding: 10px;
 	color: #57999d;
@@ -1002,3 +1003,18 @@ body.error .copy p {
 
 
 /* @end */
+
+a.delete {
+	background: url(../images/bin.png) no-repeat 2px 4px;
+	display: inline-block;
+	width: 5px;
+	height: 5px;
+	padding: 10px;
+	position: relative;
+	right: -230px;
+	top: 4px;
+}
+
+a.delete:hover {
+	background: url(../images/bin_closed.png) no-repeat 2px 4px;
+}

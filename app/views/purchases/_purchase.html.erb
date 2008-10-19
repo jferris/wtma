@@ -19,7 +19,7 @@
       "$('#{dom_id(purchase)}').down('.closed').show(); " <<
       "$('#{dom_id(purchase)}').down('.open').hide(); " %>
     </span>
-    <%= link_to_remote 'X', :url => purchase_path(purchase), :method => :delete %>
+    <%= link_to_remote '<span class="invisible">X</span>', {:url => purchase_path(purchase), :method => :delete }, :class => 'delete' %>
   </div>  
   <% content_tag_for :div,
                      purchase,
