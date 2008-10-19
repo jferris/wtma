@@ -9,7 +9,8 @@ class PurchasesController < ApplicationController
   end
 
   def index
-    @purchases = current_user.purchases.latest
+    @purchases    = current_user.purchases.latest
+    @store        = @purchases.first.store unless @purchases.empty?
     @new_purchase = Purchase.new
   end
 

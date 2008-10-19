@@ -15,6 +15,7 @@ class PurchasesControllerTest < ActionController::TestCase
     context "with at least one purchase" do
       setup do
         @purchases = [Factory(:purchase)]
+        @store     = @purchases.last.store
 
         @user.     stubs(:purchases).returns(@purchases)
         @purchases.stubs(:latest).   returns(@purchases)
@@ -40,6 +41,8 @@ class PurchasesControllerTest < ActionController::TestCase
         should_render_template :index
         should_assign_to :purchases, :equals => '@purchases'
         should_assign_to :new_purchase
+        should_autocomplete_for :purchase, :quantity
+        #should_autocomplete_for :purchase, :item
 
         should_display :purchases do |purchase|
           assert_remote_link_to :delete, purchase_path(purchase)
@@ -50,11 +53,6 @@ class PurchasesControllerTest < ActionController::TestCase
         
         should "have the purchases list" do
           assert_select "#purchases"
-        end
-
-        should "autocomplete purchase quantity" do
-          assert_match %r{new Ajax.Autocompleter\(.*'purchase_quantity',.*'purchase_quantity_auto_complete',.*'/purchases/autocomplete_purchase_quantity',.*\{method: 'get'\}\)}m,
-                       @response.body
         end
 
         should "have the new purchase form" do
@@ -72,12 +70,30 @@ class PurchasesControllerTest < ActionController::TestCase
           end
         end
 
-        should_eventually "have a hidden field for a store" do
+        should "have a hidden field for a store" do
           assert_select "#new_purchase input" <<
                           "[id='purchase_store_id']" <<
                           "[name='purchase[store_id]']" <<
                           "[type='hidden']"
         end
+
+        should "fill in the name of the latest purchase's store" do
+          assert_select '#picked-store-name', @store.name
+        end
+      end
+    end
+
+    context "on GET to index without any previous purchases" do
+      setup do
+        assert @user.purchases.empty?
+        get :index
+      end
+
+      should_respond_with :success
+      should_not_assign_to :store
+
+      should "have a placeholder for the store name" do
+        assert_select '#picked-store-name'
       end
     end
 

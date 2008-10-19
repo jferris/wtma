@@ -58,15 +58,31 @@ StoreSelector = Class.create({
         mapContainer:     null,
         storeUrl:         null,
         nameContainer:    null,
+        triggerElement:   null,
         form:             null,
-        zoom:             15
+        zoom:             15,
+        expanded:         true
       }, options || {});
 
       this.mapContainer     = $(this.options.mapContainer);
       this.resultsContainer = $(this.options.resultsContainer);
       this.nameContainer    = $(this.options.nameContainer);
       this.form             = $(this.options.form);
+      this.triggerElement   = $(this.options.triggerElement);
+      this.mapLoaded        = false;
 
+      if (this.options.expanded) {
+        this.show();
+      } else {
+        this.hide(true);
+      }
+
+      this.triggerElement.observe('click', this.trigger.bindAsEventListener(this));
+    },
+
+  loadMap:
+    function() {
+      this.mapLoaded = true;
       this.map = new GMap2(this.mapContainer);
       this.map.setCenter(this.options.center, this.options.zoom);
 
@@ -75,6 +91,28 @@ StoreSelector = Class.create({
         onGenerateMarkerHtmlCallback: this.markerContents.bind(this)
       });
       this.map.addControl(this.searchControl);
+      this.searchControl.focus();
+    },
+
+  show:
+    function() {
+      new Effect.BlindDown(this.form, { 
+        afterFinish:
+          (function() {
+            if (!this.mapLoaded) {
+              this.loadMap();
+            }
+          }).bind(this)
+      });
+    },
+
+  hide:
+    function(quick) {
+      if (quick) {
+        this.form.hide();
+      } else {
+        new Effect.BlindUp(this.form);
+      }
     },
 
   markerContents:
@@ -117,6 +155,7 @@ StoreSelector = Class.create({
     function(name, params) {
       this.nameContainer.innerHTML = name;
       this.nameContainer.addClassName('loading');
+      this.nameContainer.show();
       this.form.toggle();
 
       new Ajax.Request(this.options.storeUrl, {
@@ -136,6 +175,16 @@ StoreSelector = Class.create({
         'store[latitude]':  result.lat,
         'store[longitude]': result.lng
       });
+    },
+
+  trigger:
+    function(e) {
+      e.stop();
+      if (this.form.visible()) {
+        this.hide();
+      } else {
+        this.show();
+      }
     }
 
 });
