@@ -235,8 +235,8 @@ StoreViewer = Class.create({
   centerOnStore:
     function(store) {
       if (this.centered) {
-        this.map.panTo(new GLatLng(store.latitude, store.longitude));
         this.map.setZoom(this.options.zoom);
+        this.map.panTo(new GLatLng(store.latitude, store.longitude));
       } else {
         this.map.setCenter(new GLatLng(store.latitude, store.longitude), this.options.zoom);
         this.centered = true;

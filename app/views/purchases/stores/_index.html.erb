@@ -1,11 +1,14 @@
-<div class="map"><iframe width="400" height="165" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;hl=en&amp;geocode=&amp;q=13031&amp;ie=UTF8&amp;z=12&amp;iwloc=addr&amp;ll=43.082179,-76.289062&amp;output=embed&amp;s=AARTsJrLXLIbU3SkIaqtfD9LRJnYR4XcaA"></iframe></div>
+<div class="stores_container">
+  <% content_tag_for :div, @purchase, :map_for,
+    :style => "width: 400px; height: 160px;",
+    :class => 'map' do end %>
 
-<ul class="other-stores">
-  <% @stores.each do |store| -%>
-    <% content_tag_for :li, store do %>
-      <span class="other-store-name"><%=h store.name %></span>
-      <span class="other-store-price"><%= number_to_formatted_currency(@item.purchases.cheapest.price) %></span>
+  <ol class="other-stores">
+    <% @stores.each do |store| -%>
+      <% content_tag_for :li, store do %>
+        <span class="other-store-name"><%=h store.name %></span>
+        <span class="other-store-price"><%= number_to_formatted_currency(@item.purchases.cheapest.price) %></span>
+      <% end -%>
     <% end -%>
-  <% end -%>
-</ul>
-<br class="clear"/>
+  </ol>
+</div>
