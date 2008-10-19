@@ -14,11 +14,12 @@ class PurchasesControllerTest < ActionController::TestCase
   logged_in_user_context do
     context "with at least one purchase" do
       setup do
-        @purchases = [Factory(:purchase)]
+        @purchases = paginate([Factory(:purchase)])
         @store     = @purchases.last.store
 
         @user.     stubs(:purchases).returns(@purchases)
         @purchases.stubs(:latest).   returns(@purchases)
+        @purchases.stubs(:paginate). returns(@purchases)
       end
 
       context "on GET to index" do
@@ -32,6 +33,10 @@ class PurchasesControllerTest < ActionController::TestCase
 
         before_should "find the latest purchases" do
           @purchases.expects(:latest).with().returns(@purchases)
+        end
+
+        before_should "paginate the purchases" do
+          @purchases.expects(:paginate).with().returns(@purchases)
         end
 
         should_eventually "paginate purchases" do

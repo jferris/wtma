@@ -9,7 +9,10 @@ class PurchasesController < ApplicationController
   end
 
   def index
-    @purchases    = current_user.purchases.latest
+    @purchases    = current_user.
+                      purchases.
+                      latest.
+                      paginate(:page => params[:page])
     @store        = @purchases.first.store unless @purchases.empty?
     @new_purchase = Purchase.new
   end

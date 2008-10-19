@@ -45,6 +45,10 @@ class Purchase < ActiveRecord::Base
       price
   end
 
+  def self.per_page
+    25
+  end
+
   protected
 
   def save_item
