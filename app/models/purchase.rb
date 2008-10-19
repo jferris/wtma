@@ -19,6 +19,9 @@ class Purchase < ActiveRecord::Base
   named_scope :in_stores, lambda {|stores|
     { :conditions => ['purchases.store_id IN(?)', stores] }
   }
+  named_scope :by_quantities, lambda {|quantities|
+    { :conditions => ['purchases.quantity IN (?)', quantities] }
+  }
 
   def item_name
     item.name unless item.nil?

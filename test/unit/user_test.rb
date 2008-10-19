@@ -29,6 +29,17 @@ class UserTest < Test::Unit::TestCase
         end
       end
 
+      context "when sent #quantities" do
+        setup do
+          @result = @user.quantities
+        end
+
+        should "produce a list of all quantities of all purchases the user has made" do
+          quantities = @user.purchases.map(&:quantity)
+          assert_same_elements quantities, @result
+        end
+      end
+
       context "when sent #recent_items" do
         setup do
           @limit = 2
@@ -65,7 +76,8 @@ class UserTest < Test::Unit::TestCase
       context "with some Purchases by other Users, some cheaper, some more expensive" do
         setup do
           item = @user.purchases.first.item
-          Factory(:purchase, :price => 0.25,  :item_name => item.name)
+          Factory(:purchase, :price => 0.15, :item_name => item.name, :quantity => '1 gallon')
+          Factory(:purchase, :price => 0.25, :item_name => item.name)
           Factory(:purchase, :price => 1000.0, :item_name => item.name)
         end
 
@@ -76,9 +88,14 @@ class UserTest < Test::Unit::TestCase
 
           should "produce Stores ordered by which is the cheapest for recent_items" do
             items = @user.recent_items(10)
-            item_stores = {}
+            item_quantities = {}
             items.each do |item|
-              item_stores[item] = item.purchases.sort {|a,b|a.price <=> b.price}.map(&:store)
+              quantities = item.purchases.select {|purchase| purchase.user == @user}.map(&:quantity)
+              item_quantities[item] = quantities
+            end
+            item_stores = {}
+            item_quantities.each do |item,quantities|
+              item_stores[item] = item.cheapest_stores(@user.nearby_stores, @user.quantities)
             end
             store_rankings = {}
             item_stores.each do |item,stores|
@@ -90,8 +107,6 @@ class UserTest < Test::Unit::TestCase
             ranked_stores = store_rankings.sort {|a,b| b[1] <=> a[1]}.map {|store,rank| store}
             assert_equal ranked_stores, @result
           end
-
-          should_eventually "care about the quantity"
         end
       end
     end
