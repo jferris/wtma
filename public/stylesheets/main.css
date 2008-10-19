@@ -112,7 +112,7 @@ h1 {
 	border-bottom: 4px solid #66b4b9;
 }
 
-body.purchase-new li#purchases-new, body.stores-index li#stores-index, #menu li.active  {
+body.purchases-index li#purchases-index, body.stores-index li#stores-index, #menu li.active  {
 	padding-bottom: 14px;
 	border-style: none;
 	background: #91cfd3 url(../images/active-tab-top.png) no-repeat 0 0;
