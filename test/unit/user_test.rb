@@ -137,6 +137,19 @@ class UserTest < Test::Unit::TestCase
       assert_equal [@nearby], @user.nearby_stores
     end
   end
+
+  context "with an existing openid user" do
+    setup { Factory(:user, :openid_identity => 'test', :email => nil) }
+    context "a new openid user" do
+      setup do
+        @user = Factory.build(:user, :openid_identity => 'other', :email => nil)
+      end
+
+      should "be valid" do
+        assert_valid @user
+      end
+    end
+  end
   
   context "an email User" do
     setup do
