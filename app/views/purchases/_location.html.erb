@@ -1,11 +1,17 @@
 <div id="pick-location">
-  <div id="picked-store" onclick="$('pick-location-form').toggle(); return false;">
+  <div id="picked-store">
     <a href="#">
-      <span class="location" id="picked-store-name">Johnnie's Basic Food and Produce Supply Store</span>
+      <span class="location" id="picked-store-name">
+        <% if @store -%>
+          <%=h @store.name %>
+        <% else -%>
+          Find your store below
+        <% end -%>
+      </span>
     </a>
   </div>
    
-  <form id="pick-location-form" action="#">
+  <form id="pick-location-form" action="#" style="display: none">
     <p id="location-field">
       <label>store location</label>
     </p>
@@ -22,8 +28,11 @@
       storeUrl:         '<%= stores_path %>',
       nameContainer:    'picked-store-name',
       form:             'pick-location-form',
+      triggerElement:   'picked-store',
+      expanded:         <%= @store.nil? ? 'true' : 'false' %>,
       center:           new GLatLng(<%= current_user.latitude %>,
                                     <%= current_user.longitude %>)
+
     });
   <% end -%>
 <% end -%>
