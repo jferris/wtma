@@ -23,6 +23,11 @@ a:hover {
 	text-decoration: underline;
 }
 
+a:visited {
+	color: #57999d;
+	text-decoration: underline;
+}
+
 h1 {
 	font-size: 3.6em;
 }
@@ -41,55 +46,24 @@ h1 {
 
 #logo a {
 	width: 100%;
-	height: 330px;
 	display: block;
+	height: 120px;
 }
 
 #header {
-	background: url(../images/header.png) no-repeat;
-	height: 330px;
+	background: url(../images/header-2.png) no-repeat -60px -10px;
+	height: 205px;
 	position: relative;
 	margin-bottom: 30px;
-}
-
-#header .copy {
-	position: absolute;
-	right: 130px;
-	text-align: right;
-	bottom: 90px;
-}
-
-#header p {
-	margin-bottom: 10px;
-}
-
-#header ul {
-	margin-top: 5px;
-}
-
-#header ul li {
-	display: inline;
-	padding-right: 6px;
-	border-right: 1px solid #91cfd3;
-}
-
-#header ul li:last-child {
-	border-right-style: none;
-}
-
-#header ul li a {
-	padding: 3px;
-	border-right-style: solid;
 }
 
 /* @group menu */
 
 #menu {
-	background: url(../images/repeating-top-receipt.png) repeat-x 0 45px;
+	background: url(../images/repeating-top-receipt.png) repeat-x 0 40px;
 	height: 75px;
-	position: absolute;
-	bottom: 0;
 	width: 100%;
+	margin-top: -24px;
 }
 
 #menu li {
@@ -110,6 +84,7 @@ h1 {
 	float: left;
 	background-color: #69b9be;
 	border-bottom: 4px solid #66b4b9;
+	color: white;
 }
 
 body.purchase-new li#purchases-new, body.stores-index li#stores-index, #menu li.active  {
@@ -625,6 +600,39 @@ ol#best-stores h4 {
 	font-style: italic;
 	font-family: Georgia, "Times New Roman", Times, serif;
 }
+
+/* @group account menu */
+
+#account-menu p {
+	margin-bottom: 10px;
+	visibility: hidden;
+}
+
+#account-menu ul {
+	margin-top: 5px;
+}
+
+#account-menu ul li {
+	display: inline;
+	padding-right: 6px;
+	border-right: 1px solid #91cfd3;
+}
+
+#account-menu ul li:last-child {
+	border-right-style: none;
+}
+
+#account-menu ul li a {
+	padding: 3px;
+	border-right-style: solid;
+	color: #91cfd3;
+}
+
+#account-menu ul li a:hover {
+	color: #57999d;
+}
+
+/* @end */
 
 
 
