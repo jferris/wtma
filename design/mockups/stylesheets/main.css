@@ -211,15 +211,6 @@ ul#grocery-items {
 	padding: 5px;
 }
 
-#new-item-qty input {
-	width: 130px;
-	margin-right: 20px;
-	color: #57999d;
-	font: italic 2em Georgia, "Times New Roman", Times, serif;
-	height: 35px;
-	margin-top: 2px;
-}
-
 #new-item-name input {
 	width: 455px;
 	margin-right: 20px;
@@ -233,6 +224,15 @@ ul#grocery-items {
 	margin-right: 20px;
 	color: #57999d;
 	font-size: 3em;
+}
+
+#new-item-qty input {
+	width: 130px;
+	margin-right: 20px;
+	color: #57999d;
+	font: italic 2em Georgia, "Times New Roman", Times, serif;
+	height: 35px;
+	margin-top: 2px;
 }
 
 #new-item-submit input {
@@ -702,14 +702,135 @@ ol#best-stores h4 {
 
 /* @group home */
 
-#milkman {
-	display: block;
-	position: absolute;
+body.items-index #content {
+	position: relative;
 }
 
-.home #content {
-	margin-top: 15%;
+body.items-index #container {
+	padding-top: 50px;
+	background-position: 0 0;
 }
+
+#corner-logo {
+	background: url(../images/home-corner.png) no-repeat 0 0;
+	height: 171px;
+	width: 440px;
+	position: absolute;
+	top: 26px;
+	left: -10px;
+}
+
+/* @group signin and copy */
+
+#signin-and-copy {
+	position: relative;
+}
+
+#milkman {
+	position: absolute;
+	top: -150px;
+}
+
+/* @group signin */
+
+#signin {
+	width: 226px;
+	text-align: right;
+	padding-top: 70px;
+	float: left;
+}
+
+#signin input {
+	font-size: 1.4em;
+	border-bottom-style: none;
+	border-right-style: none;
+	text-shadow: #000000 0 0 0px;
+	border-left: 1px solid #dae4e5;
+	border-top: 1px solid #dae4e5;
+	width: 126px;
+	margin-bottom: 10px;
+	text-align: right;
+	color: #7aaeb1;
+	background: #edf8f9 url(../images/openid-icon-small.gif) no-repeat 4px center;
+	padding: 5px 4px 5px 5px;
+}
+
+#signin label {
+	display: block;
+}
+
+#signin-submit input {
+	width: 82px;
+	background: url(../images/add-btn.png) no-repeat -83px 0;
+	height: 50px;
+	border-style: none;
+	color: #57999d;
+	text-shadow: #63b3b7 -1px -1px 2px;
+	font-weight: bold;
+	font-size: 1.4em;
+	cursor: pointer;
+	margin-top: 10px;
+	text-align: center;
+	padding-right: 0;
+}
+
+.signin-switcher {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-style: italic;
+	padding: 4px;
+	text-decoration: none;
+}
+
+.signin-switcher a {
+	text-decoration: underline;
+}
+
+.signin-switcher span {
+	color: silver;
+	text-decoration: none;
+}
+
+#signin-submit input:hover {
+	width: 83px;
+	height: 50px;
+	border-style: none;
+	color: #fff;
+	text-shadow: #63b3b7 -1px -1px 2px;
+	font-weight: bold;
+	font-size: 1.4em;
+	cursor: pointer;
+	background-position: 1px 0;
+}
+
+/* @end */
+
+body.items-index .copy {
+	padding-left: 270px;
+	right: 0;
+	top: 30px;
+	display: block;
+	width: 470px;
+	padding-top: 65px;
+	line-height: 1.7;
+}
+
+body.items-index .copy strong {
+	color: #7aaeb1;
+	font-weight: bold;
+}
+
+body.items-index .copy p {
+	margin-top: 20px;
+}
+
+body.items-index .copy li {
+	list-style-position: outside;
+	list-style-type: disc;
+}
+
+/* @end */
+
+
 
 
 
