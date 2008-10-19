@@ -421,6 +421,13 @@ li.purchase {
 
 #purchases .more-info {
   margin-top: 0px;
+  padding: 0px;
+  height: 220px;
+}
+
+#purchases .stores_container {
+  padding: 30px;
+  height: 160px;
 }
 
 .more-info .map {
@@ -437,24 +444,23 @@ li.purchase {
 	width: 390px;
 }
 
-ul.other-stores li {
+ol.other-stores li {
 	color: #88e197;
-clear: both;
-float: right;
+  clear: both;
+  float: right;
 	margin-top: 10px;
 	padding: 10px;
 	display: block;
 	width: 100%;
 	font-size: 1em;
-		border-bottom: 1px dotted #aadde0;
-
+	border-bottom: 1px dotted #aadde0;
 }
 
-ul.other-stores li:last-child {
+ol.other-stores li:last-child {
 	border-bottom-style: none;
 }
 
-ul.other-stores li:hover {
+ol.other-stores li:hover {
 	color: #41c037;
 }
 

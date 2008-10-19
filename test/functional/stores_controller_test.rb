@@ -77,8 +77,8 @@ class StoresControllerTest < ActionController::TestCase
 
       context "on JS POST to create with valid params" do
         setup do
-          @latitude  = 42.3971
-          @longitude = -71.126
+          @latitude  = '42.3971'
+          @longitude = '-71.126'
           post :create, :store  => { :name      => "store",
                                      :location  => 'Fairy land',
                                      :latitude  => @latitude,
@@ -93,11 +93,11 @@ class StoresControllerTest < ActionController::TestCase
         should_change "Store.count", :by => 1
 
         should "keep the passed latitude" do
-          assert_equal @latitude, assigns(:store).latitude
+          assert_equal BigDecimal.new(@latitude), assigns(:store).latitude
         end
 
         should "keep the passed longitude" do
-          assert_equal @longitude, assigns(:store).longitude
+          assert_equal BigDecimal.new(@longitude), assigns(:store).longitude
         end
 
         should "set the store id on the form" do

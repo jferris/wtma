@@ -36,7 +36,7 @@ class PurchasesControllerTest < ActionController::TestCase
         end
 
         before_should "paginate the purchases" do
-          @purchases.expects(:paginate).with().returns(@purchases)
+          @purchases.expects(:paginate).returns(@purchases)
         end
 
         should_eventually "paginate purchases" do

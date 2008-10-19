@@ -1,6 +1,7 @@
 module Quantity
   def self.quantities
     [ "12 pack",
+      "2L",
       "30 pack",
       "baker's dozen",
       "bottle",
@@ -14,7 +15,9 @@ module Quantity
       "half gallon",
       "jar",
       "jumbo",
+      "loaf",
       "six pack",
+      "slice",
       "quart" ]
   end
 
