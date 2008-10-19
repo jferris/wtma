@@ -4,7 +4,11 @@ module ApplicationHelper
   end
   
   def number_to_formatted_currency(number)
-    number_to_currency(number, :unit => "<span class='dollar-sign'>$</span>")
+    if number.nil?
+      '?'
+    else
+      number_to_currency(number, :unit => "<span class='dollar-sign'>$</span>")
+    end
   end
 
   def user_name
