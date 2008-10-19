@@ -1,5 +1,6 @@
 class StoresController < ApplicationController
   before_filter :authenticate, :except => :show
+  skip_before_filter :verify_authenticity_token
 
   def index
     @stores = current_user.best_stores
@@ -11,10 +12,6 @@ class StoresController < ApplicationController
   
   def create
     @store = Store.new(params[:store])
-    if @store.save
-      redirect_to store_path(@store)
-    else
-      render :action => :new
-    end
+    @store.save!
   end
 end
