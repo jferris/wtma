@@ -16,6 +16,7 @@ module Quantity
       "jar",
       "jumbo",
       "loaf",
+      "package",
       "six pack",
       "slice",
       "quart" ]
