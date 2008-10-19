@@ -14,6 +14,7 @@ module Quantity
       "half gallon",
       "jar",
       "jumbo",
+      "loaf",
       "six pack",
       "quart" ]
   end
