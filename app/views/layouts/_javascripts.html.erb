@@ -1,8 +1,8 @@
 <%= javascript_include_tag :defaults, 'map', :cache => true %>
     
 <!-- maps api, ajax search api, map search control code -->
-<%= javascript_include_tag "http://maps.google.com/maps?file=api&v=2&key=#{GOOGLE_MAPS_API}" %>
-<%= javascript_include_tag "http://www.google.com/uds/api?file=uds.js&v=1.0&key=#{GOOGLE_MAPS_API}" %>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<%= GOOGLE_MAPS_API %>" type="text/javascript"></script>
+<script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;key=<%= GOOGLE_MAPS_API %>" type="text/javascript"></script>
 <%= javascript_include_tag "http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js" %>
 <%= javascript_include_tag "ym4r-gm.js" %>
 <!-- ajax search stylesheet, map search stylesheet -->
@@ -11,3 +11,12 @@
 <%= stylesheet_link_tag 'maps' %>
 
 <%= yield :javascripts %>
+
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+  var pageTracker = _gat._getTracker("UA-6004540-1");
+  pageTracker._trackPageview();
+</script>
