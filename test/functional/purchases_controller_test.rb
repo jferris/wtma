@@ -5,6 +5,7 @@ class PurchasesControllerTest < ActionController::TestCase
   should_route :get,  '/purchases', :action => :index
   should_route :post, '/purchases', :action => :create
   should_route :delete, '/purchases/1', :action => :destroy, :id => '1'
+  should_route :get, '/purchases/autocomplete_purchase_quantity', :action => :autocomplete_purchase_quantity
 
   public_context do
     should_deny_access_on 'get :index'
@@ -49,6 +50,11 @@ class PurchasesControllerTest < ActionController::TestCase
         
         should "have the purchases list" do
           assert_select "#purchases"
+        end
+
+        should "autocomplete purchase quantity" do
+          assert_match %r{new Ajax.Autocompleter\(.*'purchase_quantity',.*'purchase_quantity_auto_complete',.*'/purchases/autocomplete_purchase_quantity',.*\{method: 'get'\}\)}m,
+                       @response.body
         end
 
         should "have the new purchase form" do
@@ -159,6 +165,38 @@ class PurchasesControllerTest < ActionController::TestCase
 
         should_not_change "Purchase.count"
         should_raise_exception ActiveRecord::RecordNotFound
+      end
+    end
+
+    context "on GET to autocomplete_purchase_quantity with a filter" do
+      setup do
+        @filter = 'c'
+        get :autocomplete_purchase_quantity, :purchase => {:quantity => @filter}
+      end
+
+      should_assign_to :quantities
+
+      before_should "skip the verify token" do
+        @controller.expects(:verify_authenticity_token).never
+      end
+
+      should "produce a list of quantities" do
+        assert_select 'ul' do
+          assert_select 'li'
+        end
+      end
+
+      should "produce quantities starting with the filter" do
+        assert_all assigns(:quantities) do |quantity|
+          quantity =~ /^#{@filter}/
+        end
+      end
+
+      should "not produce quantities which do not begin with the filter" do
+        invalid = Quantity.quantities.reject {|quantity| quantity =~ /^#{@filter}/}
+        assert_all invalid do |quantity|
+          !assigns(:quantities).include?(quantity)
+        end
       end
     end
   end

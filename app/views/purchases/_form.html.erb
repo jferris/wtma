@@ -64,6 +64,16 @@
       <p id="new-item-qty">
         <%= f.label :quantity, "Qty." %>
         <%= f.text_field :quantity, :title => "qty", :class => 'prefilled' %>
+        <div class="auto_complete" id="purchase_quantity_auto_complete"></div>
+        <% content_for :javascripts do %>
+          <% javascript_tag do %>
+            var purchase_quantity_auto_completer = new Ajax.Autocompleter(
+              'purchase_quantity',
+              'purchase_quantity_auto_complete',
+              '/purchases/autocomplete_purchase_quantity',
+              {method: 'get'})
+          <% end %>
+        <% end %>
       </p>
     
       <p id="new-item-name">
