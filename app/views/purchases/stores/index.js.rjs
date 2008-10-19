@@ -1,3 +1,12 @@
 page.replace_html dom_id(@purchase, :stores_for),
                   :partial => 'index'
-page.visual_effect :blind_down, dom_id(@purchase, :stores_for)
+page << <<-END
+  new Effect.BlindDown(#{dom_id(@purchase, :stores_for).inspect}, {
+    afterFinish: function() {
+      new StoreViewer({
+        mapContainer: #{dom_id(@purchase, :map_for).inspect},
+        stores:       #{@stores.to_json}
+      });
+    }
+  });
+END
