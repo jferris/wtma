@@ -877,6 +877,20 @@ body.items-index .copy li {
   float: right;
 }
 
+.forgot_password {
+  float: right;
+  margin-top: 3px;
+  margin-right: 412px;
+}
+
+.reminder input {
+  float: left;
+}
+#account-changes .reminder label {
+  float: left;
+  padding-top: 4px;
+}
+
 
 /* @end */
 
