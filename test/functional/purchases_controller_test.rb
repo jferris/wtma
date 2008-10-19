@@ -96,6 +96,17 @@ class PurchasesControllerTest < ActionController::TestCase
           assert_no_match @focus_quantity, @response.body
         end
       end
+
+      context "on GET to index without any nearby stores" do
+        setup do
+          @purchases.each {|purchase| purchase.stubs(:cheapest_price).returns(nil) }
+          get :index
+        end
+
+        should "not show the cheapest-price box" do
+          assert_select 'span.cheapest-price', false
+        end
+      end
     end
 
     context "on GET to index without any previous purchases" do
