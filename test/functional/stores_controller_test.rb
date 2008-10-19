@@ -121,6 +121,18 @@ class StoresControllerTest < ActionController::TestCase
         end
       end
 
+      context "on JS POST to create with valid params for an existing Store" do
+        setup do
+          post :create, :store  => { :name      => @store.name,
+                                     :location  => @store.location,
+                                     :latitude  => @store.latitude,
+                                     :longitude => @store.longitude },
+                        :format => :js
+        end
+
+        should_not_change 'Store.count'
+      end
+
       context "on JS POST to create with invalid params" do
         setup do
           trap_exception { post :create, :store => {}, :format => :js }
