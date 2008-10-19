@@ -1,0 +1,29 @@
+<div id="pick-location">
+  <div id="picked-store" onclick="$('pick-location-form').toggle(); return false;">
+    <a href="#">
+      <span class="location" id="picked-store-name">Johnnie's Basic Food and Produce Supply Store</span>
+    </a>
+  </div>
+   
+  <form id="pick-location-form" action="#">
+    <p id="location-field">
+      <label>store location</label>
+    </p>
+    <div id="store_location_map" class="map" style="width: 400px; height: 250px;"></div>
+    <div id="store_selector_results" class="near-stores"></div>      
+  </form>
+</div>
+  
+<% content_for :javascripts do -%>
+  <% javascript_tag do -%>
+    new StoreSelector({
+      mapContainer:     'store_location_map',
+      resultsContainer: 'store_selector_results',
+      storeUrl:         '<%= stores_path %>',
+      nameContainer:    'picked-store-name',
+      form:             'pick-location-form',
+      center:           new GLatLng(<%= current_user.latitude %>,
+                                    <%= current_user.longitude %>)
+    });
+  <% end -%>
+<% end -%>

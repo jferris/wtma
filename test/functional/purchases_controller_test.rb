@@ -93,11 +93,15 @@ class PurchasesControllerTest < ActionController::TestCase
       end
 
       should "insert the purchase at the top of the list" do
-        assert_select_rjs :insert, :top, :purchases
+        assert_select_rjs :insert, :top, 'purchases'
       end
 
       should "assign a new purchase without errors for the view" do
         assert assigns(:new_purchase).errors.empty?
+      end
+
+      should "rerender the purchase form" do
+        assert_select_rjs :replace, 'new_purchase'
       end
     end
 
@@ -109,7 +113,7 @@ class PurchasesControllerTest < ActionController::TestCase
       should_not_change "@user.purchases.count"
 
       should "rerender the purchase form" do
-        assert_select_rjs :replace, :new_purchase
+        assert_select_rjs :replace, 'new_purchase'
       end
 
       should "not create a new list element" do

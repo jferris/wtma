@@ -1,0 +1,5 @@
+page.replace 'purchase_store_id', 
+             hidden_field_tag('purchase[store_id]',
+                              @store.id,
+                              :id => 'purchase_store_id')
+page['picked-store-name'].remove_class_name :loading

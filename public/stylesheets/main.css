@@ -297,8 +297,19 @@ ul#grocery-items {
 	position: relative;
 	clear: both;
 	background-color: white;
-	margin-left: 20px;
 	padding-bottom: 10px;
+}
+
+#picked-store a .location {
+  background-repeat: no-repeat;
+  background-position: left;
+  background-image: url("/images/small-marker.png");
+  height: 14px;
+  padding: 3px 0px 3px 24px;
+}
+
+#picked-store a .loading {
+  background-image: url("/images/ajax-loader.gif");
 }
 
 #picked-store #marker {
