@@ -1,0 +1,2 @@
+page.replace_html dom_id(@purchase, :stores_for),
+                  :partial => 'index'

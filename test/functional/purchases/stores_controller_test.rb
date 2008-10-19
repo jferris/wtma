@@ -20,14 +20,17 @@ class Purchases::StoresControllerTest < ActionController::TestCase
         @item.    stubs(:cheapest_stores).returns(@stores)
       end
 
-      context "on GET to index" do
+      context "on JS GET to index" do
         setup do
-          get :index, :purchase_id => @purchase.to_param
+          get :index, :purchase_id => @purchase.to_param, :format => :js
         end
         
         should_assign_to :stores
-        should_render_without_layout
         should_display :stores
+
+        should "update the list of stores for the purchase" do
+          assert_select_rjs :replace_html, dom_id(@purchase, :stores_for)
+        end
 
         before_should "find the purchase" do
           Purchase.expects(:find).with(@purchase.to_param).returns(@purchase)

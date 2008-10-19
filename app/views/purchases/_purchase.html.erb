@@ -6,8 +6,7 @@
     <span class="cheapest-price open">
       <%= link_to_remote number_to_formatted_currency(purchase.cheapest_price),
                          :url    => purchase_stores_path(purchase),
-                         :method => :get,
-                         :update => dom_id(purchase, :stores_for) %>
+                         :method => :get %>
     </span>
     <%= link_to_remote 'X', :url => purchase_path(purchase), :method => :delete %>
   </div>  

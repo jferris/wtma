@@ -43,8 +43,7 @@ class PurchasesControllerTest < ActionController::TestCase
         should_display :purchases do |purchase|
           assert_remote_link_to :delete, purchase_path(purchase)
           assert_remote_link_to :get, 
-                                purchase_stores_path(purchase),
-                                :update => dom_id(purchase, :stores_for)
+                                purchase_stores_path(purchase)
           assert_select "##{dom_id(purchase, :stores_for)}"
         end
         
