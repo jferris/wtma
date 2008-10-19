@@ -40,7 +40,7 @@ class OpenidControllerTest < ActionController::TestCase
       should_authenticate_with_openid
     end
 
-    context "authenticating as a first-time user" do
+    context "authenticating as a first-time user with a location" do
       setup do
         User.delete_all(:openid_identity => @openid_identity)
         @location = "41 Winter St. Boston, MA 02108"
@@ -72,6 +72,20 @@ class OpenidControllerTest < ActionController::TestCase
       end      
 
       should_authenticate_with_openid
+    end
+
+    context "authenticating as a first-time user without a location" do
+      setup do
+        User.delete_all(:openid_identity => @openid_identity)
+        @location = "41 Winter St. Boston, MA 02108"
+        @request.session[:location] = nil
+        get :create, :openid_identifier => @openid_identity
+        @user = User.find_by_openid_identity(@openid_identity)
+      end
+
+      should_redirect_to 'new_user_url(:user => { :openid_identity => @openid_identity })'
+      should_authenticate_with_openid
+      should_set_the_flash_to /.*/
     end
 
     context "authenticating as a pre-existing user" do

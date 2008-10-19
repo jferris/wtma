@@ -84,4 +84,31 @@ class ItemTest < Test::Unit::TestCase
       end
     end
   end
+
+  context "some Items" do
+    setup do
+      Factory(:item, :name => 'pizza')
+      Factory(:item, :name => 'beer')
+    end
+
+    context "when sent .filtered" do
+      setup do
+        @filter = 'be'
+        @result = Item.filtered(@filter)
+      end
+
+      should "produce matching Items" do
+        assert_all @result do |item|
+          item.name =~ /^#{@filter}/
+        end
+      end
+
+      should "not produce non-matching Items" do
+        invalid = Item.all(:conditions => ['name NOT REGEXP ?', "^#{@filter}"])
+        assert_all invalid do |item|
+          !@result.include?(item)
+        end
+      end
+    end
+  end
 end

@@ -12,12 +12,13 @@ module ApplicationHelper
   end
 
   def autocomplete_field(obj, field)
+    underscore = "#{obj}_#{field}"
     r = ''
     autocompleter = javascript_tag do
-     %|var purchase_quantity_auto_completer = new Ajax.Autocompleter(
-            'purchase_quantity',
-            'purchase_quantity_autocomplete',
-            '/purchases/autocomplete_purchase_quantity',
+     %|var #{underscore}_auto_completer = new Ajax.Autocompleter(
+            '#{underscore}',
+            '#{underscore}_autocomplete',
+            '/purchases/autocomplete_#{underscore}',
             {method: 'get'})|
     end
     if request.xhr?
