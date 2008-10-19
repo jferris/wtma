@@ -7,27 +7,56 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   context "when sent #autocomplete_field" do
-    setup do
-      @result = autocomplete_field :purchase, :quantity
+    context "from JS" do
+      setup do
+        stubs(:params).returns({:format => :js})
+        @result = autocomplete_field :purchase, :quantity
+      end
+
+      should_eventually "not stick the content in the :javascripts content" do
+        expects(:content_for).with(:javascripts).yields.never
+      end
+
+      should_eventually "stick the content in a JavaScript tag" do
+        expects(:javascript_tag).yields
+      end
+
+      should_eventually "generate the div" do
+        assert_match /div.*class="auto_complete".*id="purchase_quantity_autocomplete"/,
+                     @result
+      end
+
+      should_eventually "create an Ajax.Autocompleter" do
+        underscored = 'purchase_quantity'
+        assert_match %r{new Ajax.Autocompleter\(.*'#{underscored}',.*'#{underscored}_autocomplete',.*'/purchases/autocomplete_#{underscored}',.*\{method: 'get'\}\)}m,
+                     @result
+      end
     end
 
-    before_should "stick the content in the :javascripts content" do
-      expects(:content_for).with(:javascripts).yields
-    end
+    context "from HTML" do
+      setup do
+        stubs(:params).returns({:format => nil})
+        @result = autocomplete_field :purchase, :quantity
+      end
 
-    before_should "stick the content in a JavaScript tag" do
-      expects(:javascript_tag).yields
-    end
+      before_should "stick the content in the :javascripts content" do
+        expects(:content_for).with(:javascripts).yields
+      end
 
-    should "generate the div" do
-      assert_match /div.*class="auto_complete".*id="purchase_quantity_autocomplete"/,
-                   @result
-    end
+      before_should "stick the content in a JavaScript tag" do
+        expects(:javascript_tag).yields
+      end
 
-    should "create an Ajax.Autocompleter" do
-      underscored = 'purchase_quantity'
-      assert_match %r{new Ajax.Autocompleter\(.*'#{underscored}',.*'#{underscored}_autocomplete',.*'/purchases/autocomplete_#{underscored}',.*\{method: 'get'\}\)}m,
-                   @content_for_javascripts
+      should "generate the div" do
+        assert_match /div.*class="auto_complete".*id="purchase_quantity_autocomplete"/,
+                     @result
+      end
+
+      should "create an Ajax.Autocompleter" do
+        underscored = 'purchase_quantity'
+        assert_match %r{new Ajax.Autocompleter\(.*'#{underscored}',.*'#{underscored}_autocomplete',.*'/purchases/autocomplete_#{underscored}',.*\{method: 'get'\}\)}m,
+                     @content_for_javascripts
+      end
     end
   end
 

@@ -23,6 +23,11 @@ a:hover {
 	text-decoration: underline;
 }
 
+a:visited {
+	color: #57999d;
+	text-decoration: underline;
+}
+
 h1 {
 	font-size: 3.6em;
 }
@@ -41,55 +46,24 @@ h1 {
 
 #logo a {
 	width: 100%;
-	height: 330px;
 	display: block;
+	height: 120px;
 }
 
 #header {
-	background: url(../images/header.png) no-repeat;
-	height: 330px;
+	background: url(../images/header-2.png) no-repeat -60px -10px;
+	height: 205px;
 	position: relative;
 	margin-bottom: 30px;
-}
-
-#header .copy {
-	position: absolute;
-	right: 130px;
-	text-align: right;
-	bottom: 90px;
-}
-
-#header p {
-	margin-bottom: 10px;
-}
-
-#header ul {
-	margin-top: 5px;
-}
-
-#header ul li {
-	display: inline;
-	padding-right: 6px;
-	border-right: 1px solid #91cfd3;
-}
-
-#header ul li:last-child {
-	border-right-style: none;
-}
-
-#header ul li a {
-	padding: 3px;
-	border-right-style: solid;
 }
 
 /* @group menu */
 
 #menu {
-	background: url(../images/repeating-top-receipt.png) repeat-x 0 45px;
+	background: url(../images/repeating-top-receipt.png) repeat-x 0 40px;
 	height: 75px;
-	position: absolute;
-	bottom: 0;
 	width: 100%;
+	margin-top: -24px;
 }
 
 #menu li {
@@ -110,6 +84,7 @@ h1 {
 	float: left;
 	background-color: #69b9be;
 	border-bottom: 4px solid #66b4b9;
+	color: white;
 }
 
 body.purchase-new li#purchases-new, body.stores-index li#stores-index, #menu li.active  {
@@ -172,7 +147,7 @@ body.purchase-new li#purchases-new, body.stores-index li#stores-index, #menu li.
 	padding: 5px 10px;
 }
 
-ul#grocery-items {
+ul#purchases {
 	text-align: left;
 	width: 880px;
 	margin-right: auto;
@@ -297,8 +272,19 @@ ul#grocery-items {
 	position: relative;
 	clear: both;
 	background-color: white;
-	margin-left: 20px;
 	padding-bottom: 10px;
+}
+
+#picked-store a .location {
+  background-repeat: no-repeat;
+  background-position: left;
+  background-image: url("/images/small-marker.png");
+  height: 14px;
+  padding: 3px 0px 3px 24px;
+}
+
+#picked-store a .loading {
+  background-image: url("/images/ajax-loader.gif");
 }
 
 #picked-store #marker {
@@ -357,7 +343,7 @@ ul.near-stores li {
 	display: inline;
 }
 
-.grocery-item-info {
+.purchase-info {
 	padding-top: 10px;
 	font-size: 2.4em;
 	position: relative;
@@ -366,7 +352,7 @@ ul.near-stores li {
 	padding-bottom: 10px;
 }
 
-li.grocery-item {
+li.purchase {
 	margin-bottom: 40px;
 }
 
@@ -424,6 +410,10 @@ li.grocery-item {
 	border-bottom: 4px solid #e5eff1;
 	padding: 30px;
 	margin-top: 32px;
+}
+
+#purchases .more-info {
+  margin-top: 0px;
 }
 
 .more-info .map {
@@ -610,6 +600,39 @@ ol#best-stores h4 {
 	font-style: italic;
 	font-family: Georgia, "Times New Roman", Times, serif;
 }
+
+/* @group account menu */
+
+#account-menu p {
+	margin-bottom: 10px;
+	visibility: hidden;
+}
+
+#account-menu ul {
+	margin-top: 5px;
+}
+
+#account-menu ul li {
+	display: inline;
+	padding-right: 6px;
+	border-right: 1px solid #91cfd3;
+}
+
+#account-menu ul li:last-child {
+	border-right-style: none;
+}
+
+#account-menu ul li a {
+	padding: 3px;
+	border-right-style: solid;
+	color: #91cfd3;
+}
+
+#account-menu ul li a:hover {
+	color: #57999d;
+}
+
+/* @end */
 
 
 
