@@ -1,8 +1,11 @@
 <% if @stores.empty? %>
-  <p>We need to know what you like to buy before we can tell you where you
+  <div id="give-us-food">
+    <%= link_to image_tag("empty-stores.png"), purchases_path %>
+    <p>We need to know what you like to buy before we can tell you where you
   should buy it. Please go buy something nice (a delicious steak, some fine
   wine, or even flowers) and <%= link_to 'give us your receipt', purchases_path
   %> when you come home.</p>
+  </div>
 <% else %>
   <ol id="best-stores">
     <%= render :partial => 'winning_store', :locals => {:store => @stores[0]} %>

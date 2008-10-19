@@ -1104,3 +1104,10 @@ body.stores #map {
 	right: 230px;
 	text-align: left;
 }
+
+#give-us-food p {
+	width: 450px;
+	line-height: 1.7;
+	padding-left: 400px;
+	margin-top: -40px;
+}
