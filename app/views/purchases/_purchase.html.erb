@@ -6,19 +6,21 @@
       <span class="location"><%=h purchase.store.name %></span>
     </span>
     <span class="your-price"><%= number_to_formatted_currency(purchase.price) %></span>
-    <span class="cheapest-price closed">
-      <%= link_to_remote number_to_formatted_currency(purchase.cheapest_price),
-            :url      => purchase_stores_path(purchase),
-            :method   => :get,
-            :complete => "$('#{dom_id(purchase)}').down('.open').show(); " <<
-                         "$('#{dom_id(purchase)}').down('.closed').hide(); " %>
-    </span>
-    <span class="cheapest-price open" style="display: none">
-      <%= link_to_function number_to_formatted_currency(purchase.cheapest_price),
-      "new Effect.BlindUp('#{dom_id(purchase, :stores_for)}'); " <<
-      "$('#{dom_id(purchase)}').down('.closed').show(); " <<
-      "$('#{dom_id(purchase)}').down('.open').hide(); " %>
-    </span>
+    <% unless purchase.cheapest_price.nil? %>
+      <span class="cheapest-price closed">
+        <%= link_to_remote number_to_formatted_currency(purchase.cheapest_price),
+              :url      => purchase_stores_path(purchase),
+              :method   => :get,
+              :complete => "$('#{dom_id(purchase)}').down('.open').show(); " <<
+                           "$('#{dom_id(purchase)}').down('.closed').hide(); " %>
+      </span>
+      <span class="cheapest-price open" style="display: none">
+        <%= link_to_function number_to_formatted_currency(purchase.cheapest_price),
+        "new Effect.BlindUp('#{dom_id(purchase, :stores_for)}'); " <<
+        "$('#{dom_id(purchase)}').down('.closed').show(); " <<
+        "$('#{dom_id(purchase)}').down('.open').hide(); " %>
+      </span>
+    <% end %>
     <%= link_to_remote '<span class="invisible">X</span>', {:url => purchase_path(purchase), :method => :delete }, :class => 'delete' %>
   </div>  
   <% content_tag_for :div,
