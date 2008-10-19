@@ -11,9 +11,10 @@ class Purchases::StoresControllerTest < ActionController::TestCase
   logged_in_user_context do
     context "with an purchase" do
       setup do
-        @purchase = Factory(:purchase)
-        @item     = @purchase.item
-        @stores   = [Factory(:store), Factory(:store)]
+        @purchase   = Factory(:purchase)
+        @item       = @purchase.item
+        @stores     = [Factory(:store), Factory(:store)]
+        @quantities = @user.quantities
 
         Purchase. stubs(:find).           returns(@purchase)
         @user.    stubs(:nearby_stores).  returns(@stores)
@@ -41,7 +42,7 @@ class Purchases::StoresControllerTest < ActionController::TestCase
         end
 
         before_should "find the cheapest stores for the purchase's item" do
-          @item.expects(:cheapest_stores).with(@stores).returns(@stores)
+          @item.expects(:cheapest_stores).with(@stores,@quantities).returns(@stores)
         end
       end
     end

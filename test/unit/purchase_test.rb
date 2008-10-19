@@ -96,6 +96,27 @@ class PurchaseTest < Test::Unit::TestCase
     end
   end
 
+  context "looking for purchases by quantities" do
+    setup do
+      @include_quantities = ['1 gallon','6 pack']
+      @exclude_quantities = ['1 quart','30 rack']
+      @include_quantities.each do |quantity|
+        Factory(:purchase, :quantity => quantity)
+      end
+      @exclude_quantities.each do |quantity|
+        Factory(:purchase, :quantity => quantity)
+      end
+
+      @result = Purchase.by_quantities(@include_quantities)
+    end
+
+    should "not return any Purchase for other quantities" do
+      assert_all @result do |purchase|
+        @include_quantities.include?(purchase.quantity)
+      end
+    end
+  end
+
   context "a new Purchase" do
     setup do
       @purchase = Factory.build(:purchase, 

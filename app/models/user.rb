@@ -29,9 +29,14 @@ class User < ActiveRecord::Base
     purchases.latest.map(&:item).uniq.first(limit)
   end
 
+  def quantities
+    purchases.map(&:quantity)
+  end
+
   def best_stores
+    stores = recent_items(10).map {|item| item.cheapest_stores(nearby_stores,quantities) }
     store_rankings = {}
-    recent_items(10).map {|item| item.cheapest_stores(nearby_stores) }.each do |stores|
+    stores.each do |stores|
       stores.each_with_index do |store, index|
         store_rankings[store] ||= 0
         store_rankings[store] += stores.size-index
