@@ -1,7 +1,10 @@
 <div id="account-changes">
   <div class="signup-map" id="map" style="width: 475px; height: 169px;"></div>
   
-  <% form_tag openid_path, :id => "openid_form" do %>
+  <% form_tag openid_path,
+    :id => "openid_form",
+    :style => "display: #{params[:user_type] == 'human' ? 'none' : 'block'};" do %>
+    <%= hidden_field_tag 'user_type', 'openid' %>
     <div class="text_field">
       <label for="openid_identifier">
         Open ID <%= link_to_function "Login like a Human", "$('openid_form').hide(); $('new_user').show();" %>
@@ -18,7 +21,9 @@
     </p>
   <% end %>
 
-  <% form_for @user, :html => { :style => "display: none;" } do |form| %>
+  <% form_for @user,
+              :html => { :style => "display: #{params[:user_type] == 'human' ? 'block' : 'none'};" } do |form| %>
+    <%= hidden_field_tag 'user_type', 'human' %>
     <%= form.error_messages %>
     <div class="text_field">
       <label for="user_email">

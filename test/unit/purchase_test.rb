@@ -195,4 +195,26 @@ class PurchaseTest < Test::Unit::TestCase
 
     assert_equal price, purchase.cheapest_price
   end
+
+  context "with no nearby Stores" do
+    setup do
+      @purchase = Factory(:purchase)
+      stores   = mock('stores')
+      price    = 100.00
+
+      @purchase.item.
+        expects(:cheapest_purchase_in_stores).
+        with(stores).
+        returns(nil)
+
+      @purchase.user.
+        expects(:nearby_stores).
+        with().
+        returns(stores)
+    end
+
+    should "produce nil when sent #cheapest_price" do
+      assert_nil @purchase.cheapest_price
+    end
+  end
 end

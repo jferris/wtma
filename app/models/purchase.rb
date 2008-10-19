@@ -40,9 +40,8 @@ class Purchase < ActiveRecord::Base
   end
 
   def cheapest_price
-    item.
-      cheapest_purchase_in_stores(user.nearby_stores).
-      price
+    purchase = item.cheapest_purchase_in_stores(user.nearby_stores)
+    purchase.nil? ? nil : purchase.price
   end
 
   def self.per_page

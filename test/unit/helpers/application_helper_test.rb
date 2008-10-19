@@ -6,6 +6,10 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_match /<span class='dollar-sign'>\$<\/span>3.25/, number_to_formatted_currency(3.25)
   end
 
+  should "produce '?' when sent #number_to_formatted_currency with nil" do
+    assert_equal '?', number_to_formatted_currency(nil)
+  end
+
   context "when sent #autocomplete_field" do
     context "from XHR" do
       setup do
