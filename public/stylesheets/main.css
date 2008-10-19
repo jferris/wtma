@@ -78,7 +78,7 @@ h1 {
 	padding-top: 14px;
 	padding-left: 30px;
 	width: 93px;
-	height: 6px;
+	height: 10px;
 	padding-bottom: 12px;
 	background: #57999d 0 0;
 	margin: 0;
@@ -1003,8 +1003,24 @@ body.error .copy p {
 	line-height: 1.5;
 	position: fixed;
 	top: 0;
-	width: 100%;
 	left: 0;
+	width: 100%;
+}
+
+.fieldWithErrors input#username_user_location {
+	border-bottom: 4px solid #ff595c;
+}
+
+.fieldWithErrors input#user_email {
+	border-bottom: 4px solid #ff595c;
+}
+
+.fieldWithErrors input#user_password {
+	border-bottom: 4px solid #ff595c;
+}
+
+.fieldWithErrors input#user_password_confirmation {
+	border-bottom: 4px solid #ff595c;
 }
 
 .fieldWithErrors input#purchase_quantity {
