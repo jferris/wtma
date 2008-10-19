@@ -1,11 +1,41 @@
-<h2>Comparing apples to apples&hellip;literally.</h2>
+<h1 id="corner-logo"><span class="invisible">Where's the Milk at?</span></h1>
 
-<ul>
-  <li><%= link_to 'Sign In', new_session_path %></li>
-  <li><%= link_to 'Sign Up', new_user_path %></li>
-</ul>
+<div class="map">
+  <div id="map" style="width: 960px; height: 350px;"></div>
+</div>
 
-<div id="map" style="width: 600px; height: 400px;"></div>
+<div id="signin-and-copy">
+  <div id="signin">
+    <img src="images/milkman.png" alt="omnomnomnomnom!" id="milkman"/>
+    
+    <form action="#">
+      <p id="signin-open-id">
+        <label>Open ID</label>
+        <input value="Joe"/>
+      </p>
+      
+      <p class="signin-switcher">or, <a href="#" class="signin-switcher">Sign In Like A Human</a></p>
+      
+      <p id="signin-submit">
+        <input type="submit" value="sign in"/>
+      </p>
+    </form>
+  </div>
+  
+  <div class="copy">
+    <ul>
+      <li>Don’t you wish you could know which store had the best prices near you?</li>
+      <li>Or maybe you like to shop around – where can you get the cheapest cookies?</li>
+      <li>Or, maybe, you’re just all like: <strong>“Yo, where’s the milk at?”</strong></li>
+    </ul>
+  
+    <p>Submit the items on your receipts, and, based on all the super-shoppers in your ‘hood,
+  find out who’s got the best prices, and where they are. It’s like comparing apples to apples.</p>
+  
+    <p><a href="/signup.html">Start right now! &rarr;</a></p>
+  </div>
+</div>
+
 <% content_for :javascripts do -%>
   <% javascript_tag do -%>
     var map;
@@ -13,15 +43,14 @@
       map = new GMap2($('map'));
       map.setCenter(new GLatLng(<%= USA[:lat] %>, <%= USA[:long] %>), <%= DEFAULT_ZOOM_LEVEL %>);
     }
-  <% end %>
-<% end -%>
-
-<% content_for :javascripts do -%>
-  <% javascript_tag do -%>
+    
     <% @purchases.each do |purchase| %>
-      map.add_overlay(<%= GMarker.new([purchase.store.latitude,purchase.store.longitude],
-                                       :title => "Cheapest #{purchase.item.name}!",
-                                       :info_window => "#{purchase.item.name}<br />#{purchase.price}<br />#{purchase.store.name}<br />#{purchase.store.location}").to_js %>) %>
+      map.addOverlay(
+        addInfoWindowToMarker(
+          new GMarker(
+            new GLatLng(<%= purchase.store.latitude %>, <%= purchase.store.longitude %>), 
+                        {title : "Cheapest <%= purchase.item.name %>!"}),
+                         "<strong><%= purchase.item.name %></strong><br/><%= number_to_currency purchase.price %><br /><%= purchase.store.name %><br /><%= purchase.store.location %>",{}));
     <% end %>
   <% end -%>
 <% end -%>

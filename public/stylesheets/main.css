@@ -741,6 +741,7 @@ body.items-index #container {
 	position: absolute;
 	top: 26px;
 	left: -10px;
+	z-index: 9999;
 }
 
 /* @group signin and copy */

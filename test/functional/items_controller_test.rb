@@ -10,6 +10,7 @@ class ItemsControllerTest < ActionController::TestCase
       end
 
       should_redirect_to 'purchases_path'
+      should_render_with_layout :home
     end
   end
 
