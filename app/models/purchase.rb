@@ -48,5 +48,4 @@ class Purchase < ActiveRecord::Base
     self.item = Item.find_or_create_by_name(@new_item_name)
     @new_item_name = nil
   end
-
 end

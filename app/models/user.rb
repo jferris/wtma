@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   end
 
   def recent_items(limit)
-    purchases.latest.all(:limit => limit).map(&:item)
+    purchases.latest.map(&:item).uniq.first(limit)
   end
 
   def best_stores

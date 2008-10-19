@@ -1,0 +1,80 @@
+#location-field {
+  height: 51px;
+}
+
+#new-item #pick-location .gsc-input {
+	color: #81b5b8;
+	float: left;
+}
+
+#new-item input.gsc-input {
+  width: 292px;
+  width: 746px;
+}
+
+#new-item input.gsc-search-button {
+  border: 1px outset black;
+  padding: 3px;
+	color: #81b5b8;
+}
+
+#new-item input.gsc-input, #new-item input.gsc-search-button {
+  font-size: 18pt;
+}
+
+.gmls {
+  bottom: 260px !important;
+  left: 0px !important;
+}
+
+.gmls-app {
+  border: none;
+}
+
+.gmls-search-form {
+  padding: 0px;
+}
+
+#store_location_map {
+  float: left;
+}
+
+.near-stores {
+  width: 459px;
+	margin-top: 12px;
+  margin-left: 420px;
+}
+
+.near-store-name {
+	font-size: 1.4em;
+	text-align: right;
+}
+
+.near-store-price {
+	font-size: 1.4em;
+	float: right;
+}
+
+.gmls-results-list .gmls-result-list-item {
+	margin-top: 5px;
+  height: auto;
+	font-size: 1.4em;
+}
+
+.gmls-results-list .gmls-result-list-item .gs-title {
+  color: #B6B6B6;
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.gmls-results-list div.gmls-selected {
+  background-color: white;
+}
+
+.gmls-results-list div.gmls-selected .gs-title {
+  color: #57999D;
+}
+
+.gmls-results-controls {
+  display: none !important;
+}

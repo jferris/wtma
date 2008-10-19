@@ -112,7 +112,7 @@ h1 {
 	border-bottom: 4px solid #66b4b9;
 }
 
-body.purchase-new li#purchases-new, body.stores-index li#stores-index, #menu li.active  {
+body.purchases-index li#purchases-index, body.stores-index li#stores-index, #menu li.active  {
 	padding-bottom: 14px;
 	border-style: none;
 	background: #91cfd3 url(../images/active-tab-top.png) no-repeat 0 0;
@@ -267,6 +267,7 @@ ul#purchases {
 	border: 1px solid #dae4e5;
 	padding: 20px 0 20px 20px;
 	margin-left: -21px;
+  height: 320px;
 }
 
 #new-item-location {
@@ -286,12 +287,6 @@ ul#purchases {
 	float: left;
 }
 
-#location-field input {
-	color: #81b5b8;
-	float: left;
-	width: 96%;
-}
-
 #picked-store {
 	display: block;
 	position: relative;
@@ -308,38 +303,6 @@ ul#purchases {
 	padding-right: 20px;
 	top: -5px;
 }
-
-/* @group near stores */
-
-.near-stores {
-	margin-top: 12px;
-}
-
-.near-store-name {
-	font-size: 1.4em;
-	text-align: right;
-}
-
-.near-store-price {
-	font-size: 1.4em;
-	float: right;
-}
-
-ul.near-stores li {
-	margin-top: 5px;
-}
-
-.near-store-name {
-	font-size: 1.4em;
-	text-align: right;
-}
-
-.near-store-price {
-	font-size: 1.4em;
-	float: right;
-}
-
-/* @end */
 
 /* @end */
 
@@ -431,6 +394,10 @@ li.purchase {
 	height: 160px;
 	background-color: beige;
 	float: left;
+}
+
+.purchase_stores {
+  margin-top: 0px;
 }
 
 /* @group other stores */

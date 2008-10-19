@@ -21,6 +21,22 @@ class StoresControllerTest < ActionController::TestCase
     end
 
     logged_in_user_context do
+      context "no Purchases made by @user" do
+        setup do
+          Purchase.delete_all(:user_id => @user.id)
+        end
+
+        context "GET to index" do
+          setup do
+            get :index
+          end
+
+          should "have a link to purchases_path" do
+            assert_select 'p a[href=?]', purchases_path
+          end
+        end
+      end
+
       context "some Purchases made by @user" do
         setup do
           4.times { Factory(:purchase, :user => @user) }
