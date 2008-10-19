@@ -9,9 +9,9 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     should_render_with_layout 'logged_out'
-
+    should_have_map
+    
     [:openid, :username].each do |map|
-      should_have_map map
       should_have_map_observer map
     end
   end
@@ -98,7 +98,7 @@ class UsersControllerTest < ActionController::TestCase
       end
     end
     
-    context "on PUT to update wuth invalid params" do
+    context "on PUT to update with invalid params" do
       setup do
         put :update, :id => @user, :user => { :location => "" }
       end

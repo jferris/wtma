@@ -1,65 +1,62 @@
-<h2>OpenID</h2>
-<% form_tag openid_path do %>
-  <p><%= text_field_tag 'openid_identifier' %></p>
-  <div class="text_field">
-    <label for="openid_user_location">Location</label>
-    <%= text_field_tag 'user[location]', nil, :id => 'openid_user_location' %>
-  </div>
-
-  <div id="openid_map" style="width: 300px; height: 200px;"></div>
-  <% content_for :javascripts do -%>
-    <% javascript_tag do -%>
-      var openid_map;
-      if (GBrowserIsCompatible()) {
-        openid_map = new GMap2($('openid_map'));
-        openid_map.setCenter(new GLatLng(<%= USA[:lat] %>, <%= USA[:long] %>), <%= DEFAULT_ZOOM_LEVEL %>);
-      }
-    <% end %>
-  <% end -%>
+<div id="account-changes">
+  <div class="signup-map" id="map" style="width: 475px; height: 169px;"></div>
   
-  <%= submit_tag %>
-<% end %>
+  <% form_tag openid_path, :id => "openid_form" do %>
+    <div class="text_field">
+      <label for="openid_identifier">
+        Open ID <%= link_to_function "Login like a Human", "$('openid_form').hide(); $('new_user').show();" %>
+      </label>
+      <%= text_field_tag 'openid_identifier' %>
+    </div>
+    <div class="text_field">
+      <label for="openid_user_location">Location</label>
+      <%= text_field_tag 'user[location]', nil, :id => 'openid_user_location' %>
+    </div>
+          
+    <p id="account-submit">
+      <%= submit_tag "Sign Up" %>
+    </p>
+  <% end %>
 
-<h2>Boring</h2>
-<% form_for @user do |form| %>
-  <%= form.error_messages %>
-  <div class="text_field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-  <div class="password_field">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
-  <div class="password_field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
-  </div>
-  <div class="text_field">
-    <%= form.label :location %>
-    <%= form.text_field :location, :id => 'username_user_location' %>
-  </div>
-
-  <div id="username_map" style="width: 300px; height: 200px;"></div>
-  <% content_for :javascripts do -%>
-    <% javascript_tag do -%>
-      var username_map;
-      if (GBrowserIsCompatible()) {
-        username_map = new GMap2($('username_map'));
-        username_map.setCenter(new GLatLng(<%= USA[:lat] %>, <%= USA[:long] %>), <%= DEFAULT_ZOOM_LEVEL %>);
-      }
-    <% end %>
-  <% end -%>
-  
-  <%= form.submit 'Sign up' %>
-<% end %>
+  <% form_for @user, :html => { :style => "display: none;" } do |form| %>
+    <%= form.error_messages %>
+    <div class="text_field">
+      <label for="user_email">
+        Email <%= link_to_function "Login using Open ID", "$('new_user').hide(); $('openid_form').show();" %>
+      </label>
+      <%= form.text_field :email, :size => "" %>
+    </div>
+    <div class="password_field">
+      <%= form.label :password %>
+      <%= form.password_field :password, :size => "" %>
+    </div>
+    <div class="password_field">
+      <%= form.label :password_confirmation %>
+      <%= form.password_field :password_confirmation, :size => "" %>
+    </div>
+    <div class="text_field">
+      <%= form.label :location %>
+      <%= form.text_field :location, :id => 'username_user_location', :size => "" %>
+    </div>
+          
+    <p id="account-submit">
+      <%= form.submit 'Sign up' %>
+    </p>
+  <% end %>
+</div>
 
 <% content_for :javascripts do -%>
-  <% javascript_tag do -%>
+  <% javascript_tag do -%>  
+    var map;
+    if (GBrowserIsCompatible()) {
+      map = new GMap2($('map'));
+      map.setCenter(new GLatLng(<%= USA[:lat] %>, <%= USA[:long] %>), <%= DEFAULT_ZOOM_LEVEL %>);
+    }
+  
     var geocoder = new GClientGeocoder();
     <% [:openid, :username].each do |auth_type| %>
       new MapObserver({
-        map:      <%= auth_type %>_map,
+        map:      map,
         geocoder: geocoder,
         observe:  '<%= auth_type %>_user_location'
       });

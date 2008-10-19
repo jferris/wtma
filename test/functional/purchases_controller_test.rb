@@ -5,6 +5,7 @@ class PurchasesControllerTest < ActionController::TestCase
   should_route :get,  '/purchases', :action => :index
   should_route :post, '/purchases', :action => :create
   should_route :delete, '/purchases/1', :action => :destroy, :id => '1'
+  should_route :get, '/purchases/autocomplete_purchase_quantity', :action => :autocomplete_purchase_quantity
 
   public_context do
     should_deny_access_on 'get :index'
@@ -14,6 +15,7 @@ class PurchasesControllerTest < ActionController::TestCase
     context "with at least one purchase" do
       setup do
         @purchases = [Factory(:purchase)]
+        @store     = @purchases.last.store
 
         @user.     stubs(:purchases).returns(@purchases)
         @purchases.stubs(:latest).   returns(@purchases)
@@ -39,6 +41,8 @@ class PurchasesControllerTest < ActionController::TestCase
         should_render_template :index
         should_assign_to :purchases, :equals => '@purchases'
         should_assign_to :new_purchase
+        should_autocomplete_for :purchase, :quantity
+        #should_autocomplete_for :purchase, :item
 
         should_display :purchases do |purchase|
           assert_remote_link_to :delete, purchase_path(purchase)
@@ -66,12 +70,30 @@ class PurchasesControllerTest < ActionController::TestCase
           end
         end
 
-        should_eventually "have a hidden field for a store" do
+        should "have a hidden field for a store" do
           assert_select "#new_purchase input" <<
                           "[id='purchase_store_id']" <<
                           "[name='purchase[store_id]']" <<
                           "[type='hidden']"
         end
+
+        should "fill in the name of the latest purchase's store" do
+          assert_select '#picked-store-name', @store.name
+        end
+      end
+    end
+
+    context "on GET to index without any previous purchases" do
+      setup do
+        assert @user.purchases.empty?
+        get :index
+      end
+
+      should_respond_with :success
+      should_not_assign_to :store
+
+      should "have a placeholder for the store name" do
+        assert_select '#picked-store-name'
       end
     end
 
@@ -169,6 +191,38 @@ class PurchasesControllerTest < ActionController::TestCase
 
         should_not_change "Purchase.count"
         should_raise_exception ActiveRecord::RecordNotFound
+      end
+    end
+
+    context "on GET to autocomplete_purchase_quantity with a filter" do
+      setup do
+        @filter = 'c'
+        get :autocomplete_purchase_quantity, :purchase => {:quantity => @filter}
+      end
+
+      should_assign_to :quantities
+
+      before_should "skip the verify token" do
+        @controller.expects(:verify_authenticity_token).never
+      end
+
+      should "produce a list of quantities" do
+        assert_select 'ul' do
+          assert_select 'li'
+        end
+      end
+
+      should "produce quantities starting with the filter" do
+        assert_all assigns(:quantities) do |quantity|
+          quantity =~ /^#{@filter}/
+        end
+      end
+
+      should "not produce quantities which do not begin with the filter" do
+        invalid = Quantity.quantities.reject {|quantity| quantity =~ /^#{@filter}/}
+        assert_all invalid do |quantity|
+          !assigns(:quantities).include?(quantity)
+        end
       end
     end
   end

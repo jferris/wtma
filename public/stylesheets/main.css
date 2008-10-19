@@ -87,7 +87,11 @@ h1 {
 	color: white;
 }
 
-body.purchase-new li#purchases-new, body.stores-index li#stores-index, #menu li.active  {
+body.purchase-new li#purchases-new, 
+body.stores-index li#stores-index, 
+body.sessions-new li#sessions-new,
+body.users-new li#users-new,
+#menu li.active  {
 	padding-bottom: 14px;
 	border-style: none;
 	background: #91cfd3 url(../images/active-tab-top.png) no-repeat 0 0;
@@ -704,7 +708,7 @@ ol#best-stores h4 {
 	font-weight: bold;
 	font-size: 1.4em;
 	cursor: pointer;
-	margin-top: 30px;
+	margin-top: 15px;
 }
 
 #account-submit input:hover {
@@ -876,8 +880,28 @@ body.items-index .copy li {
 
 /* @end */
 
+.signup-map {
+  border-left:1px solid #DAE4E5;
+  border-style:solid none none solid;
+  border-top:1px solid #DAE4E5;
+  margin-right: 60px;
+  margin-top: 23px;
+  float: right;
+}
 
+.forgot_password {
+  float: right;
+  margin-top: 3px;
+  margin-right: 412px;
+}
 
+.reminder input {
+  float: left;
+}
+#account-changes .reminder label {
+  float: left;
+  padding-top: 4px;
+}
 
 
 /* @end */

@@ -4,6 +4,7 @@
   <p id="new-item-qty">
     <%= f.label :quantity, "Qty." %>
     <%= f.text_field :quantity, :title => "qty", :class => 'prefilled' %>
+    <%= autocomplete_field :purchase, :quantity %>
   </p>
 
   <p id="new-item-name">
