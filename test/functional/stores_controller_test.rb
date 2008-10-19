@@ -91,21 +91,43 @@ class StoresControllerTest < ActionController::TestCase
         should_render_with_layout 'application'
       end
 
-      context "on POST to create with valid params" do
+      context "on JS POST to create with valid params" do
         setup do
-          post :create, :store => {:name => "store",
-                                   :location => "Boston, MA"}
+          @latitude  = 42.3971
+          @longitude = -71.126
+          post :create, :store  => { :name      => "store",
+                                     :location  => 'Fairy land',
+                                     :latitude  => @latitude,
+                                     :longitude => @longitude },
+                        :format => :js
+        end
+
+        before_should "not verify authenticity" do
+          @controller.expects(:verify_authenticity_token).never
         end
 
         should_change "Store.count", :by => 1
-        should_redirect_to "store_path(assigns(:store))"
+
+        should "keep the passed latitude" do
+          assert_equal @latitude, assigns(:store).latitude
+        end
+
+        should "keep the passed longitude" do
+          assert_equal @longitude, assigns(:store).longitude
+        end
+
+        should "set the store id on the form" do
+          assert_select_rjs :replace, :purchase_store_id
+        end
       end
 
-      context "on POST to create with invalid params" do
-        setup { post :create, :store => {} }
+      context "on JS POST to create with invalid params" do
+        setup do
+          trap_exception { post :create, :store => {}, :format => :js }
+        end
 
         should_not_change "Store.count"
-        should_render_template :new
+        should_raise_exception
       end
     end
   end

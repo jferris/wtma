@@ -20,6 +20,8 @@ end
 Factory.define :store do |store|
   store.name { Factory.next :store_name }
   store.location "41 Winter St. Floor 3, Boston, MA 02108"
+  store.latitude  42.3971
+  store.longitude -71.126
 end
 
 Factory.define :item do |item|
