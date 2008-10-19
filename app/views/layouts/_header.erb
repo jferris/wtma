@@ -1,3 +1,16 @@
-<% if current_user %>
-  <%= link_to "Logout", session_url, :method => :delete %>
-<% end %>
+<div id="header">
+  <h1 id="logo"><%= link_to %{<span class="invisible">Where's the Milk at?</span>}, root_url %></h1>
+  <div class="copy">
+    <p>Hey Joe! Isn't grocery shopping swell?</p>
+    <ul id="account-menu">
+      <li <%=mile%>><a href="account.html">Your Account</a></li>
+      <li><%= link_to 'Log Out', session_path, :method => :delete %></li>
+    </ul>
+  </div>
+  <div id="menu">
+    <ul>
+      <li id="purchases-new" ><%= link_to 'Receipts', purchases_path %></li>
+      <li id="stores-index" <%= mile %>><a href="stores.html">Stores</a></li>
+    </ul>
+  </div>
+</div>
