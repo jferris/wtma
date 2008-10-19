@@ -1074,6 +1074,13 @@ body.stores #map {
 	margin-top: 10px;
 }
 
+#account-changes.confirmation {
+  text-align: center;
+}
+#account-changes.confirmation .submit_field {
+  text-align: center;
+}
+
 #hello {
 	float: right;
 	margin-top: 17px;
