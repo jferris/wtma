@@ -1,16 +1,9 @@
 <div id="map" style="width: 960px; height: 350px;"></div>
 <% content_for :javascripts do -%>
   <% javascript_tag do -%>
-    var map;
-    if (GBrowserIsCompatible()) {
-      map = new GMap2($('map'));
-      map.setCenter(new GLatLng(<%= @stores[0].latitude %>, <%= @stores[0].longitude %>), 15);
-      <% @stores.each do |store| %>
-        map.addOverlay(new GMarker(new GLatLng(<%= store.latitude %>, <%= store.longitude %>)));
-      <% end %>
-    }
-    function centerMapOn(latitude, longitude) {
-      map.panTo(new GLatLng(latitude,longitude));
-    }
+    new StoreViewer({
+      mapContainer: 'map',
+      stores:       <%= @stores.to_json %>
+    });
   <% end %>
 <% end -%>

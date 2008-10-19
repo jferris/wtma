@@ -3,7 +3,7 @@ class StoresController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    @stores = current_user.best_stores
+    @stores = current_user.best_stores.first(4)
   end
 
   def show
