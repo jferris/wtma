@@ -10,7 +10,6 @@ class ItemsControllerTest < ActionController::TestCase
       end
 
       should_redirect_to 'purchases_path'
-      should_render_with_layout :home
     end
   end
 
@@ -26,7 +25,7 @@ class ItemsControllerTest < ActionController::TestCase
         setup { get :index }
 
         should_assign_to :purchases
-        should_render_with_layout 'logged_out'
+        should_render_with_layout 'home'
 
         should "set @purchases to the cheapest purchase for that item" do
           assigns(:purchases).each do |purchase|
@@ -43,7 +42,7 @@ class ItemsControllerTest < ActionController::TestCase
 
         should "put the cheapest Purchase for an Item on the map" do
           assigns(:purchases).each do |purchase|
-            assert_select "script", :text => /GLatLng\(#{purchase.store.latitude},#{purchase.store.longitude}\)/
+            assert_select "script", :text => /GLatLng\(#{purchase.store.latitude}, #{purchase.store.longitude}\)/
           end
         end
       end
