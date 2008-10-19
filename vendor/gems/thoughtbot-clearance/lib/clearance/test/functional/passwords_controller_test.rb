@@ -143,8 +143,9 @@ module Clearance
                   should 'log the user in' do
                     assert_equal session[:user_id], @user.id
                   end
-
-                  should_redirect_to "user_path(@user)"
+                  
+                  should_set_the_flash_to /changed/
+                  should_redirect_to "edit_user_path(@user)"
                 end
 
                 context 'with password but blank password confirmation' do
