@@ -23,4 +23,10 @@
   </p>
 
   <%= f.hidden_field :store_id, :value => @store && @store.id %>
+
+  <% if @store && request.xhr? -%>
+    <% javascript_tag do -%>
+      $('purchase_quantity').focus();
+    <% end -%>
+  <% end -%>
 <% end -%>

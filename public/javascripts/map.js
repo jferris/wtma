@@ -195,6 +195,7 @@ StoreViewer = Class.create({
       this.options = Object.extend({
         mapContainer: null,
         stores:       null,
+        home:         null,
         zoom:         15
       }, options || {});
 
@@ -207,8 +208,16 @@ StoreViewer = Class.create({
 
       this.centerOnStore(this.stores.first());
       this.stores.each(this.addStore.bind(this));
+
+      if (this.options.home) {
+        var icon  = new GIcon(G_DEFAULT_ICON, '/images/marker-home.png');
+        this.map.addOverlay(new GMarker(this.options.home, icon));
+        this.bounds.extend(this.options.home);
+      }
+
       this.map.setZoom(this.map.getBoundsZoomLevel(this.bounds));
       this.map.setCenter(this.bounds.getCenter());
+
     },
 
   addStore:

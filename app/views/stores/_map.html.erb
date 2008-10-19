@@ -3,6 +3,7 @@
   <% javascript_tag do -%>
     new StoreViewer({
       mapContainer: 'map',
+      home:         new GLatLng(<%= current_user.latitude %>, <%= current_user.longitude %>),
       stores:       <%= @stores.to_json %>
     });
   <% end %>
