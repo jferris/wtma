@@ -13,7 +13,10 @@ class OpenidController < ApplicationController
           session[:user_id] = user.id
           redirect_to purchases_path
         else
-          redirect_to new_session_path
+          flash[:warning] = 'Please enter your location so we can find stores near you.'
+          redirect_to new_user_path(:user => { 
+            :openid_identity => openid_identity 
+          })
         end 
       else
         flash[:warning] = result.message

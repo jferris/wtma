@@ -121,29 +121,29 @@ StoreSelector = Class.create({
       element = $(element);
       element.innerHTML = '';
 
-      var title = new Element('div', { class: 'gs-title' });
+      var title = new Element('div', { 'class': 'gs-title' });
       title.innerHTML = result.titleNoFormatting;
       element.appendChild(title)
 
-      var address = new Element('div', { class: 'gs-address' });
+      var address = new Element('div', { 'class': 'gs-address' });
       element.appendChild(address);
 
-      var street = new Element('div', { class: 'gs-street gs-addressLine' });
+      var street = new Element('div', { 'class': 'gs-street gs-addressLine' });
       street.innerHTML = result.streetAddress;
       address.appendChild(street);
 
-      var city = new Element('div', { class: 'gs-city gs-addressLine' });
+      var city = new Element('div', { 'class': 'gs-city gs-addressLine' });
       city.innerHTML = result.city + ', ' + result.region;
       address.appendChild(city);
 
-      var country = new Element('div', { class: 'gs-country' });
+      var country = new Element('div', { 'class': 'gs-country' });
       country.innerHTML = result.country;
       address.appendChild(country);
 
-      var links = new Element('div', { class: 'gs-secondary-link' });
+      var links = new Element('div', { 'class': 'gs-secondary-link' });
       element.appendChild(links);
 
-      var link  = new Element('a', { class: 'gs-secondary-link' });
+      var link  = new Element('a', { 'class': 'gs-secondary-link' });
       link.innerHTML = 'Select this store';
       link.observe('click', this.selectStore.bind(this, result.titleNoFormatting, params));
       links.appendChild(link)

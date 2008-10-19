@@ -6,7 +6,7 @@
       <label for="openid_identifier">
         Open ID <%= link_to_function "Login like a Human", "$('openid_form').hide(); $('new_user').show();" %>
       </label>
-      <%= text_field_tag 'openid_identifier' %>
+      <%= text_field_tag 'openid_identifier', @user.openid_identity %>
     </div>
     <div class="text_field">
       <label for="openid_user_location">Location</label>
