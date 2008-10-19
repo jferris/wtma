@@ -6,7 +6,7 @@ set :application, 'wheresthemilkat'
 set :repository, "git@github.com:railsrumble/giant-robots.git"
 set :scm, "git"
 set :deploy_via, :remote_cache
-set :branch, "production"
+set :tag, "beta"
 
 # Where to deploy to?
 role :web, "72.14.181.21"
