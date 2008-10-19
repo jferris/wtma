@@ -40,6 +40,7 @@ class PurchasesControllerTest < ActionController::TestCase
         should_render_template :index
         should_assign_to :purchases, :equals => '@purchases'
         should_assign_to :new_purchase
+        should_autocomplete_for :purchase, :quantity
 
         should_display :purchases do |purchase|
           assert_remote_link_to :delete, purchase_path(purchase)
@@ -50,11 +51,6 @@ class PurchasesControllerTest < ActionController::TestCase
         
         should "have the purchases list" do
           assert_select "#purchases"
-        end
-
-        should "autocomplete purchase quantity" do
-          assert_match %r{new Ajax.Autocompleter\(.*'purchase_quantity',.*'purchase_quantity_auto_complete',.*'/purchases/autocomplete_purchase_quantity',.*\{method: 'get'\}\)}m,
-                       @response.body
         end
 
         should "have the new purchase form" do
