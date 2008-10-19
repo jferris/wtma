@@ -3,13 +3,13 @@
 
   <p id="new-item-qty">
     <%= f.label :quantity, "Qty." %>
-    <%= f.text_field :quantity, :title => "qty", :class => 'prefilled' %>
+    <%= f.text_field :quantity, :title => "qty", :class => 'prefilled', :autocomplete => 'off' %>
     <%= autocomplete_field :purchase, :quantity %>
   </p>
 
   <p id="new-item-name">
     <%= f.label :name %>
-    <%= f.text_field :item_name, :title => "name", :class => 'prefilled' %>
+    <%= f.text_field :item_name, :title => "name", :class => 'prefilled', :autocomplete => 'off' %>
     <%= autocomplete_field :purchase, :item_name %>
   </p>
 
