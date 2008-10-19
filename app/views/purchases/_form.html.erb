@@ -10,6 +10,7 @@
   <p id="new-item-name">
     <%= f.label :name %>
     <%= f.text_field :item_name, :title => "name", :class => 'prefilled' %>
+    <%= autocomplete_field :purchase, :item_name %>
   </p>
 
   <p id="new-item-price">

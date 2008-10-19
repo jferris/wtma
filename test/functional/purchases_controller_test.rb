@@ -47,7 +47,7 @@ class PurchasesControllerTest < ActionController::TestCase
         should_assign_to :purchases, :equals => '@purchases'
         should_assign_to :new_purchase
         should_autocomplete_for :purchase, :quantity
-        #should_autocomplete_for :purchase, :item
+        should_autocomplete_for :purchase, :item_name
 
         should_display :purchases do |purchase|
           assert_remote_link_to :delete, purchase_path(purchase)
@@ -227,6 +227,40 @@ class PurchasesControllerTest < ActionController::TestCase
         invalid = Quantity.quantities.reject {|quantity| quantity =~ /^#{@filter}/}
         assert_all invalid do |quantity|
           !assigns(:quantities).include?(quantity)
+        end
+      end
+    end
+
+    context "on GET to autocomplete_purchase_item_name with a filter" do
+      setup do
+        Factory(:item, :name => 'cold cuts')
+        Factory(:item, :name => 'pizza')
+        @filter = 'c'
+        get :autocomplete_purchase_item_name, :purchase => {:item_name => @filter}
+      end
+
+      should_assign_to :items
+
+      before_should "skip the verify token" do
+        @controller.expects(:verify_authenticity_token).never
+      end
+
+      should "produce a list of items" do
+        assert_select 'ul' do
+          assert_select 'li'
+        end
+      end
+
+      should "produce items starting with the filter" do
+        assert_all assigns(:items) do |item|
+          item.name =~ /^#{@filter}/
+        end
+      end
+
+      should "not produce items which do not begin with the filter" do
+        invalid = Item.all(:conditions => ['name NOT REGEXP ?', "^#{@filter}"])
+        assert_all invalid do |item|
+          !assigns(:items).include?(item)
         end
       end
     end

@@ -4,6 +4,10 @@ class Item < ActiveRecord::Base
 
   has_many :purchases, :dependent => :destroy
 
+  named_scope :filtered, lambda {|filter|
+    { :conditions => ['name REGEXP ?', "^#{filter}"] }
+  }
+
   def cheapest_purchase
     purchases.cheapest
   end
