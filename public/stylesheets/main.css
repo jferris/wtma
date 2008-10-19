@@ -1098,8 +1098,9 @@ body.stores #map {
 }
 
 #hello {
-	float: right;
-	margin-top: 17px;
-	margin-right: 200px;
 	color: #91cfd3;
+	position: absolute;
+	top: 125px;
+	right: 230px;
+	text-align: left;
 }
