@@ -7,26 +7,28 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   context "when sent #autocomplete_field" do
-    context "from JS" do
+    context "from XHR" do
       setup do
-        stubs(:params).returns({:format => :js})
+        @request = stub
+        @request.stubs(:xhr?).returns(true)
+        stubs(:request).returns(@request)
         @result = autocomplete_field :purchase, :quantity
       end
 
-      should_eventually "not stick the content in the :javascripts content" do
+      before_should "not stick the content in the :javascripts content" do
         expects(:content_for).with(:javascripts).yields.never
       end
 
-      should_eventually "stick the content in a JavaScript tag" do
-        expects(:javascript_tag).yields
+      before_should "stick the content in a JavaScript tag" do
+        expects(:javascript_tag).yields.returns('')
       end
 
-      should_eventually "generate the div" do
+      should "generate the div" do
         assert_match /div.*class="auto_complete".*id="purchase_quantity_autocomplete"/,
                      @result
       end
 
-      should_eventually "create an Ajax.Autocompleter" do
+      should "create an Ajax.Autocompleter" do
         underscored = 'purchase_quantity'
         assert_match %r{new Ajax.Autocompleter\(.*'#{underscored}',.*'#{underscored}_autocomplete',.*'/purchases/autocomplete_#{underscored}',.*\{method: 'get'\}\)}m,
                      @result
@@ -35,7 +37,9 @@ class ApplicationHelperTest < ActionView::TestCase
 
     context "from HTML" do
       setup do
-        stubs(:params).returns({:format => nil})
+        @request = stub
+        @request.stubs(:xhr?).returns(false)
+        stubs(:request).returns(@request)
         @result = autocomplete_field :purchase, :quantity
       end
 

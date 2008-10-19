@@ -19,8 +19,8 @@ module ApplicationHelper
             'purchase_quantity_autocomplete',
             '/purchases/autocomplete_purchase_quantity',
             {method: 'get'})|
-        end
-    if params[:format] == :js
+    end
+    if request.xhr?
       r << autocompleter
     else
       content_for :javascripts  do
