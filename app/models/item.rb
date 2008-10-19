@@ -12,8 +12,7 @@ class Item < ActiveRecord::Base
     purchases.in_stores(stores).cheapest
   end
 
-  def cheapest_stores(stores)
-    # TODO: this currently could return the same store twice
-    purchases.in_stores(stores).cheap.map(&:store)
+  def cheapest_stores(stores, quantities)
+    purchases.by_quantities(quantities).in_stores(stores).cheap.map(&:store).uniq
   end
 end

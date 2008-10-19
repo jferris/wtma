@@ -1,5 +1,4 @@
 class Store < ActiveRecord::Base
-
   cattr_accessor :nearby_miles
 
   has_many :purchases
@@ -9,5 +8,4 @@ class Store < ActiveRecord::Base
   acts_as_mappable({:lat_column_name => :latitude,
                     :lng_column_name => :longitude,
                     :auto_geocode => {:field => :location}})
-  
 end

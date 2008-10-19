@@ -21,17 +21,21 @@ class ItemTest < Test::Unit::TestCase
 
     context "with several purchases with different prices in different stores" do
       setup do
+        @include_quanity  = "1 gallon"
+        @exclude_quantity = "1 quart"
         Factory(:purchase, :item => @item, :price => 1)
         @stores = [Factory(:store), Factory(:store)]
         @stores.each do |store|
           Factory(:purchase, :item  => @item,
                              :store => store,
-                             :price => 2 + store.id)
+                             :price => 2 + store.id,
+                             :quantity => @include_quanity)
         end
 
         @cheapest = Factory(:purchase, :item  => @item,
                                        :store => @stores.first,
-                                       :price => 2)
+                                       :price => 2,
+                                       :quantity => @include_quanity)
       end
 
       context "finding the cheapest purchase out of a list of stores" do
@@ -46,7 +50,12 @@ class ItemTest < Test::Unit::TestCase
 
       context "finding the cheapest stores for an item when sent #cheapest_stores" do
         setup do
-          @result = @item.cheapest_stores(@stores)
+          @stores << Factory(:store)
+          Factory(:purchase, :item => @item,
+                             :store => @stores.last,
+                             :price => 1,
+                             :quantity => @exclude_quantity)
+          @result = @item.cheapest_stores(@stores, [@include_quanity])
         end
 
         should "sort stores by cheapest purchase price" do
@@ -57,14 +66,20 @@ class ItemTest < Test::Unit::TestCase
           assert_equal sorted_stores, @result
         end
 
-        should "not return stores not in the given list" do
+        should "only return stores in the given list" do
           assert_all @result do |store|
             @stores.include?(store)
           end
         end
 
-        should_eventually "only return any given store once" do
+        should "only return any given store once" do
           assert_equal @result.uniq, @result
+        end
+
+        should "not include stores where the item was purchased for a different quantity" do
+          @result.each do |store|
+            assert store.purchases.any? {|purchase| purchase.quantity == @include_quanity}
+          end
         end
       end
     end

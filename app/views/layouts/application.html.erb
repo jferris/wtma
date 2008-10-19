@@ -13,7 +13,22 @@
 <body class="<%= body_class %>">
   <div id="container">
     
-    <%= render :partial => "layouts/header" %>
+    <div id="header">
+      <h1 id="logo"><%= link_to %{<span class="invisible">Where's the Milk at?</span>}, root_url %></h1>
+      <div class="copy">
+        <p>Hey <%= user_name %>! Isn't grocery shopping swell?</p>
+        <ul id="account-menu">
+          <li><%= link_to 'Your Account', edit_user_path(current_user) %></li>
+          <li><%= link_to 'Log Out', session_path, :method => :delete %></li>
+        </ul>
+      </div>
+      <div id="menu">
+        <ul>
+          <li id="purchases-index" ><%= link_to 'Receipts', purchases_path %></li>
+          <li id="stores-index"><%= link_to 'Stores', stores_path %></li>
+        </ul>
+      </div>
+    </div>
 
     <div id="content">
       <%= render :partial => 'layouts/flashes' -%>

@@ -10,13 +10,10 @@
       <form id="pick-location-form" action="#">
         <p id="location-field">
           <label>store location</label>
-          <input value="store location"/>
         </p>
+        <div id="store_location_map" class="map" style="width: 400px; height: 250px;"></div>
+        <div id="store_selector_results" class="near-stores"></div>      
       </form>
-
-      <div id="store_location_map" class="map" style="width: 400px; height: 250px; float: left"></div>
-      <div id="store_selector_results" class="near-stores"></div>      
-      <br class="clear"/>
     </div>
     
     <% remote_form_for @new_purchase do |f| -%>
@@ -66,17 +63,17 @@
   
       <p id="new-item-qty">
         <%= f.label :quantity, "Qty." %>
-        <%= f.text_field :quantity, :value => "qty" %>
+        <%= f.text_field :quantity, :title => "qty", :class => 'prefilled' %>
       </p>
     
       <p id="new-item-name">
         <%= f.label :name %>
-        <%= f.text_field :item_name, :value => "name" %>
+        <%= f.text_field :item_name, :title => "name", :class => 'prefilled' %>
       </p>
     
       <p id="new-item-price">
         <%= f.label :price %>
-        <%= f.text_field :price, :value => "price" %>
+        <%= f.text_field :price, :title => "price", :class => 'prefilled' %>
       </p>
     
       <p id="new-item-submit">

@@ -19,6 +19,9 @@ class Purchase < ActiveRecord::Base
   named_scope :in_stores, lambda {|stores|
     { :conditions => ['purchases.store_id IN(?)', stores] }
   }
+  named_scope :by_quantities, lambda {|quantities|
+    { :conditions => ['purchases.quantity IN (?)', quantities] }
+  }
 
   def item_name
     item.name unless item.nil?
@@ -48,5 +51,4 @@ class Purchase < ActiveRecord::Base
     self.item = Item.find_or_create_by_name(@new_item_name)
     @new_item_name = nil
   end
-
 end

@@ -1,18 +1,29 @@
 <% content_tag_for :li, purchase, :class => "purchase" do -%>
   <div class="purchase-info">
     <span class="qty"><%=h purchase.quantity %></span>
-    <span class="name"><%=h purchase.item_name %> <span class="location">Ralph's</span></span>
+    <span class="name">
+      <%=h purchase.item_name %> 
+      <span class="location"><%=h purchase.store.name %></span>
+    </span>
     <span class="your-price"><%= number_to_formatted_currency(purchase.price) %></span>
-    <span class="cheapest-price open">
+    <span class="cheapest-price closed">
       <%= link_to_remote number_to_formatted_currency(purchase.cheapest_price),
-                         :url    => item_stores_path(purchase.item),
-                         :method => :get,
-                         :update => dom_id(purchase, :stores_for) %>
+            :url      => purchase_stores_path(purchase),
+            :method   => :get,
+            :complete => "$('#{dom_id(purchase)}').down('.open').show(); " <<
+                         "$('#{dom_id(purchase)}').down('.closed').hide(); " %>
+    </span>
+    <span class="cheapest-price open" style="display: none">
+      <%= link_to_function number_to_formatted_currency(purchase.cheapest_price),
+      "new Effect.BlindUp('#{dom_id(purchase, :stores_for)}'); " <<
+      "$('#{dom_id(purchase)}').down('.closed').show(); " <<
+      "$('#{dom_id(purchase)}').down('.open').hide(); " %>
     </span>
     <%= link_to_remote 'X', :url => purchase_path(purchase), :method => :delete %>
   </div>  
   <% content_tag_for :div,
                      purchase,
                      :stores_for,
-                     :class => "more-info purchase_stores" do end %>
+                     :class => "more-info purchase_stores",
+                     :style => 'display: none' do end %>
 <% end -%>

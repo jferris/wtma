@@ -19,10 +19,24 @@ class UserTest < Test::Unit::TestCase
     context "with some Purchases" do
       setup do
         [:month,:week,:day,:hour].each do |time_ago|
-          Factory(:purchase,
-                  :user => @user,
-                  :created_at => 1.send(time_ago).ago,
-                  :item_name => Factory.next(:item_name))
+          item_name = Factory.next(:item_name)
+          2.times do
+            Factory(:purchase,
+                    :user => @user,
+                    :created_at => 1.send(time_ago).ago,
+                    :item_name => item_name)
+          end
+        end
+      end
+
+      context "when sent #quantities" do
+        setup do
+          @result = @user.quantities
+        end
+
+        should "produce a list of all quantities of all purchases the user has made" do
+          quantities = @user.purchases.map(&:quantity)
+          assert_same_elements quantities, @result
         end
       end
 
@@ -33,19 +47,37 @@ class UserTest < Test::Unit::TestCase
         end
 
         should "produce Items sorted by recency of Purchase" do
-          items = @user.purchases.sort{|a,b|b.created_at <=> a.created_at}.map(&:item).first(2)
-          assert_equal items, @result
+          @result.each_with_index do |item, index|
+            next if index.zero?
+            newest_purchase_for_item = @user.purchases.select do |purchase|
+              purchase.item == item
+            end.sort do |a,b|
+              b.created_at <=> a.created_at
+            end.first
+            newest_purchase_for_prior_item = @user.purchases.select do |purchase|
+              purchase.item == @result[index-1]
+            end.sort do |a,b|
+              b.created_at <=> a.created_at
+            end.first
+            assert newest_purchase_for_item.created_at <= newest_purchase_for_prior_item.created_at,
+              "#{newest_purchase_for_item.inspect} newer than #{newest_purchase_for_prior_item.inspect}"
+          end
         end
 
         should "only produce the passed number of Items" do
           assert_equal @limit, @result.size
+        end
+
+        should "only return unique results" do
+          assert_equal @result.uniq, @result
         end
       end
 
       context "with some Purchases by other Users, some cheaper, some more expensive" do
         setup do
           item = @user.purchases.first.item
-          Factory(:purchase, :price => 0.25,  :item_name => item.name)
+          Factory(:purchase, :price => 0.15, :item_name => item.name, :quantity => '1 gallon')
+          Factory(:purchase, :price => 0.25, :item_name => item.name)
           Factory(:purchase, :price => 1000.0, :item_name => item.name)
         end
 
@@ -56,9 +88,14 @@ class UserTest < Test::Unit::TestCase
 
           should "produce Stores ordered by which is the cheapest for recent_items" do
             items = @user.recent_items(10)
-            item_stores = {}
+            item_quantities = {}
             items.each do |item|
-              item_stores[item] = item.purchases.sort {|a,b|a.price <=> b.price}.map(&:store)
+              quantities = item.purchases.select {|purchase| purchase.user == @user}.map(&:quantity)
+              item_quantities[item] = quantities
+            end
+            item_stores = {}
+            item_quantities.each do |item,quantities|
+              item_stores[item] = item.cheapest_stores(@user.nearby_stores, @user.quantities)
             end
             store_rankings = {}
             item_stores.each do |item,stores|
