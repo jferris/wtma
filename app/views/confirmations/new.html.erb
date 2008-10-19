@@ -1,6 +1,9 @@
-<% form_for :user, :url => user_confirmation_path(:user_id => @user,
-                                                  :salt => @user.salt) do |form| %>
-  <div class="submit_field">
-    <%= form.submit 'Confirm' %>
-  </div>
-<% end %>
+<div id="account-changes" class="confirmation">
+  <% form_for :user, :url => user_confirmation_path(:user_id => @user,
+                                                    :salt => @user.salt) do |form| %>
+    <%= image_tag "confirm-message.png" %>
+    <p id="account-submit">
+      <%= form.submit 'Confirm' %>
+    </p>
+  <% end %>
+</div>
