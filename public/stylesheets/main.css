@@ -675,6 +675,9 @@ ol#best-stores h4 {
 }
 
 #account-changes p {
+	margin-top: 10px;
+	color: #91cfd3;
+	margin-bottom: 10px;
 }
 
 #account-changes label {
@@ -744,7 +747,7 @@ body.items-index #content {
 }
 
 body.items-index #footer {
-	margin-top: 10px;
+	margin-top: 90px;
 }
 
 body.items-index #container {
@@ -779,6 +782,8 @@ body.items-index #container {
 	display: block;
 	height: 90px;
 	background: url(../images/signup.png) 0 0;
+	margin-bottom: 10px;
+	margin-top: 40px;
 }
 
 #signup-link:hover {
@@ -793,6 +798,11 @@ body.items-index #container {
 }
 
 /* @group signin */
+
+#signin h2 {
+	font-size: 1.8em;
+	margin-bottom: 10px;
+}
 
 #signin {
 	width: 226px;
@@ -834,7 +844,7 @@ body.items-index #container {
 	font-weight: bold;
 	font-size: 1.4em;
 	cursor: pointer;
-	margin-top: 10px;
+	margin-top: 20px;
 	text-align: center;
 	padding-right: 0;
 }
@@ -842,12 +852,14 @@ body.items-index #container {
 .signin-switcher {
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-style: italic;
-	padding: 4px;
 	text-decoration: none;
+	margin: 0;
+	display: inline;
 }
 
 .signin-switcher a {
 	text-decoration: underline;
+	padding: 4px;
 }
 
 .signin-switcher span {
@@ -874,14 +886,20 @@ body.items-index .copy strong {
 	font-weight: bold;
 }
 
+body.items-index input#session_remember_me {
+	float: right;
+	width: 10px;
+	margin-top: 0;
+	margin-left: 11px;
+}
+
 body.items-index .copy {
 	padding-left: 270px;
-	right: 0;
-	top: 30px;
 	display: block;
 	width: 470px;
-	padding-top: 65px;
+	padding-top: 15px;
 	line-height: 1.7;
+	font-size: 1.2em;
 }
 
 body.items-index .copy p {
@@ -915,7 +933,6 @@ body.items-index .copy li {
   float: left;
 }
 #account-changes .reminder label {
-  float: left;
   padding-top: 4px;
 }
 
@@ -960,13 +977,11 @@ body.error .copy p {
 	color: #57999d;
 	margin-bottom: 20px;
 	background-image: url(../images/white-grad-small.png);
-	display: inline-block;
+	display: block;
 }
 
 #flash {
-	display: inline-block;
-	margin-left: auto;
-	margin-right: auto;
+	display: block;
 }
 
 #errorExplanation {
@@ -1030,4 +1045,15 @@ a.delete {
 
 a.delete:hover {
 	background: url(../images/bin_closed.png) no-repeat 2px 4px;
+}
+
+.text_field.reminder {
+	display: block;
+	margin-bottom: 10px;
+	clear: both;
+}
+
+h2#login {
+	background: url(../images/login.png) no-repeat 109px 0;
+	height: 52px;
 }
