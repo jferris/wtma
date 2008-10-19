@@ -59,7 +59,7 @@ class PurchasesControllerTest < ActionController::TestCase
         end
 
         %w(item_name quantity price).each do |field|
-          should "have a text field to enter the item name" do
+          should "have a text field to enter the #{field}" do
             assert_select "#new_purchase input" <<
                             "[id='purchase_#{field}']" <<
                             "[name='purchase[#{field}]']" <<
