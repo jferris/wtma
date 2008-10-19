@@ -1,7 +1,10 @@
 <% content_tag_for :li, purchase, :class => "purchase" do -%>
   <div class="purchase-info">
     <span class="qty"><%=h purchase.quantity %></span>
-    <span class="name"><%=h purchase.item_name %> <span class="location">Ralph's</span></span>
+    <span class="name">
+      <%=h purchase.item_name %> 
+      <span class="location"><%=h purchase.store.name %></span>
+    </span>
     <span class="your-price"><%= number_to_formatted_currency(purchase.price) %></span>
     <span class="cheapest-price closed">
       <%= link_to_remote number_to_formatted_currency(purchase.cheapest_price),
