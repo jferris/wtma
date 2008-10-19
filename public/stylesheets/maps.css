@@ -26,9 +26,10 @@
   font-size: 18pt;
 }
 
-.gmls {
+.gmls-search-form {
+  position: absolute;
   bottom: 260px !important;
-  left: 0px !important;
+  left: -65px !important;
 }
 
 .gmls-app {
