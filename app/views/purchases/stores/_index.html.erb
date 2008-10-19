@@ -7,7 +7,7 @@
     <% @stores.each do |store| -%>
       <% content_tag_for :li, store do %>
         <span class="other-store-name"><%=h store.name %></span>
-        <span class="other-store-price"><%= number_to_formatted_currency(@item.purchases.cheapest.price) %></span>
+        <span class="other-store-price"><%= number_to_formatted_currency(@item.purchases.in_stores([store]).cheapest.price) %></span>
       <% end -%>
     <% end -%>
   </ol>
