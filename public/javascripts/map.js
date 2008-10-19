@@ -188,3 +188,58 @@ StoreSelector = Class.create({
     }
 
 });
+
+StoreViewer = Class.create({
+  initialize:
+    function(options) {
+      this.options = Object.extend({
+        mapContainer: null,
+        stores:       null,
+        zoom:         15
+      }, options || {});
+
+      this.mapContainer = $(this.options.mapContainer);
+      this.stores       = this.options.stores;
+      this.centered     = false;
+      this.map          = new GMap2(this.mapContainer);
+      this.bounds       = new GLatLngBounds();
+      this.nextMarker   = 1;
+
+      this.centerOnStore(this.stores.first());
+      this.stores.each(this.addStore.bind(this));
+      this.map.setZoom(this.map.getBoundsZoomLevel(this.bounds));
+      this.map.setCenter(this.bounds.getCenter());
+    },
+
+  addStore:
+    function(store) {
+      var point = new GLatLng(store.latitude, store.longitude);
+      var icon  = new GIcon(G_DEFAULT_ICON, '/images/marker' + this.nextMarker + '.png');
+      this.map.addOverlay(new GMarker(point, icon));
+      this.bounds.extend(point);
+
+      var element = $('store_' + store.id);
+      if (element) {
+        element.observe('click', this.clickStoreLink.bindAsEventListener(this, store));
+      }
+
+      this.nextMarker++;
+    },
+
+  clickStoreLink:
+    function(e, store) {
+      e.stop();
+      this.centerOnStore(store);
+    },
+
+  centerOnStore:
+    function(store) {
+      if (this.centered) {
+        this.map.panTo(new GLatLng(store.latitude, store.longitude));
+        this.map.setZoom(this.options.zoom);
+      } else {
+        this.map.setCenter(new GLatLng(store.latitude, store.longitude), this.options.zoom);
+        this.centered = true;
+      }
+    }
+})

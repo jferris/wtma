@@ -89,7 +89,7 @@ h1 {
 	color: white;
 }
 
-body.purchase-new li#purchases-new, 
+body.purchases-index li#purchases-index, 
 body.stores-index li#stores-index, 
 body.sessions-new li#sessions-new,
 body.users-new li#users-new,
@@ -752,6 +752,7 @@ body.items-index #container {
 	position: absolute;
 	top: 26px;
 	left: -10px;
+	z-index: 9999;
 }
 
 /* @group signin and copy */
@@ -804,8 +805,12 @@ body.items-index #container {
 	margin-bottom: 10px;
 	text-align: right;
 	color: #7aaeb1;
-	background: #edf8f9 url(../images/openid-icon-small.gif) no-repeat 4px center;
+	background-color: #edf8f9;
 	padding: 5px 4px 5px 5px;
+}
+
+#signin-open-id input {
+  background: #edf8f9 url(../images/openid-icon-small.gif) no-repeat 4px center;
 }
 
 #signin label {
