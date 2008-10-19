@@ -1,6 +1,10 @@
 class StoresController < ApplicationController
   before_filter :authenticate, :except => :show
 
+  def index
+    @stores = current_user.best_stores
+  end
+
   def show
     @store = Store.find params[:id]
   end

@@ -1,0 +1,34 @@
+<ol id="best-stores">
+  <li><h2><%= link_to_function %{#{@stores[0].name}<span class="gradient"/><span class="crown"/>}, 
+                               %{ centerMapOn(#{@stores[0].latitude},#{@stores[0].longitude}) } %></h2>
+    <h4>
+      <%= @stores[0].location %>
+    </h4>
+  </li>
+  
+  <div id="map" style="width: 960px; height: 350px;"></div>
+  <% content_for :javascripts do -%>
+    <% javascript_tag do -%>
+      var map;
+      if (GBrowserIsCompatible()) {
+        map = new GMap2($('map'));
+        map.setCenter(new GLatLng(<%= @stores[0].latitude %>, <%= @stores[0].longitude %>), 15);
+        <% @stores.each do |store| %>
+          map.addOverlay(new GMarker(new GLatLng(<%= store.latitude %>, <%= store.longitude %>)));
+        <% end %>
+      }
+      function centerMapOn(latitude, longitude) {
+        map.panTo(new GLatLng(latitude,longitude));
+      }
+    <% end %>
+  <% end -%>
+  
+  <% @stores[1..-1].each do |store| %>
+    <li><h3><%= link_to_function %{#{store.name}<span class="gradient-small"/>},
+                                 %{ centerMapOn(#{store.latitude},#{store.longitude}) } %></h3>
+       <h4>
+         <%= store.location %>
+        </h4>
+    </li>
+  <% end %>
+</ol>
