@@ -15,6 +15,34 @@ class UsersControllerTest < ActionController::TestCase
       should_have_map_observer map
     end
   end
+
+  context "POST to create as a human" do
+    setup do
+      post :create, :user_type => 'human'
+    end
+
+    should "display the human form" do
+      assert_select '#new_user[style="display: block;"]'
+    end
+
+    should "hide the openid form" do
+      assert_select '#openid_form[style="display: none;"]'
+    end
+  end
+  
+  context "POST to create using openid" do
+    setup do
+      post :create, :user_type => 'openid'
+    end
+
+    should "hide the human form" do
+      assert_select '#new_user[style="display: none;"]'
+    end
+
+    should "display the openid form" do
+      assert_select '#openid_form[style="display: block;"]'
+    end
+  end
   
   public_context do
     context "with a user" do
