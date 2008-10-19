@@ -6,20 +6,41 @@
 
 <div id="signin-and-copy">
   <div id="signin">
-    <img src="images/milkman.png" alt="omnomnomnomnom!" id="milkman"/>
+    <img src="/images/milkman.png" alt="omnomnomnomnom!" id="milkman"/>
     
-    <form action="#">
+    <% form_tag openid_path, :id => "openid_form" do %>
       <p id="signin-open-id">
-        <label>Open ID</label>
-        <input value="Joe"/>
+        <label for="openid_identifier">Open ID</label>
+        <%= text_field_tag 'openid_identifier' %>
       </p>
-      
-      <p class="signin-switcher">or, <a href="#" class="signin-switcher">Sign In Like A Human</a></p>
+      <p class="signin-switcher">or, <%= link_to_function "Login like a Human", "$('openid_form').hide(); $('email_form').show();", :class => "signin-switcher" %></p>
       
       <p id="signin-submit">
-        <input type="submit" value="sign in"/>
+        <%= submit_tag "login" %>
       </p>
-    </form>
+    <% end %>
+    
+    <% form_for :session, :url => session_path, :html => { :id => "email_form", :style => "display: none;" } do |form| %>
+      <div class="text_field">
+        <label>
+          Email
+        </label>
+        <%= form.text_field :email %>  
+      </div>
+      <div class="text_field">
+        <%= form.label :password %>
+        <%= form.password_field :password %>
+      </div>
+      <div class="text_field reminder">
+        <%= form.check_box :remember_me %>
+        <%= form.label :remember_me %>
+      </div>
+      <p class="signin-switcher">or, <%= link_to_function "Login with Open ID", "$('email_form').hide(); $('openid_form').show();", :class => "signin-switcher" %></p>
+      <br class="clear"/>
+      <p id="signin-submit">
+        <%= form.submit 'login' %>
+      </p>
+    <% end %>    
   </div>
   
   <div class="copy">

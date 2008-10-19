@@ -802,8 +802,12 @@ body.items-index #container {
 	margin-bottom: 10px;
 	text-align: right;
 	color: #7aaeb1;
-	background: #edf8f9 url(../images/openid-icon-small.gif) no-repeat 4px center;
+	background-color: #edf8f9;
 	padding: 5px 4px 5px 5px;
+}
+
+#signin-open-id input {
+  background: #edf8f9 url(../images/openid-icon-small.gif) no-repeat 4px center;
 }
 
 #signin label {
