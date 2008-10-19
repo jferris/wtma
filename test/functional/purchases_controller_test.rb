@@ -2,6 +2,12 @@ require 'test_helper'
 
 class PurchasesControllerTest < ActionController::TestCase
 
+  include ActionView::Helpers::JavaScriptHelper
+
+  def setup
+    @focus_quantity = /#{Regexp.escape("$('purchase_quantity').focus()")}/
+  end
+
   should_route :get,  '/purchases', :action => :index
   should_route :post, '/purchases', :action => :create
   should_route :delete, '/purchases/1', :action => :destroy, :id => '1'
@@ -85,6 +91,10 @@ class PurchasesControllerTest < ActionController::TestCase
         should "fill in the name of the latest purchase's store" do
           assert_select '#picked-store-name', @store.name
         end
+
+        should "not focus the quantity" do
+          assert_no_match @focus_quantity, @response.body
+        end
       end
     end
 
@@ -100,14 +110,18 @@ class PurchasesControllerTest < ActionController::TestCase
       should "have a placeholder for the store name" do
         assert_select '#picked-store-name'
       end
+
+      should "not focus the quantity" do
+        assert_no_match @focus_quantity, @response.body
+      end
     end
 
     context "on JS POST to create with valid params" do
       setup do
         @store = Factory(:store)
-        post :create, 
-             :format => :js,
-             :purchase => Factory.attributes_for(:purchase,
+        xhr :post, :create, 
+                   :format => :js,
+                   :purchase => Factory.attributes_for(:purchase,
                                                  :store_id => @store.id) 
       end
 
@@ -130,6 +144,7 @@ class PurchasesControllerTest < ActionController::TestCase
       should "rerender the purchase form" do
         assert_select_rjs :replace, 'new_purchase' do
           assert_select '#purchase_store_id[value=?]', @store.id
+          assert_match @focus_quantity, @response.body
         end
       end
     end
@@ -137,8 +152,8 @@ class PurchasesControllerTest < ActionController::TestCase
     context "on JS POST to create with only a store ID" do
       setup do
         @store = Factory(:store)
-        post :create, :format   => :js, 
-                      :purchase => { :store_id => @store.to_param }
+        xhr :post, :create, :format   => :js, 
+                            :purchase => { :store_id => @store.to_param }
       end
 
       should_assign_to :purchase, :store
@@ -146,7 +161,9 @@ class PurchasesControllerTest < ActionController::TestCase
       should_not_change "@user.purchases.count"
 
       should "rerender the purchase form" do
-        assert_select_rjs :replace, 'new_purchase'
+        assert_select_rjs :replace, 'new_purchase' do
+          assert_match @focus_quantity, @response.body
+        end
       end
 
       should "not create a new list element" do
