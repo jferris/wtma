@@ -23,6 +23,11 @@ a:hover {
 	text-decoration: underline;
 }
 
+a:visited {
+	color: #57999d;
+	text-decoration: underline;
+}
+
 h1 {
 	font-size: 3.6em;
 }
@@ -41,55 +46,24 @@ h1 {
 
 #logo a {
 	width: 100%;
-	height: 330px;
 	display: block;
+	height: 120px;
 }
 
 #header {
-	background: url(../images/header.png) no-repeat;
-	height: 330px;
+	background: url(../images/header-2.png) no-repeat -60px -10px;
+	height: 205px;
 	position: relative;
 	margin-bottom: 30px;
-}
-
-#header .copy {
-	position: absolute;
-	right: 130px;
-	text-align: right;
-	bottom: 90px;
-}
-
-#header p {
-	margin-bottom: 10px;
-}
-
-#header ul {
-	margin-top: 5px;
-}
-
-#header ul li {
-	display: inline;
-	padding-right: 6px;
-	border-right: 1px solid #91cfd3;
-}
-
-#header ul li:last-child {
-	border-right-style: none;
-}
-
-#header ul li a {
-	padding: 3px;
-	border-right-style: solid;
 }
 
 /* @group menu */
 
 #menu {
-	background: url(../images/repeating-top-receipt.png) repeat-x 0 45px;
+	background: url(../images/repeating-top-receipt.png) repeat-x 0 40px;
 	height: 75px;
-	position: absolute;
-	bottom: 0;
 	width: 100%;
+	margin-top: -24px;
 }
 
 #menu li {
@@ -110,9 +84,14 @@ h1 {
 	float: left;
 	background-color: #69b9be;
 	border-bottom: 4px solid #66b4b9;
+	color: white;
 }
 
-body.purchase-new li#purchases-new, body.stores-index li#stores-index, #menu li.active  {
+body.purchase-new li#purchases-new, 
+body.stores-index li#stores-index, 
+body.sessions-new li#sessions-new,
+body.users-new li#users-new,
+#menu li.active  {
 	padding-bottom: 14px;
 	border-style: none;
 	background: #91cfd3 url(../images/active-tab-top.png) no-repeat 0 0;
@@ -626,6 +605,39 @@ ol#best-stores h4 {
 	font-family: Georgia, "Times New Roman", Times, serif;
 }
 
+/* @group account menu */
+
+#account-menu p {
+	margin-bottom: 10px;
+	visibility: hidden;
+}
+
+#account-menu ul {
+	margin-top: 5px;
+}
+
+#account-menu ul li {
+	display: inline;
+	padding-right: 6px;
+	border-right: 1px solid #91cfd3;
+}
+
+#account-menu ul li:last-child {
+	border-right-style: none;
+}
+
+#account-menu ul li a {
+	padding: 3px;
+	border-right-style: solid;
+	color: #91cfd3;
+}
+
+#account-menu ul li a:hover {
+	color: #57999d;
+}
+
+/* @end */
+
 
 
 /* @end */
@@ -873,8 +885,22 @@ body.items-index .copy li {
   border-style:solid none none solid;
   border-top:1px solid #DAE4E5;
   margin-right: 60px;
-  margin-top: -17px;
+  margin-top: 23px;
   float: right;
+}
+
+.forgot_password {
+  float: right;
+  margin-top: 3px;
+  margin-right: 412px;
+}
+
+.reminder input {
+  float: left;
+}
+#account-changes .reminder label {
+  float: left;
+  padding-top: 4px;
 }
 
 
