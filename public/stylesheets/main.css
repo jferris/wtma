@@ -112,7 +112,7 @@ h1 {
 	border-bottom: 4px solid #66b4b9;
 }
 
-body.purchases-index li#purchases-index, body.stores-index li#stores-index, #menu li.active  {
+body.purchase-new li#purchases-new, body.stores-index li#stores-index, #menu li.active  {
 	padding-bottom: 14px;
 	border-style: none;
 	background: #91cfd3 url(../images/active-tab-top.png) no-repeat 0 0;
@@ -267,7 +267,6 @@ ul#grocery-items {
 	border: 1px solid #dae4e5;
 	padding: 20px 0 20px 20px;
 	margin-left: -21px;
-  height: 320px;
 }
 
 #new-item-location {
@@ -287,6 +286,12 @@ ul#grocery-items {
 	float: left;
 }
 
+#location-field input {
+	color: #81b5b8;
+	float: left;
+	width: 96%;
+}
+
 #picked-store {
 	display: block;
 	position: relative;
@@ -303,6 +308,38 @@ ul#grocery-items {
 	padding-right: 20px;
 	top: -5px;
 }
+
+/* @group near stores */
+
+.near-stores {
+	margin-top: 12px;
+}
+
+.near-store-name {
+	font-size: 1.4em;
+	text-align: right;
+}
+
+.near-store-price {
+	font-size: 1.4em;
+	float: right;
+}
+
+ul.near-stores li {
+	margin-top: 5px;
+}
+
+.near-store-name {
+	font-size: 1.4em;
+	text-align: right;
+}
+
+.near-store-price {
+	font-size: 1.4em;
+	float: right;
+}
+
+/* @end */
 
 /* @end */
 
@@ -394,10 +431,6 @@ li.grocery-item {
 	height: 160px;
 	background-color: beige;
 	float: left;
-}
-
-.purchase_stores {
-  margin-top: 0px;
 }
 
 /* @group other stores */
@@ -696,6 +729,7 @@ body.items-index #container {
 #milkman {
 	position: absolute;
 	top: -150px;
+	left: 0;
 }
 
 /* @group signin */
@@ -771,6 +805,11 @@ body.items-index #container {
 
 /* @end */
 
+body.items-index .copy strong {
+	color: #7aaeb1;
+	font-weight: bold;
+}
+
 body.items-index .copy {
 	padding-left: 270px;
 	right: 0;
@@ -779,11 +818,6 @@ body.items-index .copy {
 	width: 470px;
 	padding-top: 65px;
 	line-height: 1.7;
-}
-
-body.items-index .copy strong {
-	color: #7aaeb1;
-	font-weight: bold;
 }
 
 body.items-index .copy p {
@@ -800,5 +834,35 @@ body.items-index .copy li {
 
 
 
+
+/* @end */
+
+/* @group error */
+
+#error-milkman {
+	top: 50px;
+	left: -180px;
+	float: left;
+	margin-left: -150px;
+	margin-top: 70px;
+	margin-right: -220px;
+}
+
+body.error .copy {
+	right: 0;
+	display: block;
+	width: 470px;
+	padding-top: 260px;
+	line-height: 1.7;
+	padding-left: 390px;
+}
+
+body.error #footer {
+	margin-top: 160px;
+}
+
+body.error .copy p {
+	margin-top: 20px;
+}
 
 /* @end */

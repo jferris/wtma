@@ -729,6 +729,7 @@ body.items-index #container {
 #milkman {
 	position: absolute;
 	top: -150px;
+	left: 0;
 }
 
 /* @group signin */
@@ -804,6 +805,11 @@ body.items-index #container {
 
 /* @end */
 
+body.items-index .copy strong {
+	color: #7aaeb1;
+	font-weight: bold;
+}
+
 body.items-index .copy {
 	padding-left: 270px;
 	right: 0;
@@ -812,11 +818,6 @@ body.items-index .copy {
 	width: 470px;
 	padding-top: 65px;
 	line-height: 1.7;
-}
-
-body.items-index .copy strong {
-	color: #7aaeb1;
-	font-weight: bold;
 }
 
 body.items-index .copy p {
@@ -833,5 +834,35 @@ body.items-index .copy li {
 
 
 
+
+/* @end */
+
+/* @group error */
+
+#error-milkman {
+	top: 50px;
+	left: -180px;
+	float: left;
+	margin-left: -150px;
+	margin-top: 70px;
+	margin-right: -220px;
+}
+
+body.error .copy {
+	right: 0;
+	display: block;
+	width: 470px;
+	padding-top: 260px;
+	line-height: 1.7;
+	padding-left: 390px;
+}
+
+body.error #footer {
+	margin-top: 160px;
+}
+
+body.error .copy p {
+	margin-top: 20px;
+}
 
 /* @end */
