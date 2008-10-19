@@ -145,7 +145,7 @@ body.purchase-new li#purchases-new, body.stores-index li#stores-index, #menu li.
 
 /* @group reciepts page */
 
-/* @group grocery-items */
+/* @group purchases */
 
 #pagination {
 	float: right;
@@ -172,7 +172,7 @@ body.purchase-new li#purchases-new, body.stores-index li#stores-index, #menu li.
 	padding: 5px 10px;
 }
 
-ul#grocery-items {
+ul#purchases {
 	text-align: left;
 	width: 880px;
 	margin-right: auto;
@@ -357,7 +357,7 @@ ul.near-stores li {
 	display: inline;
 }
 
-.grocery-item-info {
+.purchase-info {
 	padding-top: 10px;
 	font-size: 2.4em;
 	position: relative;
@@ -366,7 +366,7 @@ ul.near-stores li {
 	padding-bottom: 10px;
 }
 
-li.grocery-item {
+li.purchase {
 	margin-bottom: 40px;
 }
 

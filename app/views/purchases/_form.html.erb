@@ -1,55 +1,87 @@
-<% remote_form_for @new_purchase do |f| -%>
-  <%= f.error_messages %>
-  <div id="store_selector">
-    <div id="store_location_map" style="width: 400px; height: 250px; float: left"></div>
-    <div id="store_selector_results" style="float: left; width: 250px; height: 400px"></div>
-    <div style="clear:both"></div>
-    <% content_for :javascripts do -%>
-      <% javascript_tag do -%>
-        var location_map;
-        function extendMarker(marker, element, result) {
-          element = $(element);
-          element.innerHTML = '';
+<div id="new-item">
+  <div id="pick-location">
+     <div id="picked-store">          
+        <a href="#">
+          <img src="images/location.png" id="marker" alt="marker!"/>
+          <span class="location">Johnnie's Basic Food and Produce Supply Store</span>
+        </a>
+      </div>
+      
+      <form id="pick-location-form" action="#">
+        <p id="location-field">
+          <label>store location</label>
+          <input value="store location"/>
+        </p>
+      </form>
 
-          var title = new Element('div', { class: 'gs-title' });
-          element.appendChild(title)
+      <div id="store_location_map" class="map" style="width: 400px; height: 250px; float: left"></div>
+      <div id="store_selector_results" class="near-stores"></div>      
+      <br class="clear"/>
+    </div>
+    
+    <% remote_form_for @new_purchase do |f| -%>
+      <%= f.error_messages %>
+      <% content_for :javascripts do -%>
+        <% javascript_tag do -%>
+          var location_map;
+          function extendMarker(marker, element, result) {
+            element = $(element);
+            element.innerHTML = '';
 
-          var link  = new Element('a', { class: 'gs-title' });
-          link.innerHTML = result.titleNoFormatting;
-          title.appendChild(link)
+            var title = new Element('div', { class: 'gs-title' });
+            element.appendChild(title)
 
-          var address = new Element('div', { class: 'gs-address' });
-          element.appendChild(address);
+            var link  = new Element('a', { class: 'gs-title' });
+            link.innerHTML = result.titleNoFormatting;
+            title.appendChild(link)
 
-          var street = new Element('div', { class: 'gs-street gs-addressLine' });
-          street.innerHTML = result.streetAddress;
-          address.appendChild(street);
+            var address = new Element('div', { class: 'gs-address' });
+            element.appendChild(address);
 
-          var city = new Element('div', { class: 'gs-city gs-addressLine' });
-          city.innerHTML = result.city + ', ' + result.region;
-          address.appendChild(city);
+            var street = new Element('div', { class: 'gs-street gs-addressLine' });
+            street.innerHTML = result.streetAddress;
+            address.appendChild(street);
 
-          var country = new Element('div', { class: 'gs-country' });
-          country.innerHTML = result.country;
-          address.appendChild(country);
+            var city = new Element('div', { class: 'gs-city gs-addressLine' });
+            city.innerHTML = result.city + ', ' + result.region;
+            address.appendChild(city);
 
-          return element;
-        }
-        if (GBrowserIsCompatible()) {
-          location_map = new GMap2($('store_location_map'));
-          location_map.setCenter(new GLatLng(<%= current_user.latitude %>, <%= current_user.longitude %>), 15);
-          local_search_options = {
-            resultList: $("store_selector_results"),
-            onGenerateMarkerHtmlCallback: extendMarker
+            var country = new Element('div', { class: 'gs-country' });
+            country.innerHTML = result.country;
+            address.appendChild(country);
+
+            return element;
           }
-          location_map.addControl(new google.maps.LocalSearch(local_search_options));
-        }
+          if (GBrowserIsCompatible()) {
+            location_map = new GMap2($('store_location_map'));
+            location_map.setCenter(new GLatLng(<%= current_user.latitude %>, <%= current_user.longitude %>), 15);
+            local_search_options = {
+              resultList: $("store_selector_results"),
+              onGenerateMarkerHtmlCallback: extendMarker
+            }
+            location_map.addControl(new google.maps.LocalSearch(local_search_options));
+          }
+        <% end -%>
       <% end -%>
+  
+      <p id="new-item-qty">
+        <%= f.label :quantity, "Qty." %>
+        <%= f.text_field :quantity, :value => "qty" %>
+      </p>
+    
+      <p id="new-item-name">
+        <%= f.label :name %>
+        <%= f.text_field :item_name, :value => "name" %>
+      </p>
+    
+      <p id="new-item-price">
+        <%= f.label :price %>
+        <%= f.text_field :price, :value => "price" %>
+      </p>
+    
+      <p id="new-item-submit">
+        <%= f.submit 'add' %>
+      </p>
+      <%= f.hidden_field :store_id %>
     <% end -%>
   </div>
-  <%= f.text_field :quantity %>
-  <%= f.text_field :item_name %>
-  <%= f.text_field :price %>
-  <%= f.text_field :store_id %>
-  <%= f.submit 'Save' %>
-<% end -%>

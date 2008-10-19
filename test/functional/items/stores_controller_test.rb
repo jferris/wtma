@@ -23,8 +23,9 @@ class Items::StoresControllerTest < ActionController::TestCase
         setup do
           get :index, :item_id => @item.to_param
         end
-
+        
         should_assign_to :stores
+        should_render_without_layout
         should_display :stores
 
         before_should "find the item" do

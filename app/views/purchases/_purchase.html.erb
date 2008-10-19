@@ -1,14 +1,18 @@
-<% content_tag_for :li, purchase do -%>
-  <%=h purchase.item_name %>
-  (<%=h purchase.quantity %>)
-  <%= number_to_currency(purchase.price) %>
-  (<%= link_to_remote number_to_currency(purchase.cheapest_price),
-                      :url    => item_stores_path(purchase.item),
-                      :method => :get,
-                      :update => dom_id(purchase, :stores_for) %>)
-  <%= link_to_remote 'X', :url => purchase_path(purchase), :method => :delete %>
+<% content_tag_for :li, purchase, :class => "purchase" do -%>
+  <div class="purchase-info">
+    <span class="qty"><%=h purchase.quantity %></span>
+    <span class="name"><%=h purchase.item_name %> <span class="location">Ralph's</span></span>
+    <span class="your-price"><%= number_to_formatted_currency(purchase.price) %></span>
+    <span class="cheapest-price open">
+      <%= link_to_remote number_to_formatted_currency(purchase.cheapest_price),
+                         :url    => item_stores_path(purchase.item),
+                         :method => :get,
+                         :update => dom_id(purchase, :stores_for) %>
+    </span>
+    <%= link_to_remote 'X', :url => purchase_path(purchase), :method => :delete %>
+  </div>  
   <% content_tag_for :div,
                      purchase,
                      :stores_for,
-                     :class => :purchase_stores do end -%>
+                     :class => "more-info purchase_stores" do end %>
 <% end -%>

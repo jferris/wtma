@@ -4,5 +4,6 @@ class Items::StoresController < ApplicationController
   def index
     @item   = Item.find(params[:item_id])
     @stores = @item.cheapest_stores(current_user.nearby_stores)
+    render :layout => false
   end
 end
