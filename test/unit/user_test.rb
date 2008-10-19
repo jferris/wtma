@@ -16,6 +16,11 @@ class UserTest < Test::Unit::TestCase
       assert_equal "Joe", @user.first_name
     end
 
+    should "geocode when saving with a new location" do
+      @user.expects(:auto_geocode_address)
+      @user.update_attributes!(:location => '100 Commonwealth Ave, Boston, MA')
+    end
+
     context "with some Purchases" do
       setup do
         [:month,:week,:day,:hour].each do |time_ago|
@@ -138,7 +143,18 @@ class UserTest < Test::Unit::TestCase
       @user = Factory(:user, :openid_identity => nil, :email => 'foo@example.com')
     end
 
-    should_require_attributes :email, :location, :latitude, :longitude
+    should_require_attributes :email, :location
+
+    [:latitude, :longitude].each do |field|
+      should "require #{field}" do
+        assert_valid @user
+
+        @user.send(:"#{field}=", nil)
+        @user.location = nil
+
+        assert !@user.valid?
+      end
+    end
   end
   
   context "an OpenID and location" do
