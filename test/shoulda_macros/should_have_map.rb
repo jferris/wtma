@@ -24,4 +24,12 @@ class Test::Unit::TestCase
                    @response.body
     end
   end
+
+  def self.should_have_store_map
+    should "have a map displaying stores" do
+      json = Regexp.escape(assigns(:stores).to_json)
+      assert_match /new StoreViewer\(\{.*mapContainer:.*,.*stores: *#{json}.*\}.*\)/m,
+                   @response.body
+    end
+  end
 end

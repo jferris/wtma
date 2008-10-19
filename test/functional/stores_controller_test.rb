@@ -47,7 +47,7 @@ class StoresControllerTest < ActionController::TestCase
             get :index
           end
 
-          should_have_map
+          should_have_store_map
           should_assign_to :stores
 
           should "only display 4 stores" do
