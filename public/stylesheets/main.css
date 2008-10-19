@@ -648,7 +648,7 @@ ol#best-stores h4 {
 	font-weight: bold;
 	font-size: 1.4em;
 	cursor: pointer;
-	margin-top: 30px;
+	margin-top: 15px;
 }
 
 #account-submit input:hover {
@@ -797,8 +797,14 @@ body.items-index .copy li {
 
 /* @end */
 
-
-
+.signup-map {
+  border-left:1px solid #DAE4E5;
+  border-style:solid none none solid;
+  border-top:1px solid #DAE4E5;
+  margin-right: 60px;
+  margin-top: -17px;
+  float: right;
+}
 
 
 /* @end */
