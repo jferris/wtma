@@ -1073,3 +1073,10 @@ h2#login {
 body.stores #map {
 	margin-top: 10px;
 }
+
+#hello {
+	float: right;
+	margin-top: 17px;
+	margin-right: 200px;
+	color: #91cfd3;
+}
