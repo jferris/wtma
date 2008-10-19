@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
   has_many :purchases
 
+  before_validation_on_update :auto_geocode_address
+
   def self.find_or_create_by_openid(openid_identity, registration, user)
     User.find_by_openid_identity(openid_identity) ||
       User.new(:openid_identity => openid_identity,

@@ -3,6 +3,7 @@ module Quantity
     [ "12 pack",
       "2L",
       "30 pack",
+      "6 pack",
       "baker's dozen",
       "bottle",
       "can",
@@ -17,7 +18,6 @@ module Quantity
       "jumbo",
       "loaf",
       "package",
-      "six pack",
       "slice",
       "quart" ]
   end
