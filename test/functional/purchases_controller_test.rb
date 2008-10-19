@@ -41,6 +41,7 @@ class PurchasesControllerTest < ActionController::TestCase
         should_assign_to :purchases, :equals => '@purchases'
         should_assign_to :new_purchase
         should_autocomplete_for :purchase, :quantity
+        #should_autocomplete_for :purchase, :item
 
         should_display :purchases do |purchase|
           assert_remote_link_to :delete, purchase_path(purchase)
