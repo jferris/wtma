@@ -49,7 +49,7 @@ class OpenidControllerTest < ActionController::TestCase
         @user = User.find_by_openid_identity(@openid_identity)
       end
 
-      should_redirect_to 'new_purchase_path'
+      should_redirect_to 'purchases_path'
 
       should "create an account" do
         assert_not_nil @user
@@ -81,7 +81,7 @@ class OpenidControllerTest < ActionController::TestCase
         @user = User.find_by_openid_identity(@openid_identity)
       end
 
-      should_redirect_to 'new_purchase_path'
+      should_redirect_to 'purchases_path'
 
       should "log the user in" do
         assert_equal @user.id, session[:user_id]

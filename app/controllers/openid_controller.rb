@@ -11,7 +11,7 @@ class OpenidController < ApplicationController
                                              {:location => session[:location]})
         if user.save
           session[:user_id] = user.id
-          redirect_to new_purchase_path
+          redirect_to purchases_path
         else
           redirect_to new_session_path
         end 

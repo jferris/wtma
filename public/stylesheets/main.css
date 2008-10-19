@@ -707,8 +707,8 @@ ol#best-stores h4 {
 	position: absolute;
 }
 
-#content {
-	
+.home #content {
+	margin-top: 15%;
 }
 
 

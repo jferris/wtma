@@ -14,6 +14,7 @@ class ItemsControllerTest < ActionController::TestCase
       setup { get :index }
 
       should_assign_to :purchases
+      should_render_with_layout 'logged_out'
 
       should "set @purchases to the cheapest purchase for that item" do
         assigns(:purchases).each do |purchase|
