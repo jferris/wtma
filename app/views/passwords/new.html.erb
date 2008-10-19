@@ -1,15 +1,16 @@
-<h2>Change your password</h2>
+<div id="account-changes">
+  <h2>Change your password</h2>
+  <p>
+    We will email you a link to change your password.
+  </p>
 
-<p>
-  We will email you a link to change your password.
-</p>
-
-<% form_for :password, :url => passwords_path do |form| %>
-  <div class="text_field">
-    <%= form.label :email, 'Email address' %>
-    <%= form.text_field :email %>
-  </div>
-  <div class="submit_field">
-    <%= form.submit 'Reset password' %>
-  </div>
-<% end %>
+  <% form_for :password, :url => passwords_path do |form| %>
+    <div class="text_field">
+      <%= form.label :email, 'Email address' %>
+      <%= form.text_field :email %>
+    </div>
+    <p id="account-submit">
+      <%= form.submit 'Submit' %>
+    </p>
+  <% end %>
+</div>
