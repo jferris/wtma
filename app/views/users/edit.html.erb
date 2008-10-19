@@ -1,4 +1,8 @@
-<% form_for @user do |form| %>
-  <%= render :partial => '/users/form', :object => form %>
-  <%= form.submit 'Update', :disable_with => 'Please wait...' %>
-<% end %>
+<div id="account-changes">
+  <% form_for @user do |form| %>
+    <%= render :partial => '/users/form', :object => form %>    
+    <p id="account-submit">
+      <%= form.submit 'update' %>
+    </p>
+  <% end %>     
+</div>

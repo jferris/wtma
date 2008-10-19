@@ -1,17 +1,55 @@
+<h2>Your Personal Details</h2>
 <%= form.error_messages %>
-<div class="text_field">
-  <%= form.label :email %>
-  <%= form.text_field :email %>
-</div>
-<div class="password_field">
-  <%= form.label :password %>
-  <%= form.password_field :password %>
-</div>
-<div class="password_field">
-  <%= form.label :password_confirmation %>
-  <%= form.password_field :password_confirmation %>
-</div>
-<div class="text_field">
-  <%= form.label :location %>
+<p id="account-name">
+  <%= form.label :first_name, "Your First Name" %>
+  <%= form.text_field :first_name %>
+</p>
+<p id="account-location">
+  <%= form.label :location, "Your Location" %>
   <%= form.text_field :location %>
-</div>
+</p>
+
+<div id="user_map" style="width: 825px; height: 350px;"></div>
+
+<% if @user.openid_identity.blank? %>
+  <div class="text_field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+  <div class="text_field">
+    <%= form.label :password, "New Password" %>
+    <%= form.password_field :password %>
+  </div>
+  <div class="text_field">
+    <%= form.label :password_confirmation, "New Password, again" %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+<% else %>
+  <div class="text_field">
+    <%= form.label :openid_identity, "Open ID" %>
+    <%= form.text_field :openid_identity %>
+  </div>
+<% end %>
+
+<% content_for :javascripts do -%>
+  <% javascript_tag do -%>
+    var user_map;
+    var geocoder = new GClientGeocoder();
+    if (GBrowserIsCompatible()) {
+      user_map = new GMap2($('user_map'));
+      user_map.setCenter(new GLatLng(<%= current_user.latitude %>, <%= current_user.longitude %>), 15);
+      geocoder.getLatLng("<%= current_user.location %>", function(point) {
+        if (point) {
+          var marker = new GMarker(point);
+          user_map.addOverlay(marker);
+        }
+      });
+    }
+    
+    new MapObserver({
+      map:      user_map,
+      geocoder: geocoder,
+      observe:  'user_location'
+    });
+  <% end -%>
+<% end -%>

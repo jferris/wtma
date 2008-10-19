@@ -3,7 +3,7 @@
   <div class="copy">
     <p>Hey Joe! Isn't grocery shopping swell?</p>
     <ul id="account-menu">
-      <li <%=mile%>><a href="account.html">Your Account</a></li>
+      <li><%= link_to 'Your Account', edit_user_path(current_user) %></li>
       <li><%= link_to 'Log Out', session_path, :method => :delete %></li>
     </ul>
   </div>
