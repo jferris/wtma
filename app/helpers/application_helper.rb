@@ -10,12 +10,4 @@ module ApplicationHelper
   def user_name
     current_user.first_name
   end
-
-  def li_for_stores
-    if current_user.purchases.empty?
-      ''
-    else
-      %{<li id="stores-index">#{link_to 'Stores', stores_path}</li>}
-    end
-  end
 end
