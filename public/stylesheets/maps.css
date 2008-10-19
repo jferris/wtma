@@ -1,3 +1,5 @@
+/* @override http://localhost:3000/stylesheets/maps.css?1224445200 */
+
 #location-field {
   height: 51px;
 }
@@ -24,6 +26,14 @@
 
 #new-item input.gsc-input, #new-item input.gsc-search-button {
   font-size: 18pt;
+}
+
+#new-item input.gsc-search-button {
+	background-color: transparent;
+	border-style: none;
+	font-size: 1em;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .gmls-search-form {

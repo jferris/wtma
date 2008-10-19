@@ -1,4 +1,7 @@
-/* @override http://localhost:3000/stylesheets/main.css?1224445200 */
+/* @override 
+	http://localhost:3000/stylesheets/main.css?1224445200
+	http://localhost:3000/stylesheets/main.css?1224455654
+*/
 
 html {
 }
@@ -244,11 +247,13 @@ input#purchase_quantity {
 /* @group pick location */
 
 #pick-location {
+	background-color: white;
 	clear: both;
 	margin-bottom: 20px;
 	border: 1px solid #dae4e5;
 	padding: 20px 0 20px 20px;
 	margin-left: -21px;
+	z-index: 9;
 }
 
 #new-item-location {
@@ -519,6 +524,7 @@ ol#best-stores a, h2 a {
 }
 
 ol#best-stores {
+	width: 960px;
 }
 
 ol#best-stores li {
@@ -551,7 +557,7 @@ ol#best-stores h2 {
 
 .gradient {
 	width: 100%;
-	z-index: 10;
+	z-index: 9;
 	position: absolute;
 	left: 0;
 	display: block;
@@ -562,7 +568,7 @@ ol#best-stores h2 {
 
 .gradient-small {
 	width: 100%;
-	z-index: 10;
+	z-index: 9;
 	position: absolute;
 	left: 0;
 	display: block;
@@ -579,6 +585,7 @@ ol#best-stores h2 {
 	position: absolute;
 	left: -50px;
 	top: -20px;
+	z-index: 10;
 }
 
 ol#best-stores h3 {
@@ -625,11 +632,8 @@ ol#best-stores h4 {
 
 #account-menu li {
 	display: inline;
-	border-right: 1px solid #fff;
-}
-
-#account-menu li:last-child {
-	border-right-style: none;
+	padding-right: 2px;
+	padding-left: 2px;
 }
 
 #account-menu li a {
@@ -979,13 +983,22 @@ body.error .copy p {
 	display: block;
 }
 
+#flash_warning {
+	background-color: #ff595c;
+	padding: 10px;
+	color: white;
+	margin-bottom: 20px;
+	background-image: url(../images/white-grad-small.png);
+	display: block;
+}
+
 #flash {
 	display: block;
 }
 
 #errorExplanation {
 	color: #fff;
-	padding: 10px 30px;
+	padding: 10px 30px 20px;
 	background: rgba(255,0,4,0.65) url(../images/black-grad.png) repeat-x;
 	line-height: 1.5;
 	position: fixed;
@@ -1055,4 +1068,8 @@ a.delete:hover {
 h2#login {
 	background: url(../images/login.png) no-repeat 109px 0;
 	height: 52px;
+}
+
+body.stores #map {
+	margin-top: 10px;
 }
