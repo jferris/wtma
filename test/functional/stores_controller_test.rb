@@ -39,7 +39,7 @@ class StoresControllerTest < ActionController::TestCase
 
       context "some Purchases made by @user" do
         setup do
-          4.times { Factory(:purchase, :user => @user) }
+          5.times { Factory(:purchase, :user => @user) }
         end
 
         context "on GET to index" do
@@ -50,17 +50,8 @@ class StoresControllerTest < ActionController::TestCase
           should_have_map
           should_assign_to :stores
 
-          should "center the map on the best store" do
-            store = assigns(:stores)[0]
-            assert_match /map.setCenter\(new GLatLng\(#{store.latitude}, #{store.longitude}\), 15\)/,
-                         @response.body
-          end
-
-          should "show a marker for each store" do
-            assigns(:stores).each do |store|
-              assert_match /map.addOverlay\(new GMarker\(new GLatLng\(#{store.latitude}, #{store.longitude}\)\)\)/,
-                           @response.body
-            end
+          should "only display 4 stores" do
+            assert_select '.store', :count => 4
           end
 
           should "crown the best store" do
@@ -72,13 +63,6 @@ class StoresControllerTest < ActionController::TestCase
           should "have a li for each store" do
             assigns(:stores)[1..-1].each do |store|
               assert_select 'li h3 a', /#{store.name}/
-            end
-          end
-
-          should "recenter the map on the Store when clicked" do
-            assigns(:stores).each do |store|
-              assert_match /<a href="#" onclick=" centerMapOn\(#{store.latitude},#{store.longitude}\) ; return false;">#{store.name}/,
-                           @response.body
             end
           end
         end
