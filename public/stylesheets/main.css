@@ -1,3 +1,5 @@
+/* @override http://localhost:3000/stylesheets/main.css?1224445200 */
+
 html {
 }
 
@@ -95,7 +97,7 @@ body.users-new li#users-new,
 	padding-bottom: 14px;
 	border-style: none;
 	background: #91cfd3 url(../images/active-tab-top.png) no-repeat 0 0;
-	width: 87px;
+	width: 94px;
 	margin-top: -8px;
 	height: 21px;
 	padding-left: 35px;
@@ -188,9 +190,10 @@ ul#purchases {
 	border-left: 1px solid #dae4e5;
 	border-top: 1px solid #dae4e5;
 	padding: 5px;
+	color: #57999d;
 }
 
-#new-item-name input {
+input#purchase_item_name {
 	width: 455px;
 	margin-right: 20px;
 	color: #57999d;
@@ -198,14 +201,14 @@ ul#purchases {
 	font-weight: bold;
 }
 
-#new-item-price input {
+input#purchase_price {
 	width: 107px;
 	margin-right: 20px;
 	color: #57999d;
 	font-size: 3em;
 }
 
-#new-item-qty input {
+input#purchase_quantity {
 	width: 130px;
 	margin-right: 20px;
 	color: #57999d;
@@ -893,6 +896,7 @@ body.items-index .copy li {
   float: right;
   margin-top: 3px;
   margin-right: 412px;
+	padding-right: 18px;
 }
 
 .reminder input {
@@ -933,5 +937,63 @@ body.error #footer {
 body.error .copy p {
 	margin-top: 20px;
 }
+
+/* @end */
+
+/* @group flashes */
+
+#flash_notice {
+	background-color: #f9eeb3;
+	padding: 10px;
+	color: #57999d;
+	margin-bottom: 20px;
+	background-image: url(../images/white-grad-small.png);
+}
+
+#errorExplanation {
+	color: #fff;
+	padding: 10px 30px;
+	background: rgba(255,0,4,0.65) url(../images/black-grad.png) repeat-x;
+	line-height: 1.5;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	left: 0;
+}
+
+.fieldWithErrors input#purchase_quantity {
+	border-bottom: 4px solid #ff595c;
+}
+
+.fieldWithErrors input#purchase_item_name {
+	border-bottom: 4px solid #ff595c;
+}
+
+.fieldWithErrors input#purchase_price {
+	border-bottom: 4px solid #ff595c;
+}
+
+#errorExplanation h2 {
+	color: #651516;
+	font-size: 2em;
+}
+
+#errorExplanation p {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	color: #901d1f;
+}
+
+.errorExplanation ul {
+	margin-left: 20px;
+}
+
+.errorExplanation li {
+	list-style-type: disc;
+	list-style-position: outside;
+}
+
+
 
 /* @end */
