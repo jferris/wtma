@@ -287,11 +287,11 @@ input#purchase_quantity {
   background-position: left;
   background-image: url("/images/small-marker.png");
   height: 14px;
-  padding: 3px 0px 3px 24px;
+  padding: 8px 0px 8px 28px;
 }
 
 #picked-store a .loading {
-  background-image: url("/images/ajax-loader.gif");
+  background-image: url("/images/milky-small.gif");
 }
 
 #picked-store #marker {
