@@ -66,17 +66,17 @@
   
       <p id="new-item-qty">
         <%= f.label :quantity, "Qty." %>
-        <%= f.text_field :quantity, :value => "qty" %>
+        <%= f.text_field :quantity, :title => "qty", :class => 'prefilled' %>
       </p>
     
       <p id="new-item-name">
         <%= f.label :name %>
-        <%= f.text_field :item_name, :value => "name" %>
+        <%= f.text_field :item_name, :title => "name", :class => 'prefilled' %>
       </p>
     
       <p id="new-item-price">
         <%= f.label :price %>
-        <%= f.text_field :price, :value => "price" %>
+        <%= f.text_field :price, :title => "price", :class => 'prefilled' %>
       </p>
     
       <p id="new-item-submit">
