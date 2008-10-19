@@ -6,10 +6,13 @@
 
 <div id="signin-and-copy">
   <div id="signin">
+  
     <img src="/images/milkman.png" alt="omnomnomnomnom!" id="milkman"/>
+    <h2 id="login"><span class="invisible">Login</span></h2>
     
     <% form_tag openid_path, :id => "openid_form" do %>
       <p id="signin-open-id">
+      
         <label for="openid_identifier">Open ID</label>
         <%= text_field_tag 'openid_identifier' %>
       </p>
@@ -19,7 +22,6 @@
         <%= submit_tag "login" %>
       </p>
     <% end %>
-    
     <% form_for :session, :url => session_path, :html => { :id => "email_form", :style => "display: none;" } do |form| %>
       <div class="text_field">
         <label>
@@ -35,7 +37,7 @@
         <%= form.check_box :remember_me %>
         <%= form.label :remember_me %>
       </div>
-      <p class="signin-switcher">or, <%= link_to_function "Login with Open ID", "$('email_form').hide(); $('openid_form').show();", :class => "signin-switcher" %></p>
+      <p class="signin-switcher">or, <%= link_to_function "Login with Open ID", "$('email_form').hide(); $('openid_form').show();"%></p>
       <br class="clear"/>
       <p id="signin-submit">
         <%= form.submit 'login' %>
@@ -44,6 +46,8 @@
   </div>
   
   <div class="copy">
+  <p><%= link_to "<span class='invisible'>Start right now! &rarr;</span>", new_user_url, :id => "signup-link" %></p>
+  
     <ul>
       <li>Don’t you wish you could know which store had the best prices near you?</li>
       <li>Or maybe you like to shop around – where can you get the cheapest cookies?</li>
@@ -53,7 +57,6 @@
     <p>Submit the items on your receipts, and, based on all the super-shoppers in your ‘hood,
   find out who’s got the best prices, and where they are. It’s like comparing apples to apples.</p>
 
-    <p><%= link_to "<span class='invisible'>Start right now! &rarr;</span>", new_user_url, :id => "signup-link" %></p>
   </div>
 </div>
 
