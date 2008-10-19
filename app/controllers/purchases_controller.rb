@@ -1,6 +1,7 @@
 class PurchasesController < ApplicationController
 
   before_filter :authenticate
+  before_filter :init_google_map, :only => [:index, :create]
 
   def index
     @purchases = current_user.purchases.latest
@@ -19,6 +20,13 @@ class PurchasesController < ApplicationController
   def destroy
     @purchase = current_user.purchases.find(params[:id])
     @purchase.destroy
+  end
+
+  protected
+
+  def init_google_map
+    @map = GMap.new('location_map', 'map')
+    @map.center_zoom_init(USA, DEFAULT_ZOOM_LEVEL)
   end
 
 end

@@ -1,5 +1,52 @@
 <% remote_form_for @new_purchase do |f| -%>
   <%= f.error_messages %>
+  <div id="store_selector">
+    <div id="store_location_map" style="width: 400px; height: 250px; float: left"></div>
+    <div id="store_selector_results" style="float: left; width: 250px; height: 400px"></div>
+    <div style="clear:both"></div>
+    <% content_for :javascripts do -%>
+      <% javascript_tag do -%>
+        var location_map;
+        function extendMarker(marker, element, result) {
+          element = $(element);
+          element.innerHTML = '';
+
+          var title = new Element('div', { class: 'gs-title' });
+          element.appendChild(title)
+
+          var link  = new Element('a', { class: 'gs-title' });
+          link.innerHTML = result.titleNoFormatting;
+          title.appendChild(link)
+
+          var address = new Element('div', { class: 'gs-address' });
+          element.appendChild(address);
+
+          var street = new Element('div', { class: 'gs-street gs-addressLine' });
+          street.innerHTML = result.streetAddress;
+          address.appendChild(street);
+
+          var city = new Element('div', { class: 'gs-city gs-addressLine' });
+          city.innerHTML = result.city + ', ' + result.region;
+          address.appendChild(city);
+
+          var country = new Element('div', { class: 'gs-country' });
+          country.innerHTML = result.country;
+          address.appendChild(country);
+
+          return element;
+        }
+        if (GBrowserIsCompatible()) {
+          location_map = new GMap2($('store_location_map'));
+          location_map.setCenter(new GLatLng(<%= current_user.latitude %>, <%= current_user.longitude %>), 15);
+          local_search_options = {
+            resultList: $("store_selector_results"),
+            onGenerateMarkerHtmlCallback: extendMarker
+          }
+          location_map.addControl(new google.maps.LocalSearch(local_search_options));
+        }
+      <% end -%>
+    <% end -%>
+  </div>
   <%= f.text_field :quantity %>
   <%= f.text_field :item_name %>
   <%= f.text_field :price %>

@@ -3,10 +3,10 @@
 <!-- maps api, ajax search api, map search control code -->
 <%= javascript_include_tag "http://maps.google.com/maps?file=api&v=2&key=#{GOOGLE_MAPS_API}" %>
 <%= javascript_include_tag "http://www.google.com/uds/api?file=uds.js&v=1.0&key=#{GOOGLE_MAPS_API}" %>
-<%= javascript_include_tag "http://www.google.com/uds/solutions/mapsearch/gsmapsearch.js" %>
+<%= javascript_include_tag "http://www.google.com/uds/solutions/localsearch/gmlocalsearch.js" %>
 <%= javascript_include_tag "ym4r-gm.js" %>
 <!-- ajax search stylesheet, map search stylesheet -->
 <%= stylesheet_link_tag "http://www.google.com/uds/css/gsearch.css" %>
-<%= stylesheet_link_tag "http://www.google.com/uds/solutions/mapsearch/gsmapsearch.css" %>
+<%= stylesheet_link_tag "http://www.google.com/uds/solutions/localsearch/gmlocalsearch.css" %>
 
 <%= yield :javascripts %>

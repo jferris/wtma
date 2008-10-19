@@ -1,5 +1,12 @@
+<% content_for :javascripts do %>
+  <% javascript_tag do -%>
+    var geocoder = new GClientGeocoder();
+  <% end -%>
+<% end %>
+
 <h1>Purchases</h1>
 <%= render :partial => "form" %>
 <ul id="purchases">
   <%= render :partial => @purchases %>
 </ul>
+
