@@ -12,7 +12,7 @@ class ApplicationHelperTest < ActionView::TestCase
         @request = stub
         @request.stubs(:xhr?).returns(true)
         stubs(:request).returns(@request)
-        @result = autocomplete_field :purchase, :quantity
+        @result = autocomplete_field :foo, :quantity
       end
 
       before_should "not stick the content in the :javascripts content" do
@@ -24,12 +24,12 @@ class ApplicationHelperTest < ActionView::TestCase
       end
 
       should "generate the div" do
-        assert_match /div.*class="auto_complete".*id="purchase_quantity_autocomplete"/,
+        assert_match /div.*class="auto_complete".*id="foo_quantity_autocomplete"/,
                      @result
       end
 
       should "create an Ajax.Autocompleter" do
-        underscored = 'purchase_quantity'
+        underscored = 'foo_quantity'
         assert_match %r{new Ajax.Autocompleter\(.*'#{underscored}',.*'#{underscored}_autocomplete',.*'/purchases/autocomplete_#{underscored}',.*\{method: 'get'\}\)}m,
                      @result
       end
@@ -40,7 +40,7 @@ class ApplicationHelperTest < ActionView::TestCase
         @request = stub
         @request.stubs(:xhr?).returns(false)
         stubs(:request).returns(@request)
-        @result = autocomplete_field :purchase, :quantity
+        @result = autocomplete_field :foo, :quantity
       end
 
       before_should "stick the content in the :javascripts content" do
@@ -52,12 +52,12 @@ class ApplicationHelperTest < ActionView::TestCase
       end
 
       should "generate the div" do
-        assert_match /div.*class="auto_complete".*id="purchase_quantity_autocomplete"/,
+        assert_match /div.*class="auto_complete".*id="foo_quantity_autocomplete"/,
                      @result
       end
 
       should "create an Ajax.Autocompleter" do
-        underscored = 'purchase_quantity'
+        underscored = 'foo_quantity'
         assert_match %r{new Ajax.Autocompleter\(.*'#{underscored}',.*'#{underscored}_autocomplete',.*'/purchases/autocomplete_#{underscored}',.*\{method: 'get'\}\)}m,
                      @content_for_javascripts
       end

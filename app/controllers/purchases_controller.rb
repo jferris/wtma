@@ -1,10 +1,15 @@
 class PurchasesController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => [:autocomplete_purchase_quantity]
+  skip_before_filter :verify_authenticity_token, :only => [:autocomplete_purchase_quantity, :autocomplete_purchase_item_name]
   before_filter :authenticate
   before_filter :init_google_map, :only => [:index, :create]
 
   def autocomplete_purchase_quantity
     @quantities = Quantity.filtered(params[:purchase][:quantity])
+    render :layout => false, :format => :html
+  end
+
+  def autocomplete_purchase_item_name
+    @items = Item.filtered(params[:purchase][:item_name])
     render :layout => false, :format => :html
   end
 

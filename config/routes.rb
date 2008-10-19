@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :has_one => :confirmation
   map.resources :passwords
   map.resources :stores
-  map.resources :purchases, :collection => {:autocomplete_purchase_quantity => :get} do |purchases|
+  map.resources :purchases, :collection => {:autocomplete_purchase_quantity => :get, :autocomplete_purchase_item_name => :get} do |purchases|
     purchases.resources :stores, :controller => 'purchases/stores'
   end
 end
