@@ -8,6 +8,8 @@ class UsersControllerTest < ActionController::TestCase
       get :new
     end
 
+    should_render_with_layout 'logged_out'
+
     [:openid, :username].each do |map|
       should_have_map map
       should_have_map_observer map
