@@ -1,11 +1,15 @@
 <% content_for :javascripts do %>
+  <%= stylesheet_link_tag 'autocomplete' %>
   <% javascript_tag do -%>
     var geocoder = new GClientGeocoder();
   <% end -%>
 <% end %>
 
-<h1>Purchases</h1>
-<%= render :partial => "form" %>
+<div id="new-item">
+  <%= render :partial => 'location' %>
+  <%= render :partial => "form" %>
+</div>
+
 <ul id="purchases">
   <%= render :partial => @purchases %>
 </ul>

@@ -1,84 +1,34 @@
-<div id="new-item">
-  <div id="pick-location">
-     <div id="picked-store">          
-        <a href="#">
-          <img src="images/location.png" id="marker" alt="marker!"/>
-          <span class="location">Johnnie's Basic Food and Produce Supply Store</span>
-        </a>
-      </div>
-      
-      <form id="pick-location-form" action="#">
-        <p id="location-field">
-          <label>store location</label>
-        </p>
-        <div id="store_location_map" class="map" style="width: 400px; height: 250px;"></div>
-        <div id="store_selector_results" class="near-stores"></div>      
-      </form>
-    </div>
-    
-    <% remote_form_for @new_purchase do |f| -%>
-      <%= f.error_messages %>
-      <% content_for :javascripts do -%>
-        <% javascript_tag do -%>
-          var location_map;
-          function extendMarker(marker, element, result) {
-            element = $(element);
-            element.innerHTML = '';
+<% remote_form_for @new_purchase do |f| -%>
+  <%= f.error_messages %>
 
-            var title = new Element('div', { class: 'gs-title' });
-            element.appendChild(title)
+  <p id="new-item-qty">
+    <%= f.label :quantity, "Qty." %>
+    <%= f.text_field :quantity, :title => "qty", :class => 'prefilled' %>
+    <div class="auto_complete" id="purchase_quantity_auto_complete"></div>
+    <% content_for :javascripts do %>
+      <% javascript_tag do %>
+        var purchase_quantity_auto_completer = new Ajax.Autocompleter(
+          'purchase_quantity',
+          'purchase_quantity_auto_complete',
+          '/purchases/autocomplete_purchase_quantity',
+          {method: 'get'})
+      <% end %>
+    <% end %>
+  </p>
 
-            var link  = new Element('a', { class: 'gs-title' });
-            link.innerHTML = result.titleNoFormatting;
-            title.appendChild(link)
+  <p id="new-item-name">
+    <%= f.label :name %>
+    <%= f.text_field :item_name, :title => "name", :class => 'prefilled' %>
+  </p>
 
-            var address = new Element('div', { class: 'gs-address' });
-            element.appendChild(address);
+  <p id="new-item-price">
+    <%= f.label :price %>
+    <%= f.text_field :price, :title => "price", :class => 'prefilled' %>
+  </p>
 
-            var street = new Element('div', { class: 'gs-street gs-addressLine' });
-            street.innerHTML = result.streetAddress;
-            address.appendChild(street);
+  <p id="new-item-submit">
+    <%= f.submit 'add' %>
+  </p>
 
-            var city = new Element('div', { class: 'gs-city gs-addressLine' });
-            city.innerHTML = result.city + ', ' + result.region;
-            address.appendChild(city);
-
-            var country = new Element('div', { class: 'gs-country' });
-            country.innerHTML = result.country;
-            address.appendChild(country);
-
-            return element;
-          }
-          if (GBrowserIsCompatible()) {
-            location_map = new GMap2($('store_location_map'));
-            location_map.setCenter(new GLatLng(<%= current_user.latitude %>, <%= current_user.longitude %>), 15);
-            local_search_options = {
-              resultList: $("store_selector_results"),
-              onGenerateMarkerHtmlCallback: extendMarker
-            }
-            location_map.addControl(new google.maps.LocalSearch(local_search_options));
-          }
-        <% end -%>
-      <% end -%>
-  
-      <p id="new-item-qty">
-        <%= f.label :quantity, "Qty." %>
-        <%= f.text_field :quantity, :title => "qty", :class => 'prefilled' %>
-      </p>
-    
-      <p id="new-item-name">
-        <%= f.label :name %>
-        <%= f.text_field :item_name, :title => "name", :class => 'prefilled' %>
-      </p>
-    
-      <p id="new-item-price">
-        <%= f.label :price %>
-        <%= f.text_field :price, :title => "price", :class => 'prefilled' %>
-      </p>
-    
-      <p id="new-item-submit">
-        <%= f.submit 'add' %>
-      </p>
-      <%= f.hidden_field :store_id %>
-    <% end -%>
-  </div>
+  <%= f.hidden_field :store_id, :value => @store && @store.id %>
+<% end -%>

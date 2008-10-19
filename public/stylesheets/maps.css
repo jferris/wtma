@@ -2,6 +2,10 @@
   height: 51px;
 }
 
+#new-item #pick-location-form {
+  height: 321px;
+}
+
 #new-item #pick-location .gsc-input {
 	color: #81b5b8;
 	float: left;
@@ -77,4 +81,10 @@
 
 .gmls-results-controls {
   display: none !important;
+}
+
+.gs-result .gs-title, .gs-result .gs-title * {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
 }
