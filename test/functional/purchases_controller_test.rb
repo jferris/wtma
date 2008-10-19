@@ -81,7 +81,7 @@ class PurchasesControllerTest < ActionController::TestCase
       end
     end
 
-    context "on POST to create with valid params" do
+    context "on JS POST to create with valid params" do
       setup do
         @store = Factory(:store)
         post :create, 
@@ -90,7 +90,7 @@ class PurchasesControllerTest < ActionController::TestCase
                                                  :store_id => @store.id) 
       end
 
-      should_assign_to :purchase
+      should_assign_to :purchase, :store
       should_change "@user.purchases.count", :by => 1
       should_assign_to :new_purchase
 
@@ -99,23 +99,33 @@ class PurchasesControllerTest < ActionController::TestCase
       end
 
       should "insert the purchase at the top of the list" do
-        assert_select_rjs :insert, :top, :purchases
+        assert_select_rjs :insert, :top, 'purchases'
       end
 
       should "assign a new purchase without errors for the view" do
         assert assigns(:new_purchase).errors.empty?
       end
+
+      should "rerender the purchase form" do
+        assert_select_rjs :replace, 'new_purchase' do
+          assert_select '#purchase_store_id[value=?]', @store.id
+        end
+      end
     end
 
-    context "on POST to create with invalid params" do
-      setup { post :create, :format => :js, :purchase => {} }
+    context "on JS POST to create with only a store ID" do
+      setup do
+        @store = Factory(:store)
+        post :create, :format   => :js, 
+                      :purchase => { :store_id => @store.to_param }
+      end
 
-      should_assign_to :purchase
+      should_assign_to :purchase, :store
       should_assign_to :new_purchase
       should_not_change "@user.purchases.count"
 
       should "rerender the purchase form" do
-        assert_select_rjs :replace, :new_purchase
+        assert_select_rjs :replace, 'new_purchase'
       end
 
       should "not create a new list element" do

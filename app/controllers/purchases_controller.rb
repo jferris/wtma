@@ -15,9 +15,12 @@ class PurchasesController < ApplicationController
 
   def create
     @purchase = current_user.purchases.build(params[:purchase])
+
     if @purchase.save
+      @store        = @purchase.store
       @new_purchase = Purchase.new
     else
+      @store        = Store.find_by_id(@purchase.store_id)
       @new_purchase = @purchase
     end
   end

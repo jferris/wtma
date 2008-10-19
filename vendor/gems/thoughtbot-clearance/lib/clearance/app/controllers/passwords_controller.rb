@@ -40,7 +40,8 @@ module Clearance
                                                             params[:password])
             if @user.update_attributes params[:user]
               session[:user_id] = @user.id
-              redirect_to @user
+              flash[:info] = "Your password has been changed."
+              redirect_to edit_user_path(@user)
             else
               render :action => :edit
             end

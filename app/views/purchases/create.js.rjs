@@ -1,4 +1,4 @@
-page.replace :new_purchase, :partial => "form"
+page.replace 'new_purchase', :partial => "form"
 if @purchase.valid?
   page.insert_html :top, :purchases, :partial => @purchase
   page.hide dom_id(@purchase)

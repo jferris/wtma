@@ -1,23 +1,23 @@
-<p>
-  Your password has been reset. Choose a new password below.
-</p>
+<div id="account-changes">
+  <h2>Reset Your Password</h2>
 
-<%= error_messages_for :user %>
-<% form_for(:user,
-            :url => user_password_path(
-              @user,
-              :email => @user.email,
-              :password => @user.crypted_password),
-            :html => { :method => :put }) do |form| %>
-  <div class="password_field">
-    <%= form.label :password, 'Choose password' %>
-    <%= form.password_field :password %>
-  </div>
-  <div class="password_field">
-    <%= form.label :password_confirmation, 'Verify password' %>
-    <%= form.password_field :password_confirmation %>
-  </div>
-  <div class="submit_field">
-    <%= form.submit 'Save this password' %>
-  </div>
-<% end %>
+  <%= error_messages_for :user %>
+  <% form_for(:user,
+              :url => user_password_path(
+                @user,
+                :email => @user.email,
+                :password => @user.crypted_password),
+              :html => { :method => :put }) do |form| %>
+    <div class="password_field">
+      <%= form.label :password, 'Choose password' %>
+      <%= form.password_field :password %>
+    </div>
+    <div class="password_field">
+      <%= form.label :password_confirmation, 'Verify password' %>
+      <%= form.password_field :password_confirmation %>
+    </div>
+    <p id="account-submit">
+      <%= form.submit 'Save' %>
+    </p>
+  <% end %>
+</div>
