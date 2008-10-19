@@ -954,12 +954,19 @@ body.error .copy p {
 
 /* @group flashes */
 
-#flash {
+#flash_info, #flash_notice {
 	background-color: #f9eeb3;
 	padding: 10px;
 	color: #57999d;
 	margin-bottom: 20px;
 	background-image: url(../images/white-grad-small.png);
+	display: inline-block;
+}
+
+#flash {
+	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #errorExplanation {
